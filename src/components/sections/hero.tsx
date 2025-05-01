@@ -47,7 +47,7 @@ export function HeroSection() {
   }, [])
 
   return (
-    <section ref={containerRef} className="bg-background relative min-h-screen flex items-center overflow-hidden mt-20">
+    <section ref={containerRef} className="  bg-background py-10 relative mt-24  flex items-center overflow-hidden pt-[5vh]">
       {/* Animated background gradient */}
       <motion.div 
         className="absolute inset-0 opacity-70"

@@ -155,3 +155,8 @@
   background-image: radial-gradient(circle at center, rgba(37, 99, 235, 0.1) 1px, transparent 1px);
   background-size: 30px 30px;
 }
+
+body {
+  margin: 0;
+  padding: 0;
+}

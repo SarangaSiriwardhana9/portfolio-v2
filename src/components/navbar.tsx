@@ -58,12 +58,12 @@ export function Navbar() {
   // Prevent hydration mismatch by rendering a simpler version initially
   if (!isMounted) {
     return (
-      <header className="fixed top-0 w-full z-50 py-4 bg-transparent">
+      <header className="fixed top-0 w-full z-50 py-2 sm:py-4 bg-transparent">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between">
-            <div className="text-xl font-bold">
+            <div className="text-lg sm:text-xl font-bold">
               <span className="text-primary">SS</span>
-              <span className="hidden sm:inline-block">Saranga Siriwardhana</span>
+              <span className="hidden sm:inline-block"> Saranga Siriwardhana</span>
             </div>
             <div className="flex items-center space-x-2">
               <div className="h-8 w-8" />
@@ -77,26 +77,26 @@ export function Navbar() {
 
   return (
     <motion.header
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled 
-          ? "glass border-b border-white/10 py-2" 
-          : "bg-transparent py-4"
-      }`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
+    className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+      isScrolled 
+        ? "glass border-b border-white/10 py-2" 
+        : "bg-transparent py-4"
+    }`}
+    initial={{ y: -100 }}
+    animate={{ y: 0 }}
+    transition={{ duration: 0.5 }}
+  >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
           <motion.div 
-            className="text-xl font-bold"
+            className="text-lg sm:text-xl font-bold"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <a href="#home" className="flex items-center gap-2">
-              <div className="flex items-center justify-center size-10 bg-primary rounded-full text-primary-foreground font-bold relative">
-                <span>SS</span>
+            <a href="#home" className="flex items-center gap-1 sm:gap-2">
+              <div className="flex items-center justify-center size-8 sm:size-10 bg-primary rounded-full text-primary-foreground font-bold relative">
+                <span className="text-sm sm:text-base">SS</span>
                 <motion.div 
                   className="absolute inset-0 rounded-full border border-primary/80"
                   animate={{ 
@@ -110,7 +110,7 @@ export function Navbar() {
                   }}
                 />
               </div>
-              <span className="hidden sm:inline-block">Saranga Siriwardhana</span>
+              <span className="hidden sm:inline-block text-sm sm:text-base">Saranga Siriwardhana</span>
             </a>
           </motion.div>
 
@@ -121,7 +121,7 @@ export function Navbar() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            {navItems.map((item, i) => (
+            {navItems.map((item) => (
               <Button
                 key={item.name}
                 variant="ghost"
@@ -141,7 +141,7 @@ export function Navbar() {
             ))}
             <Button size="sm" variant="outline" className="ml-2 flex items-center gap-2 border-primary/30">
               <Download className="h-4 w-4" />
-              <span>Resume</span>
+              <span className="hidden lg:inline">Resume</span>
             </Button>
             <ModeToggle />
           </motion.nav>
@@ -151,7 +151,7 @@ export function Navbar() {
             <ModeToggle />
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon">
+                <Button variant="ghost" size="icon" className="h-8 w-8">
                   <Menu className="h-5 w-5" />
                   <span className="sr-only">Toggle menu</span>
                 </Button>

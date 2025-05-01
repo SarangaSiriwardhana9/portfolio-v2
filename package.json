@@ -4,10 +4,6 @@
   "private": true,
   "scripts": {
     "dev": "yarn env:copy:dev && next dev",
-    "dev:qa": "yarn env:copy:qa && next dev",
-    "build": "yarn env:copy:dev && next build",
-    "build:qa": "yarn env:copy:qa && next build",
-    "build:production": "next build",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "eslint . --fix",

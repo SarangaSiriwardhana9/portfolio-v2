@@ -10,7 +10,6 @@ import { SkillsSection } from '@/components/sections/skills'
 import { ThemeProvider } from '@/components/theme-provider'
 import { useEffect, useState } from 'react'
  
-
 export default function Home() {
   const [mounted, setMounted] = useState(false)
 
@@ -19,27 +18,18 @@ export default function Home() {
   }, [])
 
   if (!mounted) {
-    // Return a minimal loading state when not mounted
     return <div className="min-h-screen bg-background"></div>
   }
 
   return (
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="system"
-      enableSystem
-      disableTransitionOnChange
-    >
+    <ThemeProvider>
       <Navbar />
-      <main className="min-h-screen">
-        <div className="flex flex-col">
+      <main> {/* Remove any padding/margin from main */}
+        <div className="flex flex-col"> {/* No spacing classes here */}
           <HeroSection />
           <AboutSection />
           <SkillsSection />
-          {/* Add these components when you have them */}
-          {/* <ProjectsSection /> */}
-          {/* <ContactSection /> */}
-          <ExperienceSection  />
+          <ExperienceSection />
         </div>
       </main>
       <Footer />
