@@ -6038,6 +6038,7 @@ __metadata:
     recharts: "npm:^2.15.2"
     sharp: "npm:^0.33.5"
     sonner: "npm:^2.0.3"
+    swiper: "npm:^11.2.6"
     tailwind-merge: "npm:^3.0.1"
     tailwind-scrollbar: "npm:^3.1.0"
     tailwindcss: "npm:^4.1.3"
@@ -7339,6 +7340,13 @@ __metadata:
   peerDependencies:
     react: ">=17.0"
   checksum: 10c0/c35436f492a5cab85a2aac8f5ee5af8f67edbab3a49e12d15c7f770aae4cf09fe2925b3b8c122929210c1f28aa0958f91684a687d6608f116f7da8406d8a2f1c
+  languageName: node
+  linkType: hard
+
+"swiper@npm:^11.2.6":
+  version: 11.2.6
+  resolution: "swiper@npm:11.2.6"
+  checksum: 10c0/36ba63e2d1c5045f647f0f07b3a25c164393fb89b17db63f57fa9f776eb61bc5cb2c34634f80cf69caaddc209a174d0cd7be23c580785534569ea4a098b3a42c
   languageName: node
   linkType: hard
 

@@ -6,6 +6,7 @@ import { Navbar } from '@/components/navbar'
 import { AboutSection } from '@/components/sections/about'
 import { ExperienceSection } from '@/components/sections/experience'
 import { HeroSection } from '@/components/sections/hero'
+import ProjectsSection from '@/components/sections/projects'
 import { SkillsSection } from '@/components/sections/skills'
 import { ThemeProvider } from '@/components/theme-provider'
 import { useEffect, useState } from 'react'
@@ -30,6 +31,7 @@ export default function Home() {
           <AboutSection />
           <SkillsSection />
           <ExperienceSection />
+          <ProjectsSection/>
         </div>
       </main>
       <Footer />
