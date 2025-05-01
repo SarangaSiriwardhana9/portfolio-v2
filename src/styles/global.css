@@ -23,7 +23,7 @@
     --ring: 224 76% 48%;
     --radius: 0.75rem;
   }
-
+ 
   .light {
     --background: 0 0% 100%;
     --foreground: 222 47% 11%;
@@ -156,7 +156,34 @@
   background-size: 30px 30px;
 }
 
-body {
-  margin: 0;
-  padding: 0;
+/* Swiper Customization */
+.swiper-pagination {
+  bottom: 0 !important;
+}
+
+.swiper-pagination-bullet {
+  background-color: hsl(var(--primary) / 0.3) !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: hsl(var(--primary)) !important;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  display: none;
+}
+
+/* Animate blink for cursor effect */
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.animate-blink {
+  animation: blink 1s step-start infinite;
 }
