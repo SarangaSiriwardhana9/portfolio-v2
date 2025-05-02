@@ -64,12 +64,7 @@ const skills = [
 export function AboutSection() {
   return (
     <section id="about" className="relative py-24 overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-background/50 to-background pointer-events-none" />
-      <div className="absolute inset-0">
-        <div className="absolute -left-40 top-0 w-80 h-80 bg-primary/20 rounded-full blur-3xl" />
-        <div className="absolute -right-40 bottom-0 w-96 h-96 bg-accent/20 rounded-full blur-3xl" />
-      </div>
+ 
 
       <div className="container mx-auto px-4 relative">
         <motion.div

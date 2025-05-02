@@ -78,17 +78,8 @@ const scrollToSection = (sectionId: string) => {
 }
 
   return (
-    <section ref={containerRef} className="bg-background py-10 relative mt-24 flex items-center overflow-hidden pt-[5vh]">
-      {/* Animated background gradient */}
-      <motion.div 
-        className="absolute inset-0 opacity-70"
-        style={{ 
-          background: `radial-gradient(circle at ${x}px ${y2}px, 
-            rgba(59, 130, 246, 0.15) 0%, 
-            rgba(139, 92, 246, 0.1) 30%, 
-            transparent 70%)`
-        }}
-      />
+    <section ref={containerRef} className="  py-10 relative mt-24 flex items-center overflow-hidden pt-[5vh]">
+ 
 
       {/* Geometric shapes background */}
       <div className="absolute inset-0 overflow-hidden">

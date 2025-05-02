@@ -97,7 +97,7 @@ export function Navbar() {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <a href="#home" className="flex items-center gap-3">
-              <div className="relative overflow-hidden rounded-lg size-10 sm:size-14 bg-background/80 backdrop-blur-sm border border-primary/20">
+              <div className="relative overflow-hidden rounded-lg size-10 sm:size-14 bg-background/80 backdrop-blur-sm  ">
                 <Image 
                   src="/bannerImg1.png" 
                   alt="Saranga Siriwardhana" 

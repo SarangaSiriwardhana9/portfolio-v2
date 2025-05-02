@@ -100,19 +100,7 @@ export function SkillsSection() {
 
   return (
     <section id="skills" className="py-24 relative overflow-hidden">
-      {/* Animated background elements */}
-      <motion.div 
-        className="absolute inset-0 pointer-events-none"
-        animate={{
-          background: [
-            'radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.05) 0%, transparent 50%)',
-            'radial-gradient(circle at 100% 0%, rgba(250, 204, 21, 0.05) 0%, transparent 50%)',
-            'radial-gradient(circle at 0% 100%, rgba(16, 185, 129, 0.05) 0%, transparent 50%)',
-            'radial-gradient(circle at 100% 100%, rgba(236, 72, 153, 0.05) 0%, transparent 50%)',
-          ]
-        }}
-        transition={{ duration: 10, repeat: Infinity, repeatType: "reverse" }}
-      />
+   
       
       <div className="container mx-auto px-4" ref={containerRef}>
         <motion.div

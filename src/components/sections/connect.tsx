@@ -151,21 +151,7 @@ export function ContactSection() {
   return (
     <section id="contact" className="py-32 relative overflow-hidden">
       {/* Background elements */}
-      <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-background to-transparent"></div>
-      <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-background to-transparent"></div>
       
-      <motion.div 
-        className="absolute inset-0 pointer-events-none"
-        animate={{
-          background: [
-            'radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.08) 0%, transparent 50%)',
-            'radial-gradient(circle at 100% 0%, rgba(250, 204, 21, 0.08) 0%, transparent 50%)',
-            'radial-gradient(circle at 0% 100%, rgba(16, 185, 129, 0.08) 0%, transparent 50%)',
-            'radial-gradient(circle at 100% 100%, rgba(236, 72, 153, 0.08) 0%, transparent 50%)',
-          ]
-        }}
-        transition={{ duration: 10, repeat: Infinity, repeatType: "reverse" }}
-      />
       
       <div className="container mx-auto px-4 relative" ref={ref}>
         <motion.div
