@@ -19,7 +19,7 @@ A modern and responsive developer portfolio built with **Next.js 15**, **TypeScr
 
 | Home Page | Projects Section |
 |----------|------------------|
-| ![Home](./public/screenshots/home.png) | ![Projects](./public/screenshots/projects.png) |
+| ![Home]([./public/screenshots/home.png](https://github.com/user-attachments/assets/aab6e3b4-616c-434c-ab8b-2005bdba93e4)) | ![Projects](./public/screenshots/projects.png) |
 
 > Replace with your actual screenshot paths or delete this section if not needed.
 
@@ -90,4 +90,8 @@ public/
 
 ## 📜 License
 
-This project is open source and available under the [MIT License](LICENSE).
+This project is open source and a![1](https://github.com/user-attachments/assets/aab6e3b4-616c-434c-ab8b-2005bdba93e4)
+vailable under the [MIT License](LICENSE).
+
+
+
