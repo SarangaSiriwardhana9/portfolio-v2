@@ -1,0 +1,164 @@
+'use client'
+
+import { Footer } from '@/components/footer'
+import { Navbar } from '@/components/navbar'
+import { AboutSection } from '@/components/sections/about'
+import { SocialLinks } from '@/components/sections/social-links' 
+import { ExperienceSection } from '@/components/sections/experience'
+import { HeroSection } from '@/components/sections/hero'
+import { ProjectsSection } from '@/components/sections/projects'
+import { SkillsSection } from '@/components/sections/skills'
+import { ThemeProvider } from '@/components/theme-provider'
+import { useEffect, useState, useRef } from 'react'
+import { ContactSection } from '@/components/sections/connect'
+
+export default function Home() {
+  const [mounted, setMounted] = useState(false)
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (!mounted || !canvasRef.current) return
+
+    const canvas = canvasRef.current
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+
+    let width = window.innerWidth
+    let height = window.innerHeight
+    let animationFrameId: number
+
+    // Set canvas dimensions
+    const setCanvasDimensions = () => {
+      width = window.innerWidth
+      height = window.innerHeight
+      canvas.width = width
+      canvas.height = height
+    }
+
+    setCanvasDimensions()
+    window.addEventListener('resize', setCanvasDimensions)
+
+    // Create rain drops
+    class Drop {
+      x: number
+      y: number
+      speed: number
+      size: number
+      color: string
+      glowIntensity: number
+      
+      constructor() {
+        this.x = Math.random() * width
+        this.y = Math.random() * height * -1  // Start above the screen
+        this.speed = Math.random() * 2 + 1
+        this.size = Math.random() * 2 + 1.5
+        
+        // Primary color with slight variations
+        const hue = 170 + Math.random() * 40  // Cyberpunk greenish-blue
+        const saturation = 70 + Math.random() * 30
+        const lightness = 50 + Math.random() * 20
+        const alpha = 0.2 + Math.random() * 0.6
+        
+        this.color = `hsla(${hue}, ${saturation}%, ${lightness}%, ${alpha})`
+        this.glowIntensity = Math.random() * 0.3 + 0.2
+      }
+      
+      draw() {
+        if (!ctx) return
+        
+        // Draw glow
+        const gradient = ctx.createRadialGradient(
+          this.x, this.y, 0,
+          this.x, this.y, this.size * 3
+        )
+        gradient.addColorStop(0, this.color)
+        gradient.addColorStop(1, 'transparent')
+        
+        ctx.fillStyle = gradient
+        ctx.beginPath()
+        ctx.arc(this.x, this.y, this.size * 3, 0, Math.PI * 2)
+        ctx.fill()
+        
+        // Draw drop
+        ctx.fillStyle = this.color
+        ctx.beginPath()
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
+        ctx.fill()
+      }
+      
+      update() {
+        this.y += this.speed
+        
+        // Reset when off screen
+        if (this.y > height + this.size * 3) {
+          this.y = Math.random() * height * -1
+          this.x = Math.random() * width
+        }
+        
+        this.draw()
+      }
+    }
+
+    // Create drops
+    const drops: Drop[] = []
+    const dropCount = width < 768 ? 50 : 100
+    
+    for (let i = 0; i < dropCount; i++) {
+      drops.push(new Drop())
+    }
+
+    // Animation
+    const animate = () => {
+      ctx.clearRect(0, 0, width, height)
+      
+      for (const drop of drops) {
+        drop.update()
+      }
+      
+      animationFrameId = requestAnimationFrame(animate)
+    }
+    
+    animate()
+    
+    // Cleanup
+    return () => {
+      window.removeEventListener('resize', setCanvasDimensions)
+      cancelAnimationFrame(animationFrameId)
+    }
+  }, [mounted])
+
+  if (!mounted) {
+    return <div className="min-h-screen bg-background"></div>
+  }
+
+  return (
+    <>
+      {/* Digital rain background */}
+      <canvas 
+        ref={canvasRef} 
+        className="fixed inset-0 z-[-1] w-full h-full pointer-events-none bg-background"
+      />
+      
+      {/* Overlay for better text contrast */}
+      <div className="fixed inset-0 z-[-1] bg-background/70 backdrop-blur-[1px] pointer-events-none" />
+
+      <Navbar />
+      <main>
+        <div className="flex flex-col">
+          <HeroSection />
+          <SocialLinks />  
+          <AboutSection />
+          <SkillsSection />
+          <ExperienceSection />
+          <ProjectsSection />
+          <ContactSection />
+        </div>
+      </main>
+      <Footer />
+    </>
+  )
+}
