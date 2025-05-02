@@ -19,9 +19,7 @@ A modern and responsive developer portfolio built with **Next.js 15**, **TypeScr
 
 | Home Page | Projects Section |
 |----------|------------------|
-| ![Home]([./public/screenshots/home.png](https://github.com/user-attachments/assets/aab6e3b4-616c-434c-ab8b-2005bdba93e4)) | ![Projects](./public/screenshots/projects.png) |
-
-> Replace with your actual screenshot paths or delete this section if not needed.
+| ![Capture1](https://github.com/user-attachments/assets/d5ec4f04-21df-4611-b292-c6475cd19ef2) | ![Capture](https://github.com/user-attachments/assets/6f2d0ecd-a987-4b2c-801e-47921334321a) |
 
 ---
 
@@ -83,16 +81,20 @@ public/
 
 - **Name**: Saranga Siriwardhana
 - **Title**: Full Stack Developer
-- **LinkedIn**: [linkedin.com/in/sarangasiriwardhana](https://linkedin.com/in/sarangasiriwardhana)
+- **LinkedIn**: [linkedin.com/in/sarangasiriwardhana](https://www.linkedin.com/in/saranga-siriwardhana-409494218/)
 - **Portfolio**: [yourdomain.com](https://yourdomain.com) *(replace with your actual URL)*
+
+---
+
+## 🌐 Connect with Me
+
+- [GitHub](https://github.com/SarangaSiriwardhana9)
+- [LinkedIn](https://www.linkedin.com/in/saranga-siriwardhana-409494218/)
+- [Instagram](https://instagram.com/_.l_sara_?igshid=NTc4MTIwNjQ2YQ==)
+- [Facebook](https://www.facebook.com/saranga.siriwardana.1?mibextid=LQQJ4d)
 
 ---
 
 ## 📜 License
 
 This project is open source and available under the [MIT License](LICENSE).
-
-![Capture1](https://github.com/user-attachments/assets/d5ec4f04-21df-4611-b292-c6475cd19ef2)
-![1](https://github.com/user-attachments/assets/8619aac5-d45b-498d-8def-e765dbf471f6)
-
-
