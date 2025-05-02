@@ -1,4 +1,4 @@
-// components/sections/projects.tsx
+ 
 'use client'
 
 import { Badge } from '@/components/ui/badge';

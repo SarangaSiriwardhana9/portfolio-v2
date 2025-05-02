@@ -27,13 +27,13 @@ const skills = [
     icon: <Palette className="h-6 w-6" />,
     title: 'Frontend Development',
     description: 'Creating responsive and user-friendly web applications using HTML, CSS, and React. Bringing beautiful and functional interfaces to life.',
-    tools: ['React', 'HTML', 'CSS', 'TypeScript']
+    tools: ['Next.jS','React', 'HTML', 'CSS', 'Javascript','TypeScript']
   },
   {
     icon: <Server className="h-6 w-6" />,
     title: 'Backend Development',
     description: 'Building scalable and reliable server-side applications using modern technologies and frameworks.',
-    tools: ['Node.js', 'Angular', 'PHP', 'Express']
+    tools: ['Node.js', 'Express', 'Python', 'Java']
   },
   {
     icon: <Smartphone className="h-6 w-6" />,

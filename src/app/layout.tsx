@@ -1,4 +1,4 @@
-// app/layout.tsx
+ 
 import '@/styles/global.css'
 import type { Metadata } from 'next'
 import { Outfit } from 'next/font/google'

@@ -1,15 +1,17 @@
-// app/page.tsx
+ 
 'use client'
 
 import { Footer } from '@/components/footer'
 import { Navbar } from '@/components/navbar'
 import { AboutSection } from '@/components/sections/about'
+import { SocialLinks } from '@/components/sections/social-links' 
 import { ExperienceSection } from '@/components/sections/experience'
 import { HeroSection } from '@/components/sections/hero'
 import { ProjectsSection } from '@/components/sections/projects'
 import { SkillsSection } from '@/components/sections/skills'
 import { ThemeProvider } from '@/components/theme-provider'
 import { useEffect, useState } from 'react'
+import { ContactSection } from '@/components/sections/connect'
  
 export default function Home() {
   const [mounted, setMounted] = useState(false)
@@ -23,18 +25,21 @@ export default function Home() {
   }
 
   return (
-    <ThemeProvider>
+    < >
       <Navbar />
-      <main> {/* Remove any padding/margin from main */}
-        <div className="flex flex-col"> {/* No spacing classes here */}
+      <main>
+        <div className="flex flex-col">
           <HeroSection />
+          <SocialLinks />  
           <AboutSection />
           <SkillsSection />
           <ExperienceSection />
-          <ProjectsSection/>
+          <ProjectsSection />
+          <ContactSection />
+       
         </div>
       </main>
       <Footer />
-    </ThemeProvider>
+    </ >
   )
 }

@@ -1,6 +1,5 @@
 "use client"
 
-import { ModeToggle } from "@/components/mode-toggle"
 import { Button } from "@/components/ui/button"
 import {
   Sheet,
@@ -13,6 +12,8 @@ import {
 import { motion } from "framer-motion"
 import { Download, Menu } from "lucide-react"
 import { useEffect, useState } from "react"
+import Image from "next/image"
+import Link from "next/link"
 
 const navItems = [
   { name: "Home", href: "#home" },
@@ -55,19 +56,20 @@ export function Navbar() {
     element?.scrollIntoView({ behavior: "smooth" })
   }
 
-  // Prevent hydration mismatch by rendering a simpler version initially
+  // The URL for your resume PDF file
+  const resumeURL = "/Saranga Siriwardhana_CV.pdf"
+ 
   if (!isMounted) {
     return (
-      <header className="fixed top-0 w-full z-50 py-2 sm:py-4 bg-transparent">
+      <header className="fixed top-0 w-full z-50 py-4 sm:py-6 bg-transparent">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between">
             <div className="text-lg sm:text-xl font-bold">
-              <span className="text-primary">SS</span>
-              <span className="hidden sm:inline-block"> Saranga Siriwardhana</span>
+              <div className="h-12 w-40 bg-muted/30 rounded-md"></div>
             </div>
             <div className="flex items-center space-x-2">
-              <div className="h-8 w-8" />
-              <div className="h-8 w-8 md:hidden" />
+              <div className="h-10 w-10" />
+              <div className="h-10 w-10 md:hidden" />
             </div>
           </div>
         </div>
@@ -77,40 +79,45 @@ export function Navbar() {
 
   return (
     <motion.header
-    className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-      isScrolled 
-        ? "glass border-b border-white/10 py-2" 
-        : "bg-transparent py-4"
-    }`}
-    initial={{ y: -100 }}
-    animate={{ y: 0 }}
-    transition={{ duration: 0.5 }}
-  >
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        isScrolled 
+          ? "glass border-b border-white/10 py-3 sm:py-4" 
+          : "bg-transparent py-5 sm:py-7"
+      }`}
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
           <motion.div 
-            className="text-lg sm:text-xl font-bold"
+            className="font-bold"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <a href="#home" className="flex items-center gap-1 sm:gap-2">
-              <div className="flex items-center justify-center size-8 sm:size-10 bg-primary rounded-full text-primary-foreground font-bold relative">
-                <span className="text-sm sm:text-base">SS</span>
+            <a href="#home" className="flex items-center gap-3">
+              <div className="relative overflow-hidden rounded-lg size-10 sm:size-14 bg-background/80 backdrop-blur-sm border border-primary/20">
+                <Image 
+                  src="/bannerImg1.png" 
+                  alt="Saranga Siriwardhana" 
+                  fill 
+                  className="object-cover hover:scale-110 transition-transform duration-500"
+                />
                 <motion.div 
-                  className="absolute inset-0 rounded-full border border-primary/80"
+                  className="absolute inset-0 border-2 rounded-lg border-primary/40"
                   animate={{ 
-                    scale: [1, 1.2, 1],
-                    opacity: [1, 0, 1]
+                    scale: [1, 1.1, 1],
+                    opacity: [0.7, 0.3, 0.7]
                   }}
                   transition={{
-                    duration: 2,
+                    duration: 3,
                     repeat: Infinity,
                     ease: "easeInOut"
                   }}
                 />
               </div>
-              <span className="hidden sm:inline-block text-sm sm:text-base">Saranga Siriwardhana</span>
+              <span className="hidden sm:inline-block text-base sm:text-lg">Saranga Siriwardhana</span>
             </a>
           </motion.div>
 
@@ -126,7 +133,7 @@ export function Navbar() {
                 key={item.name}
                 variant="ghost"
                 size="sm"
-                className={`text-sm font-medium relative ${activeSection === item.href.substring(1) ? 'text-primary' : ''}`}
+                className={`text-sm font-medium relative px-4 py-2 h-auto ${activeSection === item.href.substring(1) ? 'text-primary' : ''}`}
                 onClick={() => scrollToSection(item.href)}
               >
                 {item.name}
@@ -139,26 +146,41 @@ export function Navbar() {
                 )}
               </Button>
             ))}
-            <Button size="sm" variant="outline" className="ml-2 flex items-center gap-2 border-primary/30">
-              <Download className="h-4 w-4" />
-              <span className="hidden lg:inline">Resume</span>
-            </Button>
-            <ModeToggle />
+            {/* Desktop Resume Download Button */}
+            <Link href={resumeURL} download="Saranga_Siriwardhana_CV.pdf" target="_blank" rel="noopener noreferrer">
+              <Button 
+                size="sm" 
+                variant="outline" 
+                className="ml-2 flex items-center gap-2 border-primary/30 h-auto px-4 py-2 hover:bg-primary/10"
+              >
+                <Download className="h-4 w-4" />
+                <span className="hidden lg:inline">Resume</span>
+              </Button>
+            </Link>
           </motion.nav>
 
           {/* Mobile Navigation */}
           <div className="flex items-center space-x-2 md:hidden">
-            <ModeToggle />
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="h-8 w-8">
-                  <Menu className="h-5 w-5" />
+                <Button variant="ghost" size="icon" className="h-10 w-10">
+                  <Menu className="h-6 w-6" />
                   <span className="sr-only">Toggle menu</span>
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="border-primary/20 bg-background/90 backdrop-blur-xl">
                 <SheetHeader>
-                  <SheetTitle className="text-gradient">Saranga Siriwardhana</SheetTitle>
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="relative overflow-hidden rounded-lg size-12 border border-primary/20">
+                      <Image 
+                        src="/banner4.jpg" 
+                        alt="Saranga Siriwardhana" 
+                        fill 
+                        className="object-cover"
+                      />
+                    </div>
+                    <SheetTitle className="text-gradient">Saranga Siriwardhana</SheetTitle>
+                  </div>
                   <SheetDescription>
                     BSc (Hons) Software Engineering Student | Full Stack Developer
                   </SheetDescription>
@@ -168,7 +190,7 @@ export function Navbar() {
                     <Button
                       key={item.name}
                       variant="ghost"
-                      className={`justify-start ${activeSection === item.href.substring(1) ? 'text-primary' : ''}`}
+                      className={`justify-start text-base py-6 ${activeSection === item.href.substring(1) ? 'text-primary' : ''}`}
                       onClick={() => {
                         scrollToSection(item.href)
                         document.querySelector('[data-state="open"]')?.dispatchEvent(
@@ -182,10 +204,31 @@ export function Navbar() {
                       {item.name}
                     </Button>
                   ))}
-                  <Button variant="outline" className="justify-start gap-2 mt-4 bg-primary/10 border-primary/20">
-                    <Download className="h-4 w-4" />
-                    Download Resume
-                  </Button>
+                  {/* Mobile Resume Download Button */}
+                  <Link 
+                    href={resumeURL} 
+                    download="Saranga_Siriwardhana_CV.pdf" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="w-full"
+                    onClick={() => {
+                      // Close the sheet after click
+                      document.querySelector('[data-state="open"]')?.dispatchEvent(
+                        new KeyboardEvent("keydown", {
+                          key: "Escape",
+                          bubbles: true
+                        })
+                      )
+                    }}
+                  >
+                    <Button 
+                      variant="outline" 
+                      className="justify-start gap-2 mt-4 bg-primary/10 border-primary/20 py-6 text-base w-full"
+                    >
+                      <Download className="h-5 w-5" />
+                      Download Resume
+                    </Button>
+                  </Link>
                 </nav>
               </SheetContent>
             </Sheet>

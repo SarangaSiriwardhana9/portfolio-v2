@@ -98,9 +98,9 @@ export function HeroSection() {
             </motion.div>
 
             {/* Main title with split text animation */}
-            <div className="space-y-4">
+            <div className="space-y-4  ">
               <motion.h1 
-                className="text-6xl md:text-8xl font-bold leading-none"
+                className="text-6xl md:text-7xl font-bold leading-none"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
