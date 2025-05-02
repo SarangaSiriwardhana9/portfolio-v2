@@ -90,8 +90,9 @@ public/
 
 ## 📜 License
 
-This project is open source and a![1](https://github.com/user-attachments/assets/aab6e3b4-616c-434c-ab8b-2005bdba93e4)
-vailable under the [MIT License](LICENSE).
+This project is open source and available under the [MIT License](LICENSE).
 
+![Capture1](https://github.com/user-attachments/assets/d5ec4f04-21df-4611-b292-c6475cd19ef2)
+![1](https://github.com/user-attachments/assets/8619aac5-d45b-498d-8def-e765dbf471f6)
 
 
