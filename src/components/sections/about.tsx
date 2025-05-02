@@ -17,7 +17,7 @@ import Image from 'next/image'
 
 const stats = [
   { label: 'Year of Study', value: '4th', icon: <GraduationCap className="h-5 w-5" /> },
-  { label: 'Projects', value: '10+', icon: <Code className="h-5 w-5" /> },
+  { label: 'Projects', value: '20+', icon: <Code className="h-5 w-5" /> },
   { label: 'Tech Stacks', value: '8+', icon: <Sparkles className="h-5 w-5" /> },
   { label: 'Learning Hours', value: '1000+', icon: <Brain className="h-5 w-5" /> },
 ]

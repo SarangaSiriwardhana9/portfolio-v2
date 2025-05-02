@@ -1,4 +1,3 @@
- 
 'use client'
 
 import { Button } from '@/components/ui/button'
@@ -25,7 +24,6 @@ export function HeroSection() {
   // Parallax effects
   const y = useTransform(scrollYProgress, [0, 1], [0, -200])
  
-
   // Interactive mouse effect
   const springConfig = { damping: 25, stiffness: 700 }
   const x = useSpring(mousePosition.x, springConfig)
@@ -45,9 +43,42 @@ export function HeroSection() {
     window.addEventListener('mousemove', handleMouseMove)
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
+  
+
+   // Scroll to sections function
+const scrollToSection = (sectionId: string) => {
+  const section = document.getElementById(sectionId)
+  if (section) {
+ 
+    const targetPosition = section.getBoundingClientRect().top + window.pageYOffset
+    const startPosition = window.pageYOffset
+    const distance = targetPosition - startPosition
+    const duration = 2000  
+    let startTime: number | null = null
+    
+ 
+    function animation(currentTime: number) {
+      if (startTime === null) startTime = currentTime
+      const timeElapsed = currentTime - startTime
+      const progress = Math.min(timeElapsed / duration, 1)
+      
+      // Easing function for smoother scrolling
+      const ease = (t: number) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t
+      
+      window.scrollTo(0, startPosition + distance * ease(progress))
+      
+      if (timeElapsed < duration) {
+        requestAnimationFrame(animation)
+      }
+    }
+    
+    // Start the animation
+    requestAnimationFrame(animation)
+  }
+}
 
   return (
-    <section ref={containerRef} className="  bg-background py-10 relative mt-24  flex items-center overflow-hidden pt-[5vh]">
+    <section ref={containerRef} className="bg-background py-10 relative mt-24 flex items-center overflow-hidden pt-[5vh]">
       {/* Animated background gradient */}
       <motion.div 
         className="absolute inset-0 opacity-70"
@@ -98,7 +129,7 @@ export function HeroSection() {
             </motion.div>
 
             {/* Main title with split text animation */}
-            <div className="space-y-4  ">
+            <div className="space-y-4">
               <motion.h1 
                 className="text-6xl md:text-7xl font-bold leading-none"
                 initial={{ opacity: 0 }}
@@ -151,11 +182,19 @@ export function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.4, duration: 0.8 }}
             >
-              <Button size="lg" className="group">
+              <Button 
+                size="lg" 
+                className="group"
+                onClick={() => scrollToSection('contact')}
+              >
                 Let&apos;s Work Together
                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Button>
-              <Button size="lg" variant="outline">
+              <Button 
+                size="lg" 
+                variant="outline"
+                onClick={() => scrollToSection('projects')}
+              >
                 View Portfolio
               </Button>
             </motion.div>
