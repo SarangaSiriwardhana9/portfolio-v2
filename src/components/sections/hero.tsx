@@ -44,43 +44,29 @@ export function HeroSection() {
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
   
-
-   // Scroll to sections function
-const scrollToSection = (sectionId: string) => {
-  const section = document.getElementById(sectionId)
-  if (section) {
- 
-    const targetPosition = section.getBoundingClientRect().top + window.pageYOffset
-    const startPosition = window.pageYOffset
-    const distance = targetPosition - startPosition
-    const duration = 2000  
-    let startTime: number | null = null
-    
- 
-    function animation(currentTime: number) {
-      if (startTime === null) startTime = currentTime
-      const timeElapsed = currentTime - startTime
-      const progress = Math.min(timeElapsed / duration, 1)
+  // Use the same smooth scrolling function as in your navbar
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id)
+    if (element) {
+      // Get the element's position
+      const headerOffset = 80 // Adjust based on your header height
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY
+      const offsetPosition = elementPosition - headerOffset
       
-      // Easing function for smoother scrolling
-      const ease = (t: number) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t
-      
-      window.scrollTo(0, startPosition + distance * ease(progress))
-      
-      if (timeElapsed < duration) {
-        requestAnimationFrame(animation)
-      }
+      // Smooth scroll with browser's native API
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
     }
-    
-    // Start the animation
-    requestAnimationFrame(animation)
   }
-}
 
   return (
-    <section ref={containerRef} className="  py-10 relative mt-24 flex items-center overflow-hidden pt-[5vh]">
- 
-
+    <section 
+      ref={containerRef} 
+      className="py-10 pb-36 relative mt-24 flex items-center overflow-hidden pt-[5vh]"
+      id="home"
+    >
       {/* Geometric shapes background */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
@@ -184,6 +170,7 @@ const scrollToSection = (sectionId: string) => {
               <Button 
                 size="lg" 
                 variant="outline"
+                className='hover:bg-primary/10 '
                 onClick={() => scrollToSection('projects')}
               >
                 View Portfolio
@@ -337,7 +324,7 @@ const scrollToSection = (sectionId: string) => {
 
       {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        className="absolute bottom-28 left-1/2 -translate-x-1/2 z-10"
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 1.5, repeat: Infinity }}
       >

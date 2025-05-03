@@ -15,6 +15,7 @@ import { ContactSection } from '@/components/sections/connect'
 export default function Home() {
   const [mounted, setMounted] = useState(false)
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [highPerformanceMode, setHighPerformanceMode] = useState(false)
 
   useEffect(() => {
     setMounted(true)
@@ -27,18 +28,43 @@ export default function Home() {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
+    // Auto-detect if we should use high performance mode - fixed TypeScript error
+    const shouldUseHighPerformance = (): boolean => {
+      // Check if it's a mobile device
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+      // Or if it's a low-end device (you can adjust the threshold)
+      const isLowEnd = navigator.hardwareConcurrency !== undefined && navigator.hardwareConcurrency <= 4
+      
+      return isMobile || isLowEnd
+    }
+    
+    setHighPerformanceMode(shouldUseHighPerformance())
     let width = window.innerWidth
     let height = window.innerHeight
     let mouseX = width / 2
     let mouseY = height / 2
     let animationFrameId: number
+    let frameCount = 0
+    let isAnimating = true
 
-    // Set canvas dimensions
+    // Set canvas dimensions with proper pixel ratio scaling
     const setCanvasDimensions = () => {
       width = window.innerWidth
       height = window.innerHeight
-      canvas.width = width
-      canvas.height = height
+      
+      // Get the device pixel ratio, with a maximum to prevent excessive scaling
+      const dpr = Math.min(window.devicePixelRatio || 1, 2)
+      
+      // Set the actual size in memory (scaled for higher DPI)
+      canvas.width = width * dpr
+      canvas.height = height * dpr
+      
+      // Set the display size (CSS pixels)
+      canvas.style.width = `${width}px`
+      canvas.style.height = `${height}px`
+      
+      // Scale the context to ensure correct drawing operations
+      ctx?.scale(dpr, dpr)
     }
 
     setCanvasDimensions()
@@ -52,10 +78,72 @@ export default function Home() {
 
     window.addEventListener('mousemove', handleMouseMove)
 
+    // Determine particle count based on screen size
+    const numberOfParticles = (() => {
+      // Even fewer particles for very small screens
+      if (width < 480) return 30
+      // Reduced count for mobile
+      if (width < 768) return 50
+      // Medium for tablets
+      if (width < 1024) return 80
+      // Full experience for desktop
+      return 120
+    })()
+
+    // Adjust connection distance based on screen size
+    const connectDistance = (() => {
+      if (width < 480) return 80
+      if (width < 768) return 100
+      if (width < 1024) return 130
+      return 160
+    })()
+
+    // For very small mobile devices, create a static background instead of animation
+    if (width < 480 && highPerformanceMode) {
+      // Create static dots
+      ctx.clearRect(0, 0, width, height)
+      
+      const numberOfDots = 60
+      for (let i = 0; i < numberOfDots; i++) {
+        const x = Math.random() * width
+        const y = Math.random() * height
+        const size = Math.random() * 2 + 1
+        
+        const hue = 220 + Math.random() * 30
+        const saturation = 70 + Math.random() * 20
+        const lightness = 50 + Math.random() * 10
+        const alpha = 0.6 + Math.random() * 0.2
+        
+        ctx.beginPath()
+        ctx.arc(x, y, size, 0, Math.PI * 2)
+        ctx.fillStyle = `hsla(${hue}, ${saturation}%, ${lightness}%, ${alpha})`
+        ctx.fill()
+      }
+      
+      // Draw some static connections
+      for (let i = 0; i < 30; i++) {
+        const x1 = Math.random() * width
+        const y1 = Math.random() * height
+        const x2 = x1 + (Math.random() - 0.5) * 100
+        const y2 = y1 + (Math.random() - 0.5) * 100
+        
+        ctx.strokeStyle = `rgba(153, 153, 255, ${Math.random() * 0.3})`
+        ctx.lineWidth = 1
+        ctx.beginPath()
+        ctx.moveTo(x1, y1)
+        ctx.lineTo(x2, y2)
+        ctx.stroke()
+      }
+      
+      // Skip the animation for static background
+      return () => {
+        window.removeEventListener('resize', setCanvasDimensions)
+        window.removeEventListener('mousemove', handleMouseMove)
+      }
+    }
+
     // Create particles
     const particlesArray: Particle[] = []
-    const numberOfParticles = width < 768 ? 80 : 150
-    const connectDistance = width < 768 ? 120 : 160
 
     class Particle {
       x: number
@@ -65,6 +153,10 @@ export default function Home() {
       baseY: number
       density: number
       color: string
+      // Add caching for performance
+      private lastDrawX: number = 0
+      private lastDrawY: number = 0
+      private needsRedraw: boolean = true
 
       constructor() {
         this.x = Math.random() * width
@@ -73,6 +165,8 @@ export default function Home() {
         this.baseX = this.x
         this.baseY = this.y
         this.density = (Math.random() * 30) + 1
+        this.lastDrawX = this.x
+        this.lastDrawY = this.y
 
         // Color with slight random variation
         const hue = 220 + Math.random() * 30 // Blue-ish
@@ -91,6 +185,9 @@ export default function Home() {
       }
 
       update() {
+        const oldX = this.x
+        const oldY = this.y
+        
         // Calculate distance between mouse and particle
         const dx = mouseX - this.x
         const dy = mouseY - this.y
@@ -115,8 +212,17 @@ export default function Home() {
         this.x += dx2 * 0.02
         this.y += dy2 * 0.02
 
-        // Draw the particle
-        this.draw()
+        // Check if we need to redraw (particle has moved enough)
+        this.needsRedraw = 
+          Math.abs(this.x - this.lastDrawX) > 0.1 || 
+          Math.abs(this.y - this.lastDrawY) > 0.1
+        
+        // Draw the particle only if needed
+        if (this.needsRedraw) {
+          this.lastDrawX = this.x
+          this.lastDrawY = this.y
+          this.draw()
+        }
       }
     }
 
@@ -130,50 +236,126 @@ export default function Home() {
 
     createParticles()
 
-    // Connect nearby particles with lines
+    // Optimized connect particles function using spatial partitioning
     const connectParticles = () => {
       if (!ctx) return
+      
+      // For high performance mode, use a simplified approach
+      if (highPerformanceMode) {
+        // Only check a subset of connections
+        const checkEvery = 2 // Check every 2nd particle
+        
+        for (let a = 0; a < particlesArray.length; a += checkEvery) {
+          for (let b = a + checkEvery; b < particlesArray.length; b += checkEvery) {
+            const dx = particlesArray[a].x - particlesArray[b].x
+            const dy = particlesArray[a].y - particlesArray[b].y
+            const distance = Math.sqrt(dx * dx + dy * dy)
 
-      for (let a = 0; a < particlesArray.length; a++) {
-        for (let b = a; b < particlesArray.length; b++) {
-          const dx = particlesArray[a].x - particlesArray[b].x
-          const dy = particlesArray[a].y - particlesArray[b].y
-          const distance = Math.sqrt(dx * dx + dy * dy)
-
-          if (distance < connectDistance) {
-            const opacity = 1 - (distance / connectDistance)
-            ctx.strokeStyle = `rgba(153, 153, 255, ${opacity * 0.4})`
-            ctx.lineWidth = 1
-            ctx.beginPath()
-            ctx.moveTo(particlesArray[a].x, particlesArray[a].y)
-            ctx.lineTo(particlesArray[b].x, particlesArray[b].y)
-            ctx.stroke()
+            if (distance < connectDistance) {
+              const opacity = 1 - (distance / connectDistance)
+              ctx.strokeStyle = `rgba(153, 153, 255, ${opacity * 0.4})`
+              ctx.lineWidth = 1
+              ctx.beginPath()
+              ctx.moveTo(particlesArray[a].x, particlesArray[a].y)
+              ctx.lineTo(particlesArray[b].x, particlesArray[b].y)
+              ctx.stroke()
+            }
+          }
+        }
+        return
+      }
+      
+      // Use a grid-based approach for better performance
+      const cellSize = connectDistance
+      const grid: Record<string, Particle[]> = {}
+      
+      // Assign particles to grid cells
+      for (const particle of particlesArray) {
+        const cellX = Math.floor(particle.x / cellSize)
+        const cellY = Math.floor(particle.y / cellSize)
+        const cellKey = `${cellX},${cellY}`
+        
+        if (!grid[cellKey]) grid[cellKey] = []
+        grid[cellKey].push(particle)
+      }
+      
+      // Check connections only with nearby cells
+      for (const particle of particlesArray) {
+        const cellX = Math.floor(particle.x / cellSize)
+        const cellY = Math.floor(particle.y / cellSize)
+        
+        // Check surrounding cells (including current cell)
+        for (let i = -1; i <= 1; i++) {
+          for (let j = -1; j <= 1; j++) {
+            const checkCellKey = `${cellX + i},${cellY + j}`
+            const cellParticles = grid[checkCellKey] || []
+            
+            for (const otherParticle of cellParticles) {
+              // Avoid double connections and self connections
+              if (particle === otherParticle) continue
+              
+              const dx = particle.x - otherParticle.x
+              const dy = particle.y - otherParticle.y
+              const distance = Math.sqrt(dx * dx + dy * dy)
+              
+              if (distance < connectDistance) {
+                const opacity = 1 - (distance / connectDistance)
+                ctx.strokeStyle = `rgba(153, 153, 255, ${opacity * 0.4})`
+                ctx.lineWidth = 1
+                ctx.beginPath()
+                ctx.moveTo(particle.x, particle.y)
+                ctx.lineTo(otherParticle.x, otherParticle.y)
+                ctx.stroke()
+              }
+            }
           }
         }
       }
     }
 
-    // Animation
+    // Optimized animation function with frame skipping for mobile
     const animate = () => {
-      if (!ctx) return
+      if (!ctx || !isAnimating) return
 
       ctx.clearRect(0, 0, width, height)
-
-      for (const particle of particlesArray) {
-        particle.update()
+      
+      // In high performance mode, skip frames
+      const frameSkip = highPerformanceMode ? 2 : 1
+      
+      if (frameCount % frameSkip === 0) {
+        for (const particle of particlesArray) {
+          particle.update()
+        }
+        
+        connectParticles()
       }
-
-      connectParticles()
-
+      
+      frameCount++
       animationFrameId = requestAnimationFrame(animate)
     }
 
+    // Pause animation when tab is not visible
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        isAnimating = false
+        cancelAnimationFrame(animationFrameId)
+      } else {
+        isAnimating = true
+        animationFrameId = requestAnimationFrame(animate)
+      }
+    }
+    
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+    
+    // Start animation
     animate()
 
     // Cleanup
     return () => {
+      isAnimating = false
       window.removeEventListener('resize', setCanvasDimensions)
       window.removeEventListener('mousemove', handleMouseMove)
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
       cancelAnimationFrame(animationFrameId)
     }
   }, [mounted])

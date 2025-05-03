@@ -133,7 +133,7 @@ export function Navbar() {
                 key={item.name}
                 variant="ghost"
                 size="sm"
-                className={`text-sm font-medium relative px-4 py-2 h-auto ${activeSection === item.href.substring(1) ? 'text-primary' : ''}`}
+                className={`  hover:bg-primary/10 hover:text-primary/90 text-sm font-medium relative px-4 py-2 h-auto ${activeSection === item.href.substring(1) ? 'text-primary' : ''}`}
                 onClick={() => scrollToSection(item.href)}
               >
                 {item.name}

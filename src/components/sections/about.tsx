@@ -115,15 +115,15 @@ export function AboutSection() {
               transition={{ delay: 0.1 * index }}
               className="relative group"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-accent/10 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-0 group-hover:opacity-100" />
-              <div className="relative text-center p-6 rounded-2xl bg-primary/5 border border-primary/10 backdrop-blur-sm">
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/10 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-0 group-hover:opacity-100" />
+              <div className="relative text-center p-6 rounded-2xl bg-primary/20 border border-primary/20 backdrop-blur-sm">
                 <div className="flex justify-center mb-3">
-                  <div className="p-3 rounded-full bg-primary/10 text-primary">
+                  <div className="p-3 rounded-full bg-foreground/10 text-primary">
                     {stat.icon}
                   </div>
                 </div>
-                <div className="text-3xl font-bold text-primary mb-1">{stat.value}</div>
-                <div className="text-sm text-muted-foreground">{stat.label}</div>
+                <div className="text-3xl font-bold text-primary/90 mb-1">{stat.value}</div>
+                <div className="text-sm text-foreground/80">{stat.label}</div>
               </div>
             </motion.div>
           ))}
@@ -203,20 +203,20 @@ export function AboutSection() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   whileHover={{ scale: 1.02 }}
-                  className="group p-4 rounded-xl bg-primary/5 border border-primary/10 hover:border-primary/20 transition-all duration-300"
+                  className="group p-4 rounded-xl bg-primary/20 border border-primary/10 hover:border-primary/20 transition-all duration-300"
                 >
                   <div className="flex items-center gap-3 mb-2">
                     <div className="p-2 rounded-lg bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">
                       {skill.icon}
                     </div>
-                    <h3 className="font-semibold">{skill.title}</h3>
+                    <h3 className="font-semibold text-foreground">{skill.title}</h3>
                   </div>
-                  <p className="text-sm text-muted-foreground mb-3">{skill.description}</p>
+                  <p className="text-sm text-foreground/70 mb-3">{skill.description}</p>
                   <div className="flex flex-wrap gap-2">
                     {skill.tools.map((tool) => (
                       <span
                         key={tool}
-                        className="text-xs px-2 py-1 rounded-full bg-primary/10 text-primary"
+                        className="text-xs px-2 py-1 rounded-full bg-primary/20 text-foreground/80"
                       >
                         {tool}
                       </span>
