@@ -1,15 +1,16 @@
 import { Button } from "@/components/ui/button"
-import { Github, Linkedin, Mail, Twitter } from "lucide-react"
+import { Github, Linkedin, Instagram, Facebook, Mail } from "lucide-react"
 import Link from "next/link"
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
   
   const socialLinks = [
-    { icon: Github, href: "https://github.com/", label: "GitHub" },
-    { icon: Linkedin, href: "https://linkedin.com/", label: "LinkedIn" },
-    { icon: Twitter, href: "https://twitter.com/", label: "Twitter" },
-    { icon: Mail, href: "mailto:saranga@example.com", label: "Email" },
+    { icon: Github, href: "https://github.com/SarangaSiriwardhana9", label: "GitHub" },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/saranga-siriwardhana-409494218/", label: "LinkedIn" },
+    { icon: Instagram, href: "https://instagram.com/_.l_sara_?igshid=NTc4MTIwNjQ2YQ==", label: "Instagram" },
+    { icon: Facebook, href: "https://www.facebook.com/saranga.siriwardana.1?mibextid=LQQJ4d", label: "Facebook" },
+    { icon: Mail, href: "mailto:lasindusaranga99@gmail.com", label: "Email" }
   ]
 
   return (
