@@ -1,4 +1,3 @@
- 
 'use client'
 
 import { motion, useInView } from 'framer-motion'
@@ -99,10 +98,8 @@ export function SkillsSection() {
   }
 
   return (
-    <section id="skills" className="py-24 relative overflow-hidden">
-   
-      
-      <div className="container mx-auto px-4" ref={containerRef}>
+    <section id="skills" className="py-10 relative overflow-hidden">
+      <div className="container mx-auto px-4 max-w-[2000px]" ref={containerRef}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -110,16 +107,16 @@ export function SkillsSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold mb-4">
             Technical <span className="text-gradient">Expertise</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto">
             A comprehensive toolkit for building modern digital solutions with cutting-edge technologies
           </p>
         </motion.div>
 
         <motion.div 
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
@@ -131,13 +128,10 @@ export function SkillsSection() {
               whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
               className="group relative"
             >
-              {/* Glowing background effect */}
               <div className={`absolute -inset-0.5 rounded-2xl bg-gradient-to-r ${category.gradient} blur opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
               
-              {/* Card content */}
-              <div className={`relative h-full p-6 rounded-2xl border border-border/50 bg-gradient-to-br ${category.gradient} backdrop-blur-sm`}>
-                {/* Progress indicator */}
-                <div className="absolute top-3 right-3 w-10 h-10">
+              <div className={`relative h-full p-4 sm:p-6 rounded-2xl border border-border/50 bg-gradient-to-br ${category.gradient} backdrop-blur-sm`}>
+                <div className="absolute top-3 right-3 w-8 sm:w-10 h-8 sm:h-10">
                   <motion.svg 
                     viewBox="0 0 36 36" 
                     className="w-full h-full -rotate-90"
@@ -168,20 +162,18 @@ export function SkillsSection() {
                   </span>
                 </div>
 
-                {/* Icon and title */}
-                <div className="flex items-center gap-3 mb-4">
+                <div className="flex items-center gap-3 mb-3 sm:mb-4">
                   <motion.div 
-                    className="p-3 rounded-xl bg-background/50 backdrop-blur-sm text-primary"
+                    className="p-2 sm:p-3 rounded-xl bg-background/50 backdrop-blur-sm text-primary"
                     whileHover={{ rotate: 360 }}
                     transition={{ duration: 0.5 }}
                   >
                     {category.icon}
                   </motion.div>
-                  <h3 className="font-semibold text-lg">{category.title}</h3>
+                  <h3 className="font-semibold text-base sm:text-lg">{category.title}</h3>
                 </div>
 
-                {/* Skills badges */}
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-1 sm:gap-2">
                   {category.skills.map((skill, skillIndex) => (
                     <motion.span
                       key={skill}
@@ -189,7 +181,7 @@ export function SkillsSection() {
                       animate={isInView ? { opacity: 1, scale: 1 } : {}}
                       transition={{ delay: index * 0.1 + skillIndex * 0.05 }}
                       whileHover={{ scale: 1.1, y: -2 }}
-                      className={`px-3 py-1 text-sm rounded-full bg-background/50 backdrop-blur-sm border border-border/50 
+                      className={`px-2 sm:px-3 py-0.5 sm:py-1 text-xs sm:text-sm rounded-full bg-background/50 backdrop-blur-sm border border-border/50 
                         hover:border-${category.accentColor}-500/50 hover:bg-${category.accentColor}-500/10 transition-all cursor-default`}
                     >
                       {skill}
@@ -197,7 +189,6 @@ export function SkillsSection() {
                   ))}
                 </div>
 
-                {/* Hover effect underline */}
                 <motion.div
                   className={`absolute bottom-0 left-0 h-1 bg-gradient-to-r ${category.gradient} rounded-b-2xl`}
                   initial={{ scaleX: 0 }}
@@ -209,7 +200,6 @@ export function SkillsSection() {
           ))}
         </motion.div>
 
-        {/* Additional interactive elements */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -217,7 +207,7 @@ export function SkillsSection() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mt-16 text-center"
         >
-          <p className="text-muted-foreground mb-6">
+          <p className="text-sm sm:text-base text-muted-foreground mb-6">
             Always learning and exploring new technologies to stay at the forefront of software development.
           </p>
           <motion.div
@@ -232,7 +222,7 @@ export function SkillsSection() {
             }}
             className="inline-block"
           >
-            <Brain className="h-12 w-12 text-primary opacity-40" />
+            <Brain className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 text-primary opacity-40" />
           </motion.div>
         </motion.div>
       </div>

@@ -1,8 +1,6 @@
- 
 import '@/styles/global.css'
 import type { Metadata } from 'next'
 import { Outfit } from 'next/font/google'
-import Head from 'next/head'
 
 const outfit = Outfit({ 
   subsets: ['latin'],
@@ -23,9 +21,6 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning className={outfit.variable}>
-      <Head>
-        <link rel="icon" href="./bannerImg1.png" type="image/png" />
-      </Head>
       <body suppressHydrationWarning>
         {children}
       </body>

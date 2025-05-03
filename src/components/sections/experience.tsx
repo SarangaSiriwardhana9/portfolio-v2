@@ -1,4 +1,3 @@
- 
 'use client'
 
 import { motion } from 'framer-motion'
@@ -54,9 +53,7 @@ export function ExperienceSection() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
+      transition: { staggerChildren: 0.1 }
     }
   }
 
@@ -65,21 +62,18 @@ export function ExperienceSection() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.5
-      }
+      transition: { duration: 0.5 }
     }
   }
 
   return (
-    <section id="experience" className="py-24 relative overflow-hidden">
-      {/* Background decorations */}
+    <section id="experience" className="py-10 relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-primary/5 blur-3xl animate-pulse" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-accent/5 blur-3xl animate-pulse delay-1000" />
       </div>
 
-      <div className="container mx-auto px-4 relative">
+      <div className="container mx-auto px-4 relative max-w-[2000px]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -96,19 +90,18 @@ export function ExperienceSection() {
             </span>
           </motion.div>
           
-          <h2 className="text-4xl md:text-6xl font-bold mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold mb-6">
             Professional
             <span className="text-gradient"> Experience</span>
           </h2>
           
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg xl:text-xl text-muted-foreground max-w-3xl mx-auto">
             Building impactful solutions through continuous learning and growth
           </p>
         </motion.div>
 
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="relative">
-            {/* Enhanced timeline line */}
             <div className="absolute left-4 md:left-8 top-6 bottom-6 w-0.5 bg-gradient-to-b from-primary/50 via-accent/50 to-primary/50" />
             
             <motion.div 
@@ -125,9 +118,8 @@ export function ExperienceSection() {
                   className="relative"
                   whileHover={{ scale: 1.02 }}
                 >
-                  {/* Enhanced timeline node */}
                   <motion.div 
-                    className={`absolute left-4 md:left-8 -translate-x-1/2 w-10 h-10 rounded-full bg-background border-2 ${
+                    className={`absolute left-4 md:left-8 -translate-x-1/2 w-8 sm:w-10 h-8 sm:h-10 rounded-full bg-background border-2 ${
                       exp.color === 'blue' ? 'border-blue-500' : 'border-purple-500'
                     } flex items-center justify-center shadow-lg`}
                     whileHover={{ scale: 1.2 }}
@@ -135,7 +127,7 @@ export function ExperienceSection() {
                     <motion.div
                       animate={{ rotate: 360 }}
                       transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                      className={`p-2 rounded-full ${
+                      className={`p-1.5 sm:p-2 rounded-full ${
                         exp.color === 'blue' ? 'bg-blue-500/20 text-blue-500' : 'bg-purple-500/20 text-purple-500'
                       }`}
                     >
@@ -143,9 +135,9 @@ export function ExperienceSection() {
                     </motion.div>
                   </motion.div>
                   
-                  <div className="ml-16 md:ml-24">
+                  <div className="ml-12 sm:ml-16 md:ml-24">
                     <motion.div 
-                      className={`rounded-2xl border-2 p-6 bg-gradient-to-br ${
+                      className={`rounded-2xl border-2 p-4 sm:p-6 bg-gradient-to-br ${
                         exp.color === 'blue' 
                           ? 'from-blue-500/5 to-blue-500/10 border-blue-500/20' 
                           : 'from-purple-500/5 to-purple-500/10 border-purple-500/20'
@@ -153,11 +145,10 @@ export function ExperienceSection() {
                       whileHover={{ y: -5 }}
                       transition={{ duration: 0.2 }}
                     >
-                      {/* Header */}
                       <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
                         <div>
-                          <h3 className="text-2xl font-bold mb-1">{exp.title}</h3>
-                          <div className="flex items-center gap-4 text-muted-foreground">
+                          <h3 className="text-xl sm:text-2xl font-bold mb-1">{exp.title}</h3>
+                          <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-muted-foreground text-sm sm:text-base">
                             <div className="flex items-center gap-2">
                               <Building className="h-4 w-4" />
                               <span>{exp.company}</span>
@@ -168,7 +159,7 @@ export function ExperienceSection() {
                             </div>
                           </div>
                         </div>
-                        <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+                        <span className={`px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium ${
                           exp.type === 'Full-time' 
                             ? 'bg-blue-500/10 text-blue-500' 
                             : 'bg-purple-500/10 text-purple-500'
@@ -177,10 +168,9 @@ export function ExperienceSection() {
                         </span>
                       </div>
                       
-                      <p className="text-muted-foreground mb-6">{exp.description}</p>
+                      <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6">{exp.description}</p>
                       
-                      {/* Technologies */}
-                      <div className="flex flex-wrap gap-2 mb-6">
+                      <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-6">
                         {exp.technologies.map((tech, i) => (
                           <motion.span
                             key={tech}
@@ -188,7 +178,7 @@ export function ExperienceSection() {
                             whileInView={{ opacity: 1, scale: 1 }}
                             transition={{ delay: i * 0.05 }}
                             whileHover={{ scale: 1.05 }}
-                            className={`px-3 py-1 text-sm rounded-lg ${
+                            className={`px-2 sm:px-3 py-0.5 sm:py-1 text-xs sm:text-sm rounded-lg ${
                               exp.color === 'blue'
                                 ? 'bg-blue-500/10 text-blue-500 border border-blue-500/20'
                                 : 'bg-purple-500/10 text-purple-500 border border-purple-500/20'
@@ -199,8 +189,7 @@ export function ExperienceSection() {
                         ))}
                       </div>
                       
-                      {/* Highlights Grid */}
-                      <div className="grid md:grid-cols-2 gap-3 mb-6">
+                      <div className="grid sm:grid-cols-2 gap-2 sm:gap-3 mb-4 sm:mb-6">
                         {exp.highlights.map((highlight, i) => (
                           <motion.div
                             key={i}
@@ -209,29 +198,28 @@ export function ExperienceSection() {
                             transition={{ delay: i * 0.1 }}
                             className="flex items-start gap-2"
                           >
-                            <CheckCircle2 className={`h-5 w-5 mt-0.5 ${
+                            <CheckCircle2 className={`h-4 sm:h-5 w-4 sm:w-5 mt-0.5 ${
                               exp.color === 'blue' ? 'text-blue-500' : 'text-purple-500'
                             }`} />
-                            <span className="text-sm">{highlight}</span>
+                            <span className="text-xs sm:text-sm">{highlight}</span>
                           </motion.div>
                         ))}
                       </div>
                       
-                      {/* Achievements */}
-                      <div className="grid grid-cols-3 gap-4">
+                      <div className="grid grid-cols-3 gap-2 sm:gap-4">
                         {exp.achievements.map((achievement, i) => (
                           <motion.div
                             key={achievement.label}
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ delay: i * 0.1 }}
-                            className={`text-center p-3 rounded-xl ${
+                            className={`text-center p-2 sm:p-3 rounded-xl ${
                               exp.color === 'blue'
                                 ? 'bg-blue-500/10 border border-blue-500/20'
                                 : 'bg-purple-500/10 border border-purple-500/20'
                             }`}
                           >
-                            <div className={`text-xl font-bold ${
+                            <div className={`text-base sm:text-xl font-bold ${
                               exp.color === 'blue' ? 'text-blue-500' : 'text-purple-500'
                             }`}>
                               {achievement.value}
@@ -248,7 +236,6 @@ export function ExperienceSection() {
           </div>
         </div>
 
-        {/* Bottom decoration */}
         <motion.div
           className="mt-16 text-center"
           initial={{ opacity: 0 }}
@@ -257,19 +244,13 @@ export function ExperienceSection() {
           transition={{ delay: 0.5 }}
         >
           <motion.div
-            animate={{ 
-              scale: [1, 1.1, 1],
-            }}
-            transition={{ 
-              duration: 2,
-              repeat: Infinity,
-              repeatType: "reverse" 
-            }}
+            animate={{ scale: [1, 1.1, 1] }}
+            transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
             className="inline-block"
           >
-            <TrendingUp className="h-8 w-8 text-primary/50" />
+            <TrendingUp className="h-6 sm:h-8 w-6 sm:w-8 text-primary/50" />
           </motion.div>
-          <p className="text-lg text-muted-foreground mt-2">
+          <p className="text-base sm:text-lg text-muted-foreground mt-2">
             Continuously evolving and growing
           </p>
         </motion.div>

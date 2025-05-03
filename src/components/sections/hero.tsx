@@ -21,10 +21,7 @@ export function HeroSection() {
     offset: ["start start", "end start"]
   })
 
-  // Parallax effects
   const y = useTransform(scrollYProgress, [0, 1], [0, -200])
- 
-  // Interactive mouse effect
   const springConfig = { damping: 25, stiffness: 700 }
   const x = useSpring(mousePosition.x, springConfig)
   const y2 = useSpring(mousePosition.y, springConfig)
@@ -44,16 +41,13 @@ export function HeroSection() {
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
   
-  // Use the same smooth scrolling function as in your navbar
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id)
     if (element) {
-      // Get the element's position
-      const headerOffset = 80 // Adjust based on your header height
+      const headerOffset = 80
       const elementPosition = element.getBoundingClientRect().top + window.scrollY
       const offsetPosition = elementPosition - headerOffset
       
-      // Smooth scroll with browser's native API
       window.scrollTo({
         top: offsetPosition,
         behavior: 'smooth'
@@ -64,34 +58,32 @@ export function HeroSection() {
   return (
     <section 
       ref={containerRef} 
-      className="py-10 pb-36 relative mt-24 flex items-center overflow-hidden pt-[5vh]"
+      className="py-10 pb-20 md:pb-36 relative mt-10 md:mt-24 flex items-center overflow-hidden pt-[5vh]"
       id="home"
     >
-      {/* Geometric shapes background */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
           style={{ y }}
-          className="absolute top-20 -left-20 w-96 h-96 rounded-full border border-primary/30 blur-3xl"
+          className="absolute top-20 -left-20 w-64 md:w-96 h-64 md:h-96 rounded-full border border-primary/30 blur-3xl"
           animate={{ rotate: 360 }}
           transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
         />
         <motion.div
           style={{ y: useTransform(scrollYProgress, [0, 1], [0, 150]) }}
-          className="absolute bottom-20 -right-20 w-96 h-96 rounded-full border border-accent/30 blur-3xl"
+          className="absolute bottom-20 -right-20 w-64 md:w-96 h-64 md:h-96 rounded-full border border-accent/30 blur-3xl"
           animate={{ rotate: -360 }}
           transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
         />
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="container mx-auto px-4 relative z-10 max-w-[2000px]">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="space-y-8"
+            className="space-y-6 md:space-y-8"
           >
-            {/* Animated badge */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -105,10 +97,9 @@ export function HeroSection() {
               </div>
             </motion.div>
 
-            {/* Main title with split text animation */}
             <div className="space-y-4">
               <motion.h1 
-                className="text-6xl md:text-7xl font-bold leading-none"
+                className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-none"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
@@ -142,7 +133,7 @@ export function HeroSection() {
               </motion.h1>
               
               <motion.p 
-                className="text-xl text-muted-foreground max-w-xl"
+                className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-xl"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.2, duration: 0.8 }}
@@ -152,9 +143,8 @@ export function HeroSection() {
               </motion.p>
             </div>
 
-            {/* CTA buttons */}
             <motion.div 
-              className="flex flex-wrap gap-4 pt-4"
+              className="flex flex-wrap gap-3 md:gap-4 pt-2 md:pt-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.4, duration: 0.8 }}
@@ -170,37 +160,122 @@ export function HeroSection() {
               <Button 
                 size="lg" 
                 variant="outline"
-                className='hover:bg-primary/10 '
+                className='hover:bg-primary/10'
                 onClick={() => scrollToSection('projects')}
               >
                 View Portfolio
               </Button>
             </motion.div>
 
-            {/* Stats */}
             <motion.div 
-              className="grid grid-cols-3 gap-8 pt-8"
+              className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-8 pt-4 md:pt-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.6, duration: 0.8 }}
             >
               <div>
-                <div className="text-3xl font-bold text-primary">5+</div>
-                <div className="text-sm text-muted-foreground">Years Experience</div>
+                <div className="text-xl sm:text-2xl md:text-3xl xl:text-4xl font-bold text-primary">5+</div>
+                <div className="text-xs md:text-sm text-muted-foreground">Years Experience</div>
               </div>
               <div>
-                <div className="text-3xl font-bold text-primary">50+</div>
-                <div className="text-sm text-muted-foreground">Projects Delivered</div>
+                <div className="text-xl sm:text-2xl md:text-3xl xl:text-4xl font-bold text-primary">50+</div>
+                <div className="text-xs md:text-sm text-muted-foreground">Projects Delivered</div>
               </div>
               <div>
-                <div className="text-3xl font-bold text-primary">30+</div>
-                <div className="text-sm text-muted-foreground">Happy Clients</div>
+                <div className="text-xl sm:text-2xl md:text-3xl xl:text-4xl font-bold text-primary">30+</div>
+                <div className="text-xs md:text-sm text-muted-foreground">Happy Clients</div>
               </div>
             </motion.div>
           </motion.div>
 
-          {/* Right column - Interactive 3D-like display */}
-          <div className="relative h-[600px] hidden lg:block">
+          {/* Mobile Image Section */}
+          <motion.div 
+            className="block lg:hidden mt-8 mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.6, duration: 0.8 }}
+          >
+            <div className="relative w-full h-[350px] rounded-2xl overflow-hidden border border-border/50 shadow-lg">
+              <div className="absolute inset-0 bg-background/50 backdrop-blur-sm"></div>
+              
+              {floatingElements.map((Element, index) => (
+                <motion.div
+                  key={index}
+                  className="absolute"
+                  style={{
+                    top: `${20 + (index * 15)}%`,
+                    left: index % 2 === 0 ? '10%' : '80%',
+                  }}
+                  animate={{
+                    y: [0, -10, 0],
+                    rotate: [0, 5, 0]
+                  }}
+                  transition={{
+                    duration: 3,
+                    delay: Element.delay,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                >
+                  <div className="p-3 bg-primary/10 backdrop-blur-sm rounded-xl border border-primary/20">
+                    <Element.icon className="h-6 w-6 text-primary" />
+                  </div>
+                </motion.div>
+              ))}
+              
+              <div className="absolute inset-4 rounded-xl overflow-hidden">
+                <div className="relative h-full w-full bg-background/60 backdrop-blur-md rounded-xl border border-border/50">
+                  <Image
+                    src="/banner5.jpg"
+                    alt="Saranga Siriwardhana"
+                    fill
+                    className="object-cover opacity-80"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/30 to-background/70" />
+                </div>
+              </div>
+              
+              <div className="absolute bottom-0 left-0 right-0 p-4 bg-background/80 backdrop-blur-md border-t border-border/50">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="h-2 w-2 rounded-full bg-red-500" />
+                  <div className="h-2 w-2 rounded-full bg-yellow-500" />
+                  <div className="h-2 w-2 rounded-full bg-green-500" />
+                </div>
+                <motion.div
+                  className="font-mono text-xs text-primary truncate"
+                  animate={{ opacity: [0, 1] }}
+                  transition={{ duration: 1, repeat: Infinity, repeatType: 'reverse' }}
+                >
+                  <span className="text-muted-foreground">$</span> npm run create-amazing-things
+                </motion.div>
+              </div>
+              
+              {Array.from({ length: 10 }).map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute w-1.5 h-1.5 rounded-full bg-primary/30"
+                  style={{
+                    top: `${Math.random() * 100}%`,
+                    left: `${Math.random() * 100}%`,
+                  }}
+                  animate={{
+                    scale: [0, 1, 0],
+                    opacity: [0, 0.5, 0],
+                  }}
+                  transition={{
+                    duration: 2 + Math.random() * 2,
+                    delay: Math.random() * 2,
+                    repeat: Infinity,
+                  }}
+                />
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Desktop Image Section */}
+          <div className="relative h-[500px] md:h-[600px] xl:h-[700px] hidden lg:block">
             <motion.div 
               className="absolute inset-0"
               style={{
@@ -208,13 +283,11 @@ export function HeroSection() {
                 transition: "transform 0.1s ease-out"
               }}
             >
-              {/* Main display screen */}
               <motion.div
                 className="relative w-full h-full bg-background/50 backdrop-blur-xl rounded-3xl border border-border/50 shadow-2xl overflow-hidden"
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.2 }}
               >
-                {/* Code-like animation in the background */}
                 <div className="absolute inset-0 overflow-hidden">
                   {Array.from({ length: 10 }).map((_, i) => (
                     <motion.div
@@ -239,7 +312,6 @@ export function HeroSection() {
                   ))}
                 </div>
 
-                {/* Floating elements */}
                 {floatingElements.map((Element, index) => (
                   <motion.div
                     key={index}
@@ -266,7 +338,6 @@ export function HeroSection() {
                   </motion.div>
                 ))}
 
-                {/* Center image with glassmorphism effect */}
                 <div className="absolute inset-16 rounded-2xl overflow-hidden">
                   <div className="relative h-full w-full bg-background/80 backdrop-blur-md rounded-2xl border border-border/50 overflow-hidden">
                     <Image
@@ -274,13 +345,13 @@ export function HeroSection() {
                       alt="Saranga Siriwardhana"
                       fill
                       className="object-cover opacity-90"
+                      sizes="(min-width: 1024px) 50vw, 100vw"
                       priority
                     />
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/40 to-background/80" />
                   </div>
                 </div>
 
-                {/* Terminal-like footer */}
                 <div className="absolute bottom-0 left-0 right-0 p-6 bg-background/90 backdrop-blur-md border-t border-border/50">
                   <div className="flex items-center gap-2 mb-2">
                     <div className="h-3 w-3 rounded-full bg-red-500" />
@@ -297,7 +368,6 @@ export function HeroSection() {
                 </div>
               </motion.div>
 
-              {/* Surrounding particles */}
               {Array.from({ length: 20 }).map((_, i) => (
                 <motion.div
                   key={i}
@@ -322,9 +392,8 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-28 left-1/2 -translate-x-1/2 z-10"
+        className="absolute bottom-10 md:bottom-22 left-1/2 -translate-x-1/2 z-10"
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 1.5, repeat: Infinity }}
       >

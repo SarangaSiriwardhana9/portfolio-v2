@@ -34,7 +34,6 @@ export function Navbar() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
       
-      // Determine active section
       const sections = navItems.map(item => item.href.substring(1))
       const scrollPosition = window.scrollY + 200
       
@@ -56,13 +55,12 @@ export function Navbar() {
     element?.scrollIntoView({ behavior: "smooth" })
   }
 
-  // The URL for your resume PDF file
   const resumeURL = "/Saranga Siriwardhana_CV.pdf"
  
   if (!isMounted) {
     return (
       <header className="fixed top-0 w-full z-50 py-4 sm:py-6 bg-transparent">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 max-w-[2000px]">
           <div className="flex items-center justify-between">
             <div className="text-lg sm:text-xl font-bold">
               <div className="h-12 w-40 bg-muted/30 rounded-md"></div>
@@ -88,7 +86,7 @@ export function Navbar() {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 max-w-[2000px]">
         <div className="flex items-center justify-between">
           <motion.div 
             className="font-bold"
@@ -97,7 +95,7 @@ export function Navbar() {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <a href="#home" className="flex items-center gap-3">
-              <div className="relative overflow-hidden rounded-lg size-10 sm:size-14 bg-background/80 backdrop-blur-sm  ">
+              <div className="relative overflow-hidden rounded-lg size-10 sm:size-14 bg-background/80 backdrop-blur-sm">
                 <Image 
                   src="/bannerImg1.png" 
                   alt="Saranga Siriwardhana" 
@@ -121,7 +119,6 @@ export function Navbar() {
             </a>
           </motion.div>
 
-          {/* Desktop Navigation */}
           <motion.nav 
             className="hidden md:flex items-center space-x-1"
             initial={{ opacity: 0 }}
@@ -133,7 +130,7 @@ export function Navbar() {
                 key={item.name}
                 variant="ghost"
                 size="sm"
-                className={`  hover:bg-primary/10 hover:text-primary/90 text-sm font-medium relative px-4 py-2 h-auto ${activeSection === item.href.substring(1) ? 'text-primary' : ''}`}
+                className={`hover:bg-primary/10 hover:text-primary/90 text-sm font-medium relative px-4 py-2 h-auto ${activeSection === item.href.substring(1) ? 'text-primary' : ''}`}
                 onClick={() => scrollToSection(item.href)}
               >
                 {item.name}
@@ -146,7 +143,6 @@ export function Navbar() {
                 )}
               </Button>
             ))}
-            {/* Desktop Resume Download Button */}
             <Link href={resumeURL} download="Saranga_Siriwardhana_CV.pdf" target="_blank" rel="noopener noreferrer">
               <Button 
                 size="sm" 
@@ -159,7 +155,6 @@ export function Navbar() {
             </Link>
           </motion.nav>
 
-          {/* Mobile Navigation */}
           <div className="flex items-center space-x-2 md:hidden">
             <Sheet>
               <SheetTrigger asChild>
@@ -204,7 +199,6 @@ export function Navbar() {
                       {item.name}
                     </Button>
                   ))}
-                  {/* Mobile Resume Download Button */}
                   <Link 
                     href={resumeURL} 
                     download="Saranga_Siriwardhana_CV.pdf" 
@@ -212,7 +206,6 @@ export function Navbar() {
                     rel="noopener noreferrer"
                     className="w-full"
                     onClick={() => {
-                      // Close the sheet after click
                       document.querySelector('[data-state="open"]')?.dispatchEvent(
                         new KeyboardEvent("keydown", {
                           key: "Escape",

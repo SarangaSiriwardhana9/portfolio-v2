@@ -14,20 +14,20 @@ export function Footer() {
   ]
 
   return (
-    <footer className="py-12 border-t border-border/30">
-      <div className="container mx-auto px-4">
+    <footer className="py-8 sm:py-10 md:py-12 border-t border-border/30">
+      <div className="container mx-auto px-4 max-w-[2000px]">
         <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="mb-6 md:mb-0">
-            <h3 className="text-xl font-bold flex items-center">
+          <div className="mb-6 md:mb-0 text-center md:text-left">
+            <h3 className="text-lg sm:text-xl font-bold flex items-center justify-center md:justify-start">
               <span className="text-primary">SS</span>
               <span className="ml-2">Saranga Siriwardhana</span>
             </h3>
-            <p className="text-muted-foreground mt-2">
+            <p className="text-xs sm:text-sm text-muted-foreground mt-2 max-w-md">
               BSc (Hons) Software Engineering Student | Full Stack Developer
             </p>
           </div>
           
-          <div className="flex space-x-4">
+          <div className="flex space-x-2 sm:space-x-3 md:space-x-4">
             {socialLinks.map((link) => (
               <Button
                 key={link.label}
@@ -35,27 +35,27 @@ export function Footer() {
                 size="icon"
                 asChild
                 aria-label={link.label}
-                className="hover:bg-primary/10 hover:text-primary rounded-full"
+                className="h-8 w-8 sm:h-10 sm:w-10 hover:bg-primary/10 hover:text-primary rounded-full"
               >
                 <Link href={link.href} target="_blank" rel="noopener noreferrer">
-                  <link.icon className="h-5 w-5" />
+                  <link.icon className="h-4 w-4 sm:h-5 sm:w-5" />
                 </Link>
               </Button>
             ))}
           </div>
         </div>
         
-        <div className="mt-8 pt-6 border-t border-border/30 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-sm text-muted-foreground">
+        <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-border/30 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-xs sm:text-sm text-muted-foreground">
             © {currentYear} Saranga Siriwardhana. All rights reserved.
           </p>
           
-          <nav className="flex gap-4 mt-4 md:mt-0">
+          <nav className="flex flex-wrap justify-center gap-3 sm:gap-4 mt-4 md:mt-0">
             {["Home", "About", "Skills", "Projects", "Contact"].map((item) => (
               <Link 
                 key={item}
                 href={`#${item.toLowerCase()}`} 
-                className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                className="text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors"
               >
                 {item}
               </Link>
