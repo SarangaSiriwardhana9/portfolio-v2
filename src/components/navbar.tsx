@@ -214,13 +214,15 @@ export function Navbar() {
                       )
                     }}
                   >
+                    <div className=" px-2">
                     <Button 
                       variant="outline" 
-                      className="justify-start gap-2 mt-4 bg-primary/10 border-primary/20 py-6 text-base w-full"
+                      className="justify-start px-8 gap-2 mt-4 bg-primary/10 border-primary/20 py-6 text-base w-full"
                     >
                       <Download className="h-5 w-5" />
-                      Download Resume
+                      Download Resumea
                     </Button>
+                    </div>
                   </Link>
                 </nav>
               </SheetContent>

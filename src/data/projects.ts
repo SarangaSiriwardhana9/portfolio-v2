@@ -1,15 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
  
-import Auth from '../../public/projects/auth.png'
-import buildHub from '../../public/projects/buildHub.jpeg'
-import codewave from '../../public/projects/codewave1.png'
-import keepIt from '../../public/projects/keepIt.png'
-import MrKing from '../../public/projects/mrKing.jpeg'
-import note from '../../public/projects/note.png'
+import Auth from '../../public/projects/auth.png.jpg'
+import buildHub from '../../public/projects/buildHub.jpg'
+import codewave from '../../public/projects/codewave1.jpg'
+import keepIt from '../../public/projects/keepIt.jpg'
+import MrKing from '../../public/projects/mrKing.jpg'
+import note from '../../public/projects/note.jpg'
 import projectOne from '../../public/projects/projectOne.jpg'
-import projectThree from '../../public/projects/projectThree.png'
-import SriChat from '../../public/projects/srichat.png'
-import StateLk from '../../public/projects/statelk.png'
+import projectThree from '../../public/projects/projectThree.jpg'
+import SriChat from '../../public/projects/srichat.jpg'
+import StateLk from '../../public/projects/statelk.jpg'
+import Edupulse from '../../public/projects/edupulse.jpg'
 
 export interface Project {
     title: string;
@@ -25,6 +26,17 @@ export interface Project {
   
   // Project data
   export const projects: Project[] = [
+
+    {
+      title: "EduPulse-Online Learning Management System With Microservices Architecture",
+      description: "EduPulse is a modern e-learning platform designed to enhance online education through a microservices architecture. The platform provides a seamless interface for learners to browse, enroll in, and access courses, while offering robust tools for instructors and administrators to manage course content and student progress.",
+      image: Edupulse,
+      github: "https://github.com/SarangaSiriwardhana9/EduPulse-Microservices-EducationPlatform",
+      tags: ["MERN", "microservices","React","docker", "Node.js", "MongoDB", "Tailwind CSS", "Stripe", "JWT"],
+      category: "Education",
+      color: "from-blue-500/20 to-purple-500/20",
+      size: "large"
+    },
     {
       title: "CAFE-MR.KING - E-COMMERCE PLATFORM",
       description: "Presenting MR. KING CAFE: My MERN project exemplifying Full-Stack expertise. This platform boasts a user-friendly interface with React, Node.js, and MongoDB, enhanced by Tailwind CSS. Users can log in, explore menus, add to carts, and pay securely via Stripe. JWT ensures authentication, while an admin dashboard simplifies menu and user management.",
