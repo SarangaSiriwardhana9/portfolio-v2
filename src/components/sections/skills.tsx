@@ -87,8 +87,8 @@ export function SkillsSection() {
 
   const cardVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       transition: {
         duration: 0.5,
@@ -108,14 +108,17 @@ export function SkillsSection() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold mb-4">
-            Technical <span className="text-gradient">Expertise</span>
+            Technical{' '}
+            <span className="text-primary sm:bg-clip-text sm:text-transparent sm:bg-gradient-to-r sm:from-primary sm:via-accent sm:to-primary">
+              Expertise
+            </span>
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto">
             A comprehensive toolkit for building modern digital solutions with cutting-edge technologies
           </p>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"
           variants={containerVariants}
           initial="hidden"
@@ -129,11 +132,11 @@ export function SkillsSection() {
               className="group relative"
             >
               <div className={`absolute -inset-0.5 rounded-2xl bg-gradient-to-r ${category.gradient} blur opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-              
+
               <div className={`relative h-full p-4 sm:p-6 rounded-2xl border border-border/50 bg-gradient-to-br ${category.gradient} backdrop-blur-sm`}>
                 <div className="absolute top-3 right-3 w-8 sm:w-10 h-8 sm:h-10">
-                  <motion.svg 
-                    viewBox="0 0 36 36" 
+                  <motion.svg
+                    viewBox="0 0 36 36"
                     className="w-full h-full -rotate-90"
                     initial={{ strokeDasharray: "0 100" }}
                     animate={isInView ? { strokeDasharray: `${category.progress} 100` } : {}}
@@ -163,7 +166,7 @@ export function SkillsSection() {
                 </div>
 
                 <div className="flex items-center gap-3 mb-3 sm:mb-4">
-                  <motion.div 
+                  <motion.div
                     className="p-2 sm:p-3 rounded-xl bg-background/50 backdrop-blur-sm text-primary"
                     whileHover={{ rotate: 360 }}
                     transition={{ duration: 0.5 }}
@@ -211,12 +214,12 @@ export function SkillsSection() {
             Always learning and exploring new technologies to stay at the forefront of software development.
           </p>
           <motion.div
-            animate={{ 
+            animate={{
               scale: [1, 1.1, 1],
               rotate: [0, 5, -5, 0]
             }}
-            transition={{ 
-              duration: 5, 
+            transition={{
+              duration: 5,
               repeat: Infinity,
               repeatType: "reverse"
             }}

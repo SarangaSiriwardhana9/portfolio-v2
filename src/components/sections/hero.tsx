@@ -98,40 +98,45 @@ export function HeroSection() {
             </motion.div>
 
             <div className="space-y-4">
-              <motion.h1 
-                className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-none"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
-              >
-                <motion.span 
-                  className="block overflow-hidden"
-                  initial={{ y: 100 }}
-                  animate={{ y: 0 }}
-                  transition={{ delay: 0.6, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  Building
-                </motion.span>
-                <motion.span 
-                  className="block overflow-hidden"
-                  initial={{ y: 100 }}
-                  animate={{ y: 0 }}
-                  transition={{ delay: 0.8, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-accent to-primary">
-                    Digital Dreams
-                  </span>
-                </motion.span>
-                <motion.span 
-                  className="block overflow-hidden"
-                  initial={{ y: 100 }}
-                  animate={{ y: 0 }}
-                  transition={{ delay: 1, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  Into Reality
-                </motion.span>
-              </motion.h1>
-              
+            <motion.h1 
+  className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-none"
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ delay: 0.5 }}
+>
+  <motion.span 
+    className="block overflow-visible sm:overflow-hidden"
+    initial={{ y: 100 }}
+    animate={{ y: 0 }}
+    transition={{ delay: 0.6, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+  >
+    Building
+  </motion.span>
+  
+  <motion.span 
+    className="block overflow-visible sm:overflow-hidden"
+    initial={{ y: 100 }}
+    animate={{ y: 0 }}
+    transition={{ delay: 0.8, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+  >
+    <span className={`
+      inline-block sm:bg-clip-text sm:text-transparent 
+      sm:bg-gradient-to-r sm:from-primary sm:via-accent sm:to-primary
+      text-primary
+    `}>
+      Digital Dreams
+    </span>
+  </motion.span>
+  
+  <motion.span 
+    className="block overflow-visible sm:overflow-hidden"
+    initial={{ y: 100 }}
+    animate={{ y: 0 }}
+    transition={{ delay: 1, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+  >
+    Into Reality
+  </motion.span>
+</motion.h1>
               <motion.p 
                 className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-xl"
                 initial={{ opacity: 0, y: 20 }}

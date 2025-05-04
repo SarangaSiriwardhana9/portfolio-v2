@@ -2,10 +2,10 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { 
-  Send, 
-  User, 
-  Mail, 
+import {
+  Send,
+  User,
+  Mail,
   MessageSquare,
   CheckCircle,
   AlertCircle,
@@ -75,7 +75,7 @@ export function ContactSection() {
 
   const onSubmit = async (data: FormValues) => {
     setFormStatus('submitting')
-    
+
     try {
       const templateParams = {
         from_name: data.name,
@@ -84,13 +84,13 @@ export function ContactSection() {
         message: data.message,
         to_email: "lasindusaranga99@gmail.com"
       }
-      
+
       const response = await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
         templateParams
       )
-      
+
       console.log('Email sent successfully:', response)
       setFormStatus('success')
       form.reset()
@@ -100,7 +100,7 @@ export function ContactSection() {
     } catch (error) {
       console.error('Error sending email:', error)
       setFormStatus('error')
-      
+
       setTimeout(() => {
         setFormStatus('idle')
       }, 5000)
@@ -141,7 +141,10 @@ export function ContactSection() {
           className="text-center mb-12 md:mb-20"
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6">
-            Get In <span className="text-gradient">Touch</span>
+            Get In{' '}
+            <span className="text-primary sm:bg-clip-text sm:text-transparent sm:bg-gradient-to-r sm:from-primary sm:via-accent sm:to-primary">
+              Touch
+            </span>
           </h2>
           <p className="text-base sm:text-lg xl:text-xl text-muted-foreground max-w-3xl mx-auto">
             Have a project in mind or want to discuss opportunities? Send me a message!
@@ -167,7 +170,7 @@ export function ContactSection() {
                       Feel free to reach out through the form or directly via my contact details below.
                     </p>
                   </div>
-                  
+
                   <div className="space-y-4 sm:space-y-6 mt-6 sm:mt-10">
                     <div className="flex items-center gap-3 sm:gap-4">
                       <div className="size-10 sm:size-14 rounded-full bg-primary/10 flex items-center justify-center shadow-inner">
@@ -178,7 +181,7 @@ export function ContactSection() {
                         <p className="font-semibold text-sm sm:text-base md:text-lg">lasindusaranga99@gmail.com</p>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center gap-3 sm:gap-4">
                       <div className="size-10 sm:size-14 rounded-full bg-primary/10 flex items-center justify-center shadow-inner">
                         <MapPin className="size-4 sm:size-6 text-primary" />
@@ -189,15 +192,15 @@ export function ContactSection() {
                       </div>
                     </div>
                   </div>
-                  
+
                   <div className="pt-4 sm:pt-8 mt-6 sm:mt-10 border-t border-border/30">
                     <p className="text-base sm:text-lg font-medium mb-3 sm:mb-4">Find me on</p>
                     <div className="flex gap-3 sm:gap-4">
                       {socialLinks.map((link, index) => (
-                        <a 
+                        <a
                           key={index}
-                          href={link.href} 
-                          target="_blank" 
+                          href={link.href}
+                          target="_blank"
                           rel="noopener noreferrer"
                           className="size-10 sm:size-12 rounded-full bg-background/80 border border-border/50 flex items-center justify-center hover:border-primary/40 hover:bg-primary/10 transition-colors shadow-sm"
                           aria-label={link.label}
@@ -210,7 +213,7 @@ export function ContactSection() {
                 </div>
               </div>
             </motion.div>
-            
+
             <motion.div
               variants={itemVariants}
               className="lg:col-span-3"
@@ -227,10 +230,10 @@ export function ContactSection() {
                             <FormLabel className="text-sm sm:text-base">Name</FormLabel>
                             <FormControl>
                               <div className="relative">
-                                <Input 
-                                  placeholder="Your name" 
-                                  className="pl-10 sm:pl-12 h-10 sm:h-14 text-sm sm:text-base" 
-                                  {...field} 
+                                <Input
+                                  placeholder="Your name"
+                                  className="pl-10 sm:pl-12 h-10 sm:h-14 text-sm sm:text-base"
+                                  {...field}
                                   disabled={formStatus === 'submitting'}
                                 />
                                 <User className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 size-4 sm:size-5 text-muted-foreground" />
@@ -240,7 +243,7 @@ export function ContactSection() {
                           </FormItem>
                         )}
                       />
-                      
+
                       <FormField
                         control={form.control}
                         name="email"
@@ -249,11 +252,11 @@ export function ContactSection() {
                             <FormLabel className="text-sm sm:text-base">Email</FormLabel>
                             <FormControl>
                               <div className="relative">
-                                <Input 
-                                  placeholder="Your email" 
-                                  type="email" 
-                                  className="pl-10 sm:pl-12 h-10 sm:h-14 text-sm sm:text-base" 
-                                  {...field} 
+                                <Input
+                                  placeholder="Your email"
+                                  type="email"
+                                  className="pl-10 sm:pl-12 h-10 sm:h-14 text-sm sm:text-base"
+                                  {...field}
                                   disabled={formStatus === 'submitting'}
                                 />
                                 <Mail className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 size-4 sm:size-5 text-muted-foreground" />
@@ -264,7 +267,7 @@ export function ContactSection() {
                         )}
                       />
                     </div>
-                    
+
                     <FormField
                       control={form.control}
                       name="subject"
@@ -273,10 +276,10 @@ export function ContactSection() {
                           <FormLabel className="text-sm sm:text-base">Subject</FormLabel>
                           <FormControl>
                             <div className="relative">
-                              <Input 
-                                placeholder="Subject of your message" 
-                                className="pl-10 sm:pl-12 h-10 sm:h-14 text-sm sm:text-base" 
-                                {...field} 
+                              <Input
+                                placeholder="Subject of your message"
+                                className="pl-10 sm:pl-12 h-10 sm:h-14 text-sm sm:text-base"
+                                {...field}
                                 disabled={formStatus === 'submitting'}
                               />
                               <MessageSquare className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 size-4 sm:size-5 text-muted-foreground" />
@@ -286,7 +289,7 @@ export function ContactSection() {
                         </FormItem>
                       )}
                     />
-                    
+
                     <FormField
                       control={form.control}
                       name="message"
@@ -294,10 +297,10 @@ export function ContactSection() {
                         <FormItem>
                           <FormLabel className="text-sm sm:text-base">Message</FormLabel>
                           <FormControl>
-                            <Textarea 
-                              placeholder="Write your message here..." 
-                              className="min-h-[120px] sm:min-h-[160px] md:min-h-[200px] resize-none p-3 sm:p-4 text-sm sm:text-base" 
-                              {...field} 
+                            <Textarea
+                              placeholder="Write your message here..."
+                              className="min-h-[120px] sm:min-h-[160px] md:min-h-[200px] resize-none p-3 sm:p-4 text-sm sm:text-base"
+                              {...field}
                               disabled={formStatus === 'submitting'}
                             />
                           </FormControl>
@@ -305,12 +308,12 @@ export function ContactSection() {
                         </FormItem>
                       )}
                     />
-                    
+
                     <div>
-                      <Button 
-                        type="submit" 
+                      <Button
+                        type="submit"
                         className="w-full sm:w-auto gap-2 h-10 sm:h-12 md:h-14 px-4 sm:px-6 md:px-8 text-sm sm:text-base"
-                        size="lg" 
+                        size="lg"
                         disabled={formStatus === 'submitting'}
                       >
                         {formStatus === 'idle' && (
@@ -319,21 +322,21 @@ export function ContactSection() {
                             Send Message
                           </>
                         )}
-                        
+
                         {formStatus === 'submitting' && (
                           <>
                             <Loader2 className="size-4 sm:size-5 animate-spin" />
                             Sending...
                           </>
                         )}
-                        
+
                         {formStatus === 'success' && (
                           <>
                             <CheckCircle className="size-4 sm:size-5" />
                             Message Sent!
                           </>
                         )}
-                        
+
                         {formStatus === 'error' && (
                           <>
                             <AlertCircle className="size-4 sm:size-5" />
@@ -342,7 +345,7 @@ export function ContactSection() {
                         )}
                       </Button>
                     </div>
-                    
+
                     {formStatus === 'success' && (
                       <motion.div
                         initial={{ opacity: 0, y: 10 }}
@@ -355,7 +358,7 @@ export function ContactSection() {
                         </div>
                       </motion.div>
                     )}
-                    
+
                     {formStatus === 'error' && (
                       <motion.div
                         initial={{ opacity: 0, y: 10 }}

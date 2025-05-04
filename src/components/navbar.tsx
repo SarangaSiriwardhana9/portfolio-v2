@@ -95,7 +95,7 @@ export function Navbar() {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <a href="#home" className="flex items-center gap-3">
-              <div className="relative overflow-hidden rounded-lg size-10 sm:size-14 bg-background/80 backdrop-blur-sm">
+              <div className="relative overflow-hidden  size-10 sm:size-14 ">
                 <Image 
                   src="/bannerImg1.png" 
                   alt="Saranga Siriwardhana" 
@@ -103,7 +103,7 @@ export function Navbar() {
                   className="object-cover hover:scale-110 transition-transform duration-500"
                 />
                 <motion.div 
-                  className="absolute inset-0 border-2 rounded-lg border-primary/40"
+                  className="absolute inset-0  "
                   animate={{ 
                     scale: [1, 1.1, 1],
                     opacity: [0.7, 0.3, 0.7]

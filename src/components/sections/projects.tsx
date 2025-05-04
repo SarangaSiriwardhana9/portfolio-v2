@@ -55,9 +55,12 @@ export function ProjectsSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold mb-4">
-            Featured <span className="text-gradient">Projects</span>
-          </h2>
+<h2 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold mb-4">
+  Featured{' '}
+  <span className="text-primary sm:bg-clip-text sm:text-transparent sm:bg-gradient-to-r sm:from-primary sm:via-accent sm:to-primary">
+    Projects
+  </span>
+</h2>
           <p className="text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto">
             A showcase of my technical expertise across various domains and technologies
           </p>

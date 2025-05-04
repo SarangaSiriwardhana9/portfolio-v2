@@ -89,12 +89,14 @@ export function ExperienceSection() {
               My Journey
             </span>
           </motion.div>
-          
+
           <h2 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold mb-6">
             Professional
-            <span className="text-gradient"> Experience</span>
+            <span className="text-primary sm:bg-clip-text sm:text-transparent sm:bg-gradient-to-r sm:from-primary sm:via-accent sm:to-primary">
+              {' '}Experience
+            </span>
           </h2>
-          
+
           <p className="text-base sm:text-lg xl:text-xl text-muted-foreground max-w-3xl mx-auto">
             Building impactful solutions through continuous learning and growth
           </p>
@@ -103,8 +105,8 @@ export function ExperienceSection() {
         <div className="max-w-6xl mx-auto">
           <div className="relative">
             <div className="absolute left-4 md:left-8 top-6 bottom-6 w-0.5 bg-gradient-to-b from-primary/50 via-accent/50 to-primary/50" />
-            
-            <motion.div 
+
+            <motion.div
               className="space-y-12"
               variants={containerVariants}
               initial="hidden"
@@ -118,30 +120,27 @@ export function ExperienceSection() {
                   className="relative"
                   whileHover={{ scale: 1.02 }}
                 >
-                  <motion.div 
-                    className={`absolute left-4 md:left-8 -translate-x-1/2 w-8 sm:w-10 h-8 sm:h-10 rounded-full bg-background border-2 ${
-                      exp.color === 'blue' ? 'border-blue-500' : 'border-purple-500'
-                    } flex items-center justify-center shadow-lg`}
+                  <motion.div
+                    className={`absolute left-4 md:left-8 -translate-x-1/2 w-8 sm:w-10 h-8 sm:h-10 rounded-full bg-background border-2 ${exp.color === 'blue' ? 'border-blue-500' : 'border-purple-500'
+                      } flex items-center justify-center shadow-lg`}
                     whileHover={{ scale: 1.2 }}
                   >
                     <motion.div
                       animate={{ rotate: 360 }}
                       transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                      className={`p-1.5 sm:p-2 rounded-full ${
-                        exp.color === 'blue' ? 'bg-blue-500/20 text-blue-500' : 'bg-purple-500/20 text-purple-500'
-                      }`}
+                      className={`p-1.5 sm:p-2 rounded-full ${exp.color === 'blue' ? 'bg-blue-500/20 text-blue-500' : 'bg-purple-500/20 text-purple-500'
+                        }`}
                     >
                       {exp.icon}
                     </motion.div>
                   </motion.div>
-                  
+
                   <div className="ml-12 sm:ml-16 md:ml-24">
-                    <motion.div 
-                      className={`rounded-2xl border-2 p-4 sm:p-6 bg-gradient-to-br ${
-                        exp.color === 'blue' 
-                          ? 'from-blue-500/5 to-blue-500/10 border-blue-500/20' 
+                    <motion.div
+                      className={`rounded-2xl border-2 p-4 sm:p-6 bg-gradient-to-br ${exp.color === 'blue'
+                          ? 'from-blue-500/5 to-blue-500/10 border-blue-500/20'
                           : 'from-purple-500/5 to-purple-500/10 border-purple-500/20'
-                      } backdrop-blur-sm`}
+                        } backdrop-blur-sm`}
                       whileHover={{ y: -5 }}
                       transition={{ duration: 0.2 }}
                     >
@@ -159,17 +158,16 @@ export function ExperienceSection() {
                             </div>
                           </div>
                         </div>
-                        <span className={`px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium ${
-                          exp.type === 'Full-time' 
-                            ? 'bg-blue-500/10 text-blue-500' 
+                        <span className={`px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium ${exp.type === 'Full-time'
+                            ? 'bg-blue-500/10 text-blue-500'
                             : 'bg-purple-500/10 text-purple-500'
-                        }`}>
+                          }`}>
                           {exp.type}
                         </span>
                       </div>
-                      
+
                       <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6">{exp.description}</p>
-                      
+
                       <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-6">
                         {exp.technologies.map((tech, i) => (
                           <motion.span
@@ -178,17 +176,16 @@ export function ExperienceSection() {
                             whileInView={{ opacity: 1, scale: 1 }}
                             transition={{ delay: i * 0.05 }}
                             whileHover={{ scale: 1.05 }}
-                            className={`px-2 sm:px-3 py-0.5 sm:py-1 text-xs sm:text-sm rounded-lg ${
-                              exp.color === 'blue'
+                            className={`px-2 sm:px-3 py-0.5 sm:py-1 text-xs sm:text-sm rounded-lg ${exp.color === 'blue'
                                 ? 'bg-blue-500/10 text-blue-500 border border-blue-500/20'
                                 : 'bg-purple-500/10 text-purple-500 border border-purple-500/20'
-                            }`}
+                              }`}
                           >
                             {tech}
                           </motion.span>
                         ))}
                       </div>
-                      
+
                       <div className="grid sm:grid-cols-2 gap-2 sm:gap-3 mb-4 sm:mb-6">
                         {exp.highlights.map((highlight, i) => (
                           <motion.div
@@ -198,14 +195,13 @@ export function ExperienceSection() {
                             transition={{ delay: i * 0.1 }}
                             className="flex items-start gap-2"
                           >
-                            <CheckCircle2 className={`h-4 sm:h-5 w-4 sm:w-5 mt-0.5 ${
-                              exp.color === 'blue' ? 'text-blue-500' : 'text-purple-500'
-                            }`} />
+                            <CheckCircle2 className={`h-4 sm:h-5 w-4 sm:w-5 mt-0.5 ${exp.color === 'blue' ? 'text-blue-500' : 'text-purple-500'
+                              }`} />
                             <span className="text-xs sm:text-sm">{highlight}</span>
                           </motion.div>
                         ))}
                       </div>
-                      
+
                       <div className="grid grid-cols-3 gap-2 sm:gap-4">
                         {exp.achievements.map((achievement, i) => (
                           <motion.div
@@ -213,15 +209,13 @@ export function ExperienceSection() {
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ delay: i * 0.1 }}
-                            className={`text-center p-2 sm:p-3 rounded-xl ${
-                              exp.color === 'blue'
+                            className={`text-center p-2 sm:p-3 rounded-xl ${exp.color === 'blue'
                                 ? 'bg-blue-500/10 border border-blue-500/20'
                                 : 'bg-purple-500/10 border border-purple-500/20'
-                            }`}
+                              }`}
                           >
-                            <div className={`text-base sm:text-xl font-bold ${
-                              exp.color === 'blue' ? 'text-blue-500' : 'text-purple-500'
-                            }`}>
+                            <div className={`text-base sm:text-xl font-bold ${exp.color === 'blue' ? 'text-blue-500' : 'text-purple-500'
+                              }`}>
                               {achievement.value}
                             </div>
                             <div className="text-xs text-muted-foreground">{achievement.label}</div>

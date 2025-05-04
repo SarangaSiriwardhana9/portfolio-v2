@@ -87,8 +87,10 @@ export function AboutSection() {
           </motion.div>
 
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-3 sm:mb-4">
-            Transforming Ideas Into
-            <span className="text-gradient"> Digital Reality</span>
+            Transforming Ideas Into{' '}
+            <span className="text-primary sm:bg-clip-text sm:text-transparent sm:bg-gradient-to-r sm:from-primary sm:via-accent sm:to-primary">
+              Digital Reality
+            </span>
           </h2>
           <p className="text-xs sm:text-sm md:text-base lg:text-lg text-muted-foreground max-w-3xl mx-auto">
             Passionate about creating innovative solutions that address real-world problems
@@ -135,18 +137,18 @@ export function AboutSection() {
             transition={{ duration: 0.8 }}
             className="relative w-full h-[500px] sm:h-[650px] md:h-[700px] lg:h-[800px] mx-auto"
           >
-  <div className="relative w-full h-full rounded-2xl sm:rounded-3xl overflow-hidden border-2 sm:border-4 border-background shadow-xl sm:shadow-2xl">
-  <Image
-    src="/banner4.jpg"
-    alt="Saranga Siriwardhana"
-    fill
-    className="object-cover object-center"
-    sizes="(max-width: 768px) 100vw, 50vw"
-    priority
-  />
-  {/* This div creates the full black opacity overlay */}
-  <div className="absolute inset-0 bg-black/50" />
-  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+            <div className="relative w-full h-full rounded-2xl sm:rounded-3xl overflow-hidden border-2 sm:border-4 border-background shadow-xl sm:shadow-2xl">
+              <Image
+                src="/banner4.jpg"
+                alt="Saranga Siriwardhana"
+                fill
+                className="object-cover object-center"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority
+              />
+              {/* This div creates the full black opacity overlay */}
+              <div className="absolute inset-0 bg-black/50" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 backdrop-blur-lg bg-background/80 p-3 sm:p-4 rounded-lg sm:rounded-xl border border-border/50">
                 <h3 className="font-bold text-sm sm:text-base md:text-lg mb-0.5 sm:mb-1">Sri Lanka Institute of Information Technology</h3>
                 <p className="text-[10px] xs:text-xs sm:text-sm text-primary flex items-center gap-1 sm:gap-2">
