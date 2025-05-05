@@ -59,7 +59,7 @@ export function Navbar() {
  
   if (!isMounted) {
     return (
-      <header className="fixed top-0 w-full z-50 py-4 sm:py-6 bg-transparent">
+      <header className="fixed top-0 w-full z-50  py-4 sm:py-6 bg-transparent">
         <div className="container mx-auto px-4 max-w-[2000px]">
           <div className="flex items-center justify-between">
             <div className="text-lg sm:text-xl font-bold">

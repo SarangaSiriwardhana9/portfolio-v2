@@ -311,7 +311,7 @@ export default function Home() {
       <div className="fixed inset-0 z-[-1] bg-gradient-to-b from-background/80 via-background/40 to-background/80 pointer-events-none" />
 
       <Navbar />
-      <main className="max-w-[2000px] mx-auto">
+      <main className="max-w-[2000px] mx-auto px-2">
         <div className="flex flex-col">
           <HeroSection />
           <SocialLinks />
