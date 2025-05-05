@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   keywords: 'Full Stack Developer, Software Engineer, React, Next.js, TypeScript, Portfolio',
   viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
   icons: {
-    icon: './bannerImg1.png',  
+    icon: './favicon.png',  
   },
 }
 

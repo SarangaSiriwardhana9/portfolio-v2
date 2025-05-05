@@ -97,10 +97,10 @@ export function Navbar() {
             <a href="#home" className="flex items-center gap-3">
               <div className="relative overflow-hidden  size-10 sm:size-14 ">
                 <Image 
-                  src="/bannerImg1.png" 
+                  src="/favicon.png" 
                   alt="Saranga Siriwardhana" 
                   fill 
-                  className="object-cover hover:scale-110 transition-transform duration-500"
+                  className="  rounded-4xl hover:scale-110 transition-transform duration-500"
                 />
                 <motion.div 
                   className="absolute inset-0  "
@@ -168,10 +168,10 @@ export function Navbar() {
                   <div className="flex items-center gap-3 mb-2">
                     <div className="relative overflow-hidden rounded-lg size-12 border border-primary/20">
                       <Image 
-                        src="/banner4.jpg" 
+                        src="/favicon.png" 
                         alt="Saranga Siriwardhana" 
                         fill 
-                        className="object-cover"
+                        className=" "
                       />
                     </div>
                     <SheetTitle className="text-gradient">Saranga Siriwardhana</SheetTitle>
