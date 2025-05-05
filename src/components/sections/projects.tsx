@@ -4,7 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Project, projects } from '@/data/projects';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowUpRight, Code, ExternalLink, Eye, Github, Tag, X } from 'lucide-react';
+import { ArrowUpRight, Code, Github, Eye, Tag, X } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
@@ -55,12 +55,12 @@ export function ProjectsSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-<h2 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold mb-4">
-  Featured{' '}
-  <span className="text-primary sm:bg-clip-text sm:text-transparent sm:bg-gradient-to-r sm:from-primary sm:via-accent sm:to-primary">
-    Projects
-  </span>
-</h2>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold mb-4">
+            Featured{' '}
+            <span className="text-primary sm:bg-clip-text sm:text-transparent sm:bg-gradient-to-r sm:from-primary sm:via-accent sm:to-primary">
+              Projects
+            </span>
+          </h2>
           <p className="text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto">
             A showcase of my technical expertise across various domains and technologies
           </p>
@@ -99,22 +99,18 @@ export function ProjectsSection() {
             <motion.div
               key={project.title}
               variants={cardVariants}
-              whileHover={{ 
-                y: -5,
-                transition: { duration: 0.2 }
-              }}
-              className="group"
+              className="h-full"
             >
-              <div className={`relative h-full rounded-2xl overflow-hidden border border-border/50 bg-gradient-to-br ${project.color} backdrop-blur-sm`}>
-                <div className={`absolute -inset-0.5 rounded-2xl bg-gradient-to-r ${project.color.replace('/20', '/30')} blur opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-                
+              <div className={`relative h-full rounded-2xl overflow-hidden border border-border/50 bg-gradient-to-br ${project.color} backdrop-blur-sm`}>                
                 <div className="relative z-10 h-full flex flex-col">
-                  <div className="relative h-48 sm:h-56 overflow-hidden">
+                  {/* Fixed-height image container */}
+                  <div className="relative w-full" style={{ height: "200px" }}>
                     <Image
                       src={project.image}
                       alt={project.title}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                      className="object-cover object-center"
+                      style={{ objectPosition: "center" }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-70" />
                     
@@ -163,12 +159,7 @@ export function ProjectsSection() {
                     </div>
                   </div>
 
-                  <motion.div
-                    className="absolute bottom-0 left-0 h-1 bg-primary"
-                    initial={{ width: 0 }}
-                    whileHover={{ width: "100%" }}
-                    transition={{ duration: 0.3 }}
-                  />
+                  {/* Removed the hover animation line */}
                 </div>
               </div>
             </motion.div>
@@ -237,14 +228,15 @@ export function ProjectsSection() {
                           src={selectedProject.image}
                           alt={selectedProject.title}
                           fill
-                          className="object-cover"
+                          className="object-cover object-center"
+                          style={{ objectPosition: "center" }}
                         />
                       </div>
                     </div>
                   </div>
                   
                   <div className="lg:col-span-1">
-                    <div className="bg-muted rounded-xl p-4 sm:p-6 space-y-4 sm:space-y-6">
+                    <div className="bg-gray-800 rounded-xl p-4 sm:p-6 space-y-4 sm:space-y-6">
                       <div>
                         <div className="flex items-center gap-2 mb-2 sm:mb-3">
                           <Code className="h-4 sm:h-5 w-4 sm:w-5 text-primary" />
