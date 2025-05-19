@@ -27,26 +27,26 @@ export default function Home() {
     <>
       {/* Animated background */}
       <div className="fixed inset-0 z-[-1] bg-background" />
-      <div className="fixed inset-0 z-[-1] bg-gradient-to-b from-background/80 via-background/40 to-background/80" />
-      <div className="fixed inset-0 z-[-1] grid-pattern opacity-10" />
+      <div className="fixed inset-0 z-[-1] bg-gradient-to-b from-background/90 via-background/60 to-background/90" />
+      <div className="fixed inset-0 z-[-1] grid-pattern opacity-20" />
       
       {/* Animated gradient orbs */}
       <div className="fixed inset-0 z-[-1] overflow-hidden">
         {/* Main floating orbs */}
-        <div className="absolute top-20 -left-20 w-64 md:w-96 h-64 md:h-96 rounded-full bg-primary/10 blur-3xl animate-float-slow" />
-        <div className="absolute bottom-20 -right-20 w-64 md:w-96 h-64 md:h-96 rounded-full bg-accent/10 blur-3xl animate-float-slow-delayed" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-primary/5 blur-3xl animate-pulse-slow" />
+        <div className="absolute top-20 -left-20 w-64 md:w-96 h-64 md:h-96 rounded-full bg-primary/20 blur-2xl animate-float-slow" />
+        <div className="absolute bottom-20 -right-20 w-64 md:w-96 h-64 md:h-96 rounded-full bg-accent/20 blur-2xl animate-float-slow-delayed" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-primary/15 blur-2xl animate-pulse-slow" />
         
         {/* Additional moving elements */}
-        <div className="absolute top-1/4 right-1/4 w-32 h-32 rounded-full bg-primary/5 blur-2xl animate-float-fast" />
-        <div className="absolute bottom-1/3 left-1/3 w-40 h-40 rounded-full bg-accent/5 blur-2xl animate-float-fast-delayed" />
+        <div className="absolute top-1/4 right-1/4 w-32 h-32 rounded-full bg-primary/15 blur-xl animate-float-fast" />
+        <div className="absolute bottom-1/3 left-1/3 w-40 h-40 rounded-full bg-accent/15 blur-xl animate-float-fast-delayed" />
         
         {/* Moving lines */}
         <div className="absolute inset-0">
-          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent animate-slide-right" />
-          <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent animate-slide-left" />
-          <div className="absolute top-0 left-0 w-px h-full bg-gradient-to-b from-transparent via-primary/20 to-transparent animate-slide-down" />
-          <div className="absolute top-0 right-0 w-px h-full bg-gradient-to-b from-transparent via-accent/20 to-transparent animate-slide-up" />
+          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent animate-slide-right" />
+          <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent animate-slide-left" />
+          <div className="absolute top-0 left-0 w-px h-full bg-gradient-to-b from-transparent via-primary/30 to-transparent animate-slide-down" />
+          <div className="absolute top-0 right-0 w-px h-full bg-gradient-to-b from-transparent via-accent/30 to-transparent animate-slide-up" />
         </div>
       </div>
 

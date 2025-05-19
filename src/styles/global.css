@@ -67,7 +67,15 @@
 }
 
 .glass {
-  @apply bg-background/70 backdrop-blur-sm border border-border/50;
+  @apply bg-background/80 backdrop-blur-md border border-border/50;
+}
+
+.card-glass {
+  @apply bg-background/80 backdrop-blur-md border border-border/50 shadow-lg;
+}
+
+.card-hover {
+  @apply transition-all duration-300 hover:bg-background/90 hover:border-primary/30 hover:shadow-xl;
 }
 
 /* Simplified animations */
@@ -85,10 +93,10 @@
 }
 
 .grid-pattern {
-  background-size: 20px 20px;
+  background-size: 30px 30px;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
 }
 
 .animate-spin-slow {
@@ -187,11 +195,11 @@
 
 @keyframes pulse-slow {
   0%, 100% {
-    opacity: 0.3;
+    opacity: 0.4;
     transform: scale(1);
   }
   50% {
-    opacity: 0.5;
+    opacity: 0.6;
     transform: scale(1.1);
   }
 }
@@ -209,14 +217,6 @@
 .animate-pulse-slow {
   animation: pulse-slow 8s ease-in-out infinite;
   will-change: transform, opacity;
-}
-
-/* Grid pattern */
-.grid-pattern {
-  background-size: 30px 30px;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
 }
 
 /* Fast floating animations */
