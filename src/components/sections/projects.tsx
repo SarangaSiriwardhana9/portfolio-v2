@@ -170,23 +170,24 @@ export function ProjectsSection() {
       <AnimatePresence>
         {showModal && selectedProject && (
           <motion.div 
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm overflow-y-auto"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-[1px] overflow-y-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
             onClick={() => setShowModal(false)}
           >
             <motion.div 
               className="relative w-full max-w-4xl max-h-[90vh] custom-scrollbar bg-background rounded-2xl shadow-2xl"
-              initial={{ scale: 0.9, y: 20 }}
+              initial={{ scale: 0.95, y: 10 }}
               animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.9, y: 20 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              exit={{ scale: 0.95, y: 10 }}
+              transition={{ duration: 0.2 }}
               onClick={(e) => e.stopPropagation()}
             >
               <button 
                 onClick={() => setShowModal(false)}
-                className="absolute top-4 right-4 z-10 p-2 rounded-full bg-background/80 backdrop-blur-sm shadow-md hover:bg-muted transition-colors"
+                className="absolute top-4 right-4 z-10 p-2 rounded-full bg-background/80 backdrop-blur-[1px] shadow-md hover:bg-muted transition-colors"
                 aria-label="Close modal"
               >
                 <X className="h-5 w-5" />
@@ -194,20 +195,21 @@ export function ProjectsSection() {
 
               <div className="relative h-48 sm:h-64 md:h-80 overflow-hidden rounded-t-2xl">
                 <div className={`absolute inset-0 bg-gradient-to-br ${selectedProject.color.replace('/20', '')}`}>
-                  <div className="absolute inset-0 mix-blend-overlay opacity-60">
+                  <div className="absolute inset-0 mix-blend-overlay opacity-40">
                     <Image
                       src={selectedProject.image}
                       alt={selectedProject.title}
                       fill
                       className="object-cover"
+                      priority
                     />
                   </div>
                 </div>
                 
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
                 
                 <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-8 text-left">
-                  <Badge variant="outline" className="mb-2 bg-background/50 backdrop-blur-sm text-xs sm:text-sm">
+                  <Badge variant="outline" className="mb-2 bg-background/50 backdrop-blur-[1px] text-xs sm:text-sm">
                     {selectedProject.category}
                   </Badge>
                   <h2 className="text-xl sm:text-3xl md:text-4xl font-bold">{selectedProject.title}</h2>
@@ -230,50 +232,39 @@ export function ProjectsSection() {
                           fill
                           className="object-cover object-center"
                           style={{ objectPosition: "center" }}
+                          priority
                         />
                       </div>
                     </div>
                   </div>
                   
-                  <div className="lg:col-span-1">
-                    <div className="bg-gray-800 rounded-xl p-4 sm:p-6 space-y-4 sm:space-y-6">
-                      <div>
-                        <div className="flex items-center gap-2 mb-2 sm:mb-3">
-                          <Code className="h-4 sm:h-5 w-4 sm:w-5 text-primary" />
-                          <h4 className="font-semibold text-sm sm:text-base">Technologies</h4>
-                        </div>
-                        <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                          {selectedProject.tags.map(tag => (
-                            <Badge key={tag} variant="secondary" className="bg-background/50 text-xs sm:text-sm">
-                              {tag}
-                            </Badge>
-                          ))}
-                        </div>
+                  <div className="space-y-6">
+                    <div>
+                      <div className="flex items-center gap-2 mb-2 sm:mb-3">
+                        <Tag className="h-4 sm:h-5 w-4 sm:w-5 text-primary" />
+                        <h4 className="font-semibold text-sm sm:text-base">Technologies Used</h4>
                       </div>
-                      
-                      <div>
-                        <div className="flex items-center gap-2 mb-2">
-                          <Tag className="h-4 sm:h-5 w-4 sm:w-5 text-primary" />
-                          <h4 className="font-semibold text-sm sm:text-base">Project Size</h4>
-                        </div>
-                        <Badge variant="outline" className="capitalize text-xs sm:text-sm">
-                          {selectedProject.size}
-                        </Badge>
+                      <div className="flex flex-wrap gap-2">
+                        {selectedProject.tags.map((tag) => (
+                          <Badge key={tag} variant="secondary" className="text-xs sm:text-sm">
+                            {tag}
+                          </Badge>
+                        ))}
                       </div>
-                      
-                      <div>
-                        <div className="flex items-center gap-2 mb-2 sm:mb-3">
-                          <ArrowUpRight className="h-4 sm:h-5 w-4 sm:w-5 text-primary" />
-                          <h4 className="font-semibold text-sm sm:text-base">Project Links</h4>
-                        </div>
-                        <div className="space-y-3">
-                          <Button asChild className="w-full text-xs sm:text-sm py-2 sm:py-5">
-                            <a href={selectedProject.github} target="_blank" rel="noopener noreferrer">
-                              <Github className="mr-1.5 sm:mr-2 h-3 sm:h-4 w-3 sm:w-4" />
-                              View Source Code
-                            </a>
-                          </Button>
-                        </div>
+                    </div>
+
+                    <div>
+                      <div className="flex items-center gap-2 mb-2 sm:mb-3">
+                        <ArrowUpRight className="h-4 sm:h-5 w-4 sm:w-5 text-primary" />
+                        <h4 className="font-semibold text-sm sm:text-base">Project Links</h4>
+                      </div>
+                      <div className="space-y-3">
+                        <Button asChild className="w-full text-xs sm:text-sm py-2 sm:py-5">
+                          <a href={selectedProject.github} target="_blank" rel="noopener noreferrer">
+                            <Github className="mr-1.5 sm:mr-2 h-3 sm:h-4 w-3 sm:w-4" />
+                            View Source Code
+                          </a>
+                        </Button>
                       </div>
                     </div>
                   </div>
