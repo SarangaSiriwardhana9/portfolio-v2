@@ -19,6 +19,7 @@ const navItems = [
   { name: "Home", href: "#home" },
   { name: "About", href: "#about" },
   { name: "Skills", href: "#skills" },
+  { name: "Experience", href: "#experience" },
   { name: "Projects", href: "#projects" },
   { name: "Contact", href: "#contact" },
 ]
@@ -163,7 +164,16 @@ export function Navbar() {
                   <span className="sr-only">Toggle menu</span>
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="border-primary/20 bg-background/90 backdrop-blur-xl">
+              <SheetContent 
+                side="right" 
+                className="border-primary/20 bg-background/95 backdrop-blur-xl"
+                style={{
+                  willChange: 'transform',
+                  transform: 'translateZ(0)',
+                  backfaceVisibility: 'hidden',
+                  backgroundColor: 'rgba(0, 0, 0, 0.8)'
+                }}
+              >
                 <SheetHeader>
                   <div className="flex items-center gap-3 mb-2">
                     <div className="relative overflow-hidden rounded-lg size-12 border border-primary/20">
@@ -171,7 +181,8 @@ export function Navbar() {
                         src="/favicon.png" 
                         alt="Saranga Siriwardhana" 
                         fill 
-                        className=" "
+                        className=""
+                        priority
                       />
                     </div>
                     <SheetTitle className="text-gradient">Saranga Siriwardhana</SheetTitle>
@@ -214,14 +225,14 @@ export function Navbar() {
                       )
                     }}
                   >
-                    <div className=" px-2">
-                    <Button 
-                      variant="outline" 
-                      className="justify-start px-8 gap-2 mt-4 bg-primary/10 border-primary/20 py-6 text-base w-full"
-                    >
-                      <Download className="h-5 w-5" />
-                      Download Resumea
-                    </Button>
+                    <div className="px-2">
+                      <Button 
+                        variant="outline" 
+                        className="justify-start px-8 gap-2 mt-4 bg-primary/10 border-primary/20 py-6 text-base w-full"
+                      >
+                        <Download className="h-5 w-5" />
+                        Download Resume
+                      </Button>
                     </div>
                   </Link>
                 </nav>

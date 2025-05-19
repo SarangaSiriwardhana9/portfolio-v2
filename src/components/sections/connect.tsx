@@ -188,7 +188,7 @@ export function ContactSection() {
                       </div>
                       <div>
                         <p className="text-xs sm:text-sm text-muted-foreground">Location</p>
-                        <p className="font-semibold text-sm sm:text-base md:text-lg">Colombo, Sri Lanka</p>
+                        <p className="font-semibold text-sm sm:text-base md:text-lg">408 2/3B Wadduwa, Sri Lanka</p>
                       </div>
                     </div>
                   </div>

@@ -72,16 +72,14 @@ const skillCategories = [
 ]
 
 export function SkillsSection() {
-  const containerRef = useRef(null)
-  const isInView = useInView(containerRef, { once: true, margin: "-100px" })
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
+      transition: { staggerChildren: 0.1 }
     }
   }
 
@@ -90,16 +88,13 @@ export function SkillsSection() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut"
-      }
+      transition: { duration: 0.3 }
     }
   }
 
   return (
     <section id="skills" className="py-10 relative overflow-hidden">
-      <div className="container mx-auto px-4 max-w-[2000px]" ref={containerRef}>
+      <div className="container mx-auto px-4 relative max-w-[2000px]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -107,18 +102,27 @@ export function SkillsSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold mb-4">
-            Technical{' '}
-            <span className="text-primary sm:bg-clip-text sm:text-transparent sm:bg-gradient-to-r sm:from-primary sm:via-accent sm:to-primary">
-              Expertise
+          <motion.div
+            className="inline-block mb-4"
+            whileHover={{ scale: 1.05 }}
+          >
+            <span className="px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold">
+              My Expertise
             </span>
+          </motion.div>
+
+          <h2 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold mb-6">
+            Technical
+            <span className="text-primary"> Skills</span>
           </h2>
-          <p className="text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto">
-            A comprehensive toolkit for building modern digital solutions with cutting-edge technologies
+
+          <p className="text-base sm:text-lg xl:text-xl text-muted-foreground max-w-3xl mx-auto">
+            A comprehensive overview of my technical capabilities and expertise
           </p>
         </motion.div>
 
         <motion.div
+          ref={ref}
           className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"
           variants={containerVariants}
           initial="hidden"
@@ -128,105 +132,30 @@ export function SkillsSection() {
             <motion.div
               key={category.title}
               variants={cardVariants}
-              whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
               className="group relative"
             >
-              <div className={`absolute -inset-0.5 rounded-2xl bg-gradient-to-r ${category.gradient} blur opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-
               <div className={`relative h-full p-4 sm:p-6 rounded-2xl border border-border/50 bg-gradient-to-br ${category.gradient} backdrop-blur-sm`}>
-                <div className="absolute top-3 right-3 w-8 sm:w-10 h-8 sm:h-10">
-                  <motion.svg
-                    viewBox="0 0 36 36"
-                    className="w-full h-full -rotate-90"
-                    initial={{ strokeDasharray: "0 100" }}
-                    animate={isInView ? { strokeDasharray: `${category.progress} 100` } : {}}
-                    transition={{ duration: 1, delay: index * 0.1 }}
-                  >
-                    <path
-                      className="stroke-current text-primary/20"
-                      strokeWidth="4"
-                      fill="none"
-                      d="M18 2.0845
-                        a 15.9155 15.9155 0 0 1 0 31.831
-                        a 15.9155 15.9155 0 0 1 0 -31.831"
-                    />
-                    <path
-                      className="stroke-current text-primary"
-                      strokeWidth="4"
-                      strokeLinecap="round"
-                      fill="none"
-                      d="M18 2.0845
-                        a 15.9155 15.9155 0 0 1 0 31.831
-                        a 15.9155 15.9155 0 0 1 0 -31.831"
-                    />
-                  </motion.svg>
-                  <span className="absolute inset-0 flex items-center justify-center text-xs font-bold">
-                    {category.progress}%
-                  </span>
-                </div>
-
-                <div className="flex items-center gap-3 mb-3 sm:mb-4">
-                  <motion.div
-                    className="p-2 sm:p-3 rounded-xl bg-background/50 backdrop-blur-sm text-primary"
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.5 }}
-                  >
+                <div className="flex items-center gap-3 mb-4">
+                  <div className={`p-2 rounded-lg bg-${category.accentColor}-500/10 text-${category.accentColor}-500`}>
                     {category.icon}
-                  </motion.div>
-                  <h3 className="font-semibold text-base sm:text-lg">{category.title}</h3>
+                  </div>
+                  <h3 className="text-lg font-semibold">{category.title}</h3>
                 </div>
 
                 <div className="flex flex-wrap gap-1 sm:gap-2">
                   {category.skills.map((skill, skillIndex) => (
-                    <motion.span
+                    <span
                       key={skill}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                      transition={{ delay: index * 0.1 + skillIndex * 0.05 }}
-                      whileHover={{ scale: 1.1, y: -2 }}
                       className={`px-2 sm:px-3 py-0.5 sm:py-1 text-xs sm:text-sm rounded-full bg-background/50 backdrop-blur-sm border border-border/50 
                         hover:border-${category.accentColor}-500/50 hover:bg-${category.accentColor}-500/10 transition-all cursor-default`}
                     >
                       {skill}
-                    </motion.span>
+                    </span>
                   ))}
                 </div>
-
-                <motion.div
-                  className={`absolute bottom-0 left-0 h-1 bg-gradient-to-r ${category.gradient} rounded-b-2xl`}
-                  initial={{ scaleX: 0 }}
-                  whileHover={{ scaleX: 1 }}
-                  transition={{ duration: 0.3 }}
-                />
               </div>
             </motion.div>
           ))}
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-16 text-center"
-        >
-          <p className="text-sm sm:text-base text-muted-foreground mb-6">
-            Always learning and exploring new technologies to stay at the forefront of software development.
-          </p>
-          <motion.div
-            animate={{
-              scale: [1, 1.1, 1],
-              rotate: [0, 5, -5, 0]
-            }}
-            transition={{
-              duration: 5,
-              repeat: Infinity,
-              repeatType: "reverse"
-            }}
-            className="inline-block"
-          >
-            <Brain className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 text-primary opacity-40" />
-          </motion.div>
         </motion.div>
       </div>
     </section>
