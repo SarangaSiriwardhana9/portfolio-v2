@@ -82,6 +82,16 @@ export interface Project {
       color: "from-cyan-500/20 to-cyan-500/20",
       size: "large"
     },
+       {
+      title: "Luminous Moments - Photography Portfolio",
+      description: "A modern, responsive photography portfolio website built with Next.js 14, showcasing professional photography services across Sri Lanka. The platform features a beautiful UI with optimized image loading, smooth animations, and a seamless user experience.",
+      image: Luminos,
+      github: "https://github.com/SarangaSiriwardhana9/Luminous_Moments-Photography-Portfolio",
+      tags: ["NextJs", "Tailwind CSS", "Typescript","Shadcn UI"],
+      category: "Mini Projects",
+      color: "from-orange-200/20 to-orange-500/20",
+      size: "small"
+    },
     {
       title: "KeepIt - Book Marketplace Mobile App",
       description: "This mobile app project is designed to create a user-friendly and efficient platform for buying and selling books in a peer-to-peer (C2C) fashion. It offers a seamless experience for book enthusiasts who want to trade, purchase, or sell their pre-owned books.",
@@ -122,16 +132,7 @@ export interface Project {
       color: "from-neutral-800/20 to-neutral-600/20",
       size: "medium"
     },
-     {
-      title: "Luminous Moments - Photography Portfolio",
-      description: "A modern, responsive photography portfolio website built with Next.js 14, showcasing professional photography services across Sri Lanka. The platform features a beautiful UI with optimized image loading, smooth animations, and a seamless user experience.",
-      image: Luminos,
-      github: "https://github.com/SarangaSiriwardhana9/Luminous_Moments-Photography-Portfolio",
-      tags: ["NextJs", "Tailwind CSS", "Typescript","Shadcn UI"],
-      category: "Mini Projects",
-      color: "from-orange-200/20 to-orange-500/20",
-      size: "small"
-    },
+  
     {
       title: "Serena Lanka Travels - Travel Agency Website",
       description: "Serena Lanka Travels is a React-based website for a travel agency offering tours and packages in Sri Lanka. The website provides information about the company, its services, tours, and allows users to contact the agency for inquiries and bookings.",
