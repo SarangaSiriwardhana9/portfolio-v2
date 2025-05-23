@@ -15,6 +15,7 @@ import Emate from '../../public/projects/emate.jpg'
 import RealTalk from '../../public/projects/realtalk.jpg'
 import StarGraze from '../../public/projects/stargraze.jpg'
 import Serena from '../../public/projects/serena.jpg'
+import Luminos from '../../public/projects/luminos.png'
 export interface Project {
     title: string;
     description: string;
@@ -120,6 +121,16 @@ export interface Project {
       category: "Communication",
       color: "from-neutral-800/20 to-neutral-600/20",
       size: "medium"
+    },
+     {
+      title: "Luminous Moments - Photography Portfolio",
+      description: "A modern, responsive photography portfolio website built with Next.js 14, showcasing professional photography services across Sri Lanka. The platform features a beautiful UI with optimized image loading, smooth animations, and a seamless user experience.",
+      image: Luminos,
+      github: "https://github.com/SarangaSiriwardhana9/Luminous_Moments-Photography-Portfolio",
+      tags: ["NextJs", "Tailwind CSS", "Typescript","Shadcn UI"],
+      category: "Mini Projects",
+      color: "from-orange-200/20 to-orange-500/20",
+      size: "small"
     },
     {
       title: "Serena Lanka Travels - Travel Agency Website",
