@@ -183,7 +183,7 @@ export function SocialLinks() {
         />
       </motion.div>
 
-      <div className='container mx-auto px-3 max-w-6xl relative'>
+      <div className='container mx-auto px-3 max-w-7xl relative'>
         <motion.div
           className='flex flex-col items-center'
           initial={{ opacity: 0, y: 30 }}

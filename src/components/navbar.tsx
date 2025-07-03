@@ -56,7 +56,7 @@ export function Navbar() {
     <>
       {/* Floating Navigation - Made smaller */}
       <motion.header
-        className='fixed top-3 sm:top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-6xl px-3 sm:px-4'
+        className='fixed top-3 sm:top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-5xl px-3 sm:px-4'
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, delay: 1.8 }}

@@ -151,7 +151,7 @@ export function ProjectsSection() {
         />
       </motion.div>
 
-      <div className='container mx-auto px-3 max-w-6xl' ref={ref}>
+      <div className='container mx-auto px-3 max-w-7xl' ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

@@ -26,10 +26,11 @@ export default function Home() {
   return (
     <>
       {/* Animated background */}
-      <div className='fixed inset-0 z-[-1] bg-black' />
+      <div className='fixed inset-1 z-[-1] bg-black' />
 
       <Navbar />
-      <main className='max-w-6xl mx-auto px-2'>
+
+      <main className='mx-auto  w-full max-w-7xl '>
         <div className='flex flex-col mt-4'>
           <HeroSection />
           <SocialLinks />

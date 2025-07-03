@@ -226,7 +226,7 @@ export function SkillsSection() {
         />
       </motion.div>
 
-      <div className='container mx-auto px-3 relative max-w-6xl'>
+      <div className='container mx-auto px-3 relative max-w-7xl'>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

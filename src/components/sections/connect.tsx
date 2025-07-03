@@ -245,7 +245,7 @@ export function ContactSection() {
         />
       </motion.div>
 
-      <div className='container mx-auto px-3 relative max-w-6xl' ref={ref}>
+      <div className='container mx-auto px-3 relative max-w-7xl' ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}

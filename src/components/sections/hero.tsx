@@ -140,7 +140,7 @@ export function HeroSection() {
         />
       </div>
 
-      <div className='container mx-auto px-3 relative max-w-6xl'>
+      <div className='container mx-auto px-3 relative max-w-7xl'>
         <motion.div
           className='grid lg:grid-cols-2 gap-6 lg:gap-8 items-center'
           initial={{ opacity: 0 }}
