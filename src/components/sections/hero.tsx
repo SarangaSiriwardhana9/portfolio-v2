@@ -2,15 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
-import {
-  ArrowRight,
-  Code2,
-  Cpu,
-  GitBranch,
-  Sparkles,
-  Server,
-  Database,
-} from "lucide-react";
+import { ArrowRight, Code2, Server, Database } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
@@ -67,54 +59,6 @@ export function HeroSection() {
     }
   };
 
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut",
-      },
-    },
-  };
-
-  const statsVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const statItemVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.5,
-        ease: "backOut",
-      },
-    },
-  };
-
   return (
     <motion.section
       ref={containerRef}
@@ -143,7 +87,7 @@ export function HeroSection() {
             }}
             transition={{
               duration: 3,
-              repeat: Infinity,
+              repeat: Number.POSITIVE_INFINITY,
               delay: element.delay,
               ease: "easeInOut",
             }}
@@ -162,10 +106,19 @@ export function HeroSection() {
             scale: [1, 1.1, 1],
           }}
           transition={{
-            rotate: { duration: 50, repeat: Infinity, ease: "linear" },
-            scale: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+            rotate: {
+              duration: 50,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "linear",
+            },
+            scale: {
+              duration: 4,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+            },
           }}
         />
+
         <motion.div
           className='absolute bottom-10 -right-10 w-40 md:w-64 h-40 md:h-64 rounded-full border border-cyan-400/20 blur-2xl'
           animate={{
@@ -173,8 +126,16 @@ export function HeroSection() {
             scale: [1, 1.2, 1],
           }}
           transition={{
-            rotate: { duration: 40, repeat: Infinity, ease: "linear" },
-            scale: { duration: 3, repeat: Infinity, ease: "easeInOut" },
+            rotate: {
+              duration: 40,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "linear",
+            },
+            scale: {
+              duration: 3,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+            },
           }}
         />
       </div>
@@ -182,14 +143,16 @@ export function HeroSection() {
       <div className='container mx-auto px-3 relative max-w-6xl'>
         <motion.div
           className='grid lg:grid-cols-2 gap-6 lg:gap-8 items-center'
-          variants={containerVariants}
-          initial='hidden'
-          animate='visible'
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ staggerChildren: 0.2, delayChildren: 0.1 }}
         >
           {/* Text Content */}
           <motion.div
             className='space-y-4 md:space-y-5'
-            variants={itemVariants}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
           >
             {/* Badge */}
             <motion.div
@@ -206,14 +169,14 @@ export function HeroSection() {
                   }}
                   transition={{
                     duration: 2,
-                    repeat: Infinity,
+                    repeat: Number.POSITIVE_INFINITY,
                     ease: "easeInOut",
                   }}
                 />
                 <motion.div
                   className='absolute -left-1 -top-1 w-2 h-2 bg-blue-500 rounded-full animate-ping'
                   animate={{ scale: [1, 2, 1], opacity: [1, 0, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
+                  transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
                 />
                 <span className='text-xs font-medium text-blue-400'>
                   Junior Full Stack Developer
@@ -222,36 +185,34 @@ export function HeroSection() {
             </motion.div>
 
             {/* Main Heading */}
-            <motion.div className='space-y-3' variants={itemVariants}>
-              <motion.h1
-                className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight'
-                initial='hidden'
-                animate='visible'
-              >
+            <motion.div
+              className='space-y-3'
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+            >
+              <motion.h1 className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight'>
                 <motion.span
                   className='block text-white'
-                  variants={{
-                    hidden: { opacity: 0, x: -50 },
-                    visible: { opacity: 1, x: 0, transition: { delay: 0.2 } },
-                  }}
+                  initial={{ opacity: 0, x: -50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2 }}
                 >
                   Building
                 </motion.span>
                 <motion.span
                   className='block text-blue-400'
-                  variants={{
-                    hidden: { opacity: 0, x: 50 },
-                    visible: { opacity: 1, x: 0, transition: { delay: 0.4 } },
-                  }}
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.4 }}
                 >
                   Digital Dreams
                 </motion.span>
                 <motion.span
                   className='block text-white'
-                  variants={{
-                    hidden: { opacity: 0, x: -50 },
-                    visible: { opacity: 1, x: 0, transition: { delay: 0.6 } },
-                  }}
+                  initial={{ opacity: 0, x: -50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.6 }}
                 >
                   Into Reality
                 </motion.span>
@@ -259,10 +220,9 @@ export function HeroSection() {
 
               <motion.p
                 className='text-sm sm:text-base text-gray-400 max-w-lg'
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0, transition: { delay: 0.8 } },
-                }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8 }}
               >
                 Crafting exceptional digital experiences with cutting-edge
                 technologies. Let&apos;s transform your vision into reality.
@@ -272,7 +232,9 @@ export function HeroSection() {
             {/* Action Buttons */}
             <motion.div
               className='flex flex-wrap gap-2 md:gap-3 pt-2 md:pt-3'
-              variants={itemVariants}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
             >
               <motion.div
                 whileHover={{ scale: 1.05 }}
@@ -302,7 +264,7 @@ export function HeroSection() {
                 <Button
                   size='sm'
                   variant='outline'
-                  className='hover:bg-blue-500/10 border-blue-500/30 text-blue-400 hover:text-blue-300'
+                  className='hover:bg-blue-500/10 border-blue-500/30 text-blue-400 hover:text-blue-300 bg-transparent'
                   onClick={() => scrollToSection("projects")}
                 >
                   View Portfolio
@@ -313,9 +275,9 @@ export function HeroSection() {
             {/* Stats */}
             <motion.div
               className='grid grid-cols-3 gap-2 sm:gap-3 md:gap-4 pt-3 md:pt-4'
-              variants={statsVariants}
-              initial='hidden'
-              animate='visible'
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, staggerChildren: 0.1, delay: 0.3 }}
             >
               {[
                 { value: "5+", label: "Years Experience" },
@@ -324,7 +286,9 @@ export function HeroSection() {
               ].map((stat, index) => (
                 <motion.div
                   key={index}
-                  variants={statItemVariants}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
                   whileHover={{
                     scale: 1.1,
                     rotateY: 10,
@@ -343,7 +307,7 @@ export function HeroSection() {
                     }}
                     transition={{
                       duration: 2,
-                      repeat: Infinity,
+                      repeat: Number.POSITIVE_INFINITY,
                       delay: index * 0.2,
                     }}
                   >
@@ -358,7 +322,9 @@ export function HeroSection() {
           {/* Mobile Image Section */}
           <motion.div
             className='block lg:hidden mt-6 mb-3'
-            variants={itemVariants}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
           >
             <motion.div
               className='relative w-full h-[250px] rounded-xl overflow-hidden border border-blue-500/20 shadow-lg'
@@ -383,7 +349,7 @@ export function HeroSection() {
                     "linear-gradient(to bottom, transparent, rgba(0,0,0,0.2), rgba(0,0,0,0.6))",
                   ],
                 }}
-                transition={{ duration: 4, repeat: Infinity }}
+                transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY }}
               />
             </motion.div>
           </motion.div>
@@ -391,7 +357,9 @@ export function HeroSection() {
           {/* Desktop Image Section */}
           <motion.div
             className='hidden lg:block relative'
-            variants={itemVariants}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
           >
             <motion.div
               className='relative w-full h-[400px] bg-black/50 backdrop-blur-xl rounded-2xl border border-blue-500/20 shadow-2xl overflow-hidden'
@@ -419,7 +387,7 @@ export function HeroSection() {
                     "linear-gradient(to bottom, transparent, rgba(0,0,0,0.3), rgba(0,0,0,0.7))",
                   ],
                 }}
-                transition={{ duration: 4, repeat: Infinity }}
+                transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY }}
               />
             </motion.div>
           </motion.div>
@@ -436,14 +404,14 @@ export function HeroSection() {
         <motion.div
           className='w-5 h-8 rounded-full border-2 border-blue-500 flex justify-center cursor-pointer'
           animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
+          transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}
           whileHover={{ scale: 1.1 }}
           onClick={() => scrollToSection("about")}
         >
           <motion.div
             className='w-1 h-1.5 bg-blue-500 rounded-full mt-1.5'
             animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
+            transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}
           />
         </motion.div>
       </motion.div>

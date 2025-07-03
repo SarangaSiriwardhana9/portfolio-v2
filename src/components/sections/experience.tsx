@@ -112,27 +112,6 @@ export function ExperienceSection() {
   const backgroundY = useTransform(scrollYProgress, [0, 1], [0, -150]);
   const timelineY = useTransform(scrollYProgress, [0, 1], [0, -50]);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.15 },
-    },
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 50, rotateX: 45 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      rotateX: 0,
-      transition: {
-        duration: 0.8,
-        ease: "backOut",
-      },
-    },
-  };
-
   return (
     <motion.section
       ref={containerRef}
@@ -163,7 +142,7 @@ export function ExperienceSection() {
             }}
             transition={{
               duration: 6,
-              repeat: Infinity,
+              repeat: Number.POSITIVE_INFINITY,
               delay: element.delay,
               ease: "easeInOut",
             }}
@@ -184,10 +163,11 @@ export function ExperienceSection() {
           }}
           transition={{
             duration: 10,
-            repeat: Infinity,
+            repeat: Number.POSITIVE_INFINITY,
             ease: "easeInOut",
           }}
         />
+
         <motion.div
           className='absolute bottom-1/4 right-1/4 w-48 h-48 rounded-full bg-cyan-400/5 blur-3xl'
           animate={{
@@ -197,7 +177,7 @@ export function ExperienceSection() {
           }}
           transition={{
             duration: 8,
-            repeat: Infinity,
+            repeat: Number.POSITIVE_INFINITY,
             ease: "easeInOut",
             delay: 2,
           }}
@@ -239,7 +219,7 @@ export function ExperienceSection() {
               }}
               transition={{
                 duration: 4,
-                repeat: Infinity,
+                repeat: Number.POSITIVE_INFINITY,
                 ease: "easeInOut",
               }}
             >
@@ -273,7 +253,7 @@ export function ExperienceSection() {
                 }}
                 transition={{
                   duration: 3,
-                  repeat: Infinity,
+                  repeat: Number.POSITIVE_INFINITY,
                   ease: "easeInOut",
                 }}
               />
@@ -281,15 +261,18 @@ export function ExperienceSection() {
 
             <motion.div
               className='space-y-8'
-              variants={containerVariants}
-              initial='hidden'
-              whileInView='visible'
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
+              transition={{ staggerChildren: 0.15 }}
             >
               {experiences.map((exp, expIndex) => (
                 <motion.div
                   key={exp.title}
-                  variants={cardVariants}
+                  initial={{ opacity: 0, y: 50, rotateX: 45 }}
+                  whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: expIndex * 0.15 }}
                   className='relative'
                   whileHover={{ scale: 1.02, z: 10 }}
                 >
@@ -309,7 +292,7 @@ export function ExperienceSection() {
                       animate={{ rotate: 360 }}
                       transition={{
                         duration: 3,
-                        repeat: Infinity,
+                        repeat: Number.POSITIVE_INFINITY,
                         ease: "linear",
                       }}
                       className={`p-1 rounded-full ${
@@ -358,7 +341,7 @@ export function ExperienceSection() {
                           }}
                           transition={{
                             duration: 2,
-                            repeat: Infinity,
+                            repeat: Number.POSITIVE_INFINITY,
                             delay: i * 0.3,
                           }}
                         />
@@ -396,6 +379,7 @@ export function ExperienceSection() {
                               </motion.div>
                             </div>
                           </div>
+
                           <motion.span
                             className={`px-2 py-1 rounded-full text-xs font-medium ${
                               exp.type === "Full-time"
@@ -508,7 +492,7 @@ export function ExperienceSection() {
                                   }}
                                   transition={{
                                     duration: 2,
-                                    repeat: Infinity,
+                                    repeat: Number.POSITIVE_INFINITY,
                                     delay: i * 0.3,
                                   }}
                                 >
@@ -541,7 +525,7 @@ export function ExperienceSection() {
             animate={{ scale: [1, 1.2, 1] }}
             transition={{
               duration: 2,
-              repeat: Infinity,
+              repeat: Number.POSITIVE_INFINITY,
               repeatType: "reverse",
             }}
             className='inline-block'
@@ -553,7 +537,7 @@ export function ExperienceSection() {
             animate={{ opacity: [0.5, 1, 0.5] }}
             transition={{
               duration: 3,
-              repeat: Infinity,
+              repeat: Number.POSITIVE_INFINITY,
               ease: "easeInOut",
             }}
           >

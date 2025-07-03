@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
+
 import {
   ArrowRight,
   Brain,
@@ -13,6 +14,7 @@ import {
   Sparkles,
   Trophy,
 } from "lucide-react";
+
 import Image from "next/image";
 import { useRef } from "react";
 
@@ -115,42 +117,6 @@ export function AboutSection() {
     [0.3, 0.8, 0.3]
   );
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
-    },
-  };
-
-  const skillVariants = {
-    hidden: { opacity: 0, scale: 0.8, rotateY: 45 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      rotateY: 0,
-      transition: {
-        duration: 0.5,
-        ease: "backOut",
-      },
-    },
-  };
-
   return (
     <motion.section
       ref={containerRef}
@@ -181,7 +147,7 @@ export function AboutSection() {
             }}
             transition={{
               duration: 4,
-              repeat: Infinity,
+              repeat: Number.POSITIVE_INFINITY,
               delay: element.delay,
               ease: "easeInOut",
             }}
@@ -201,10 +167,11 @@ export function AboutSection() {
           }}
           transition={{
             duration: 6,
-            repeat: Infinity,
+            repeat: Number.POSITIVE_INFINITY,
             ease: "easeInOut",
           }}
         />
+
         <motion.div
           className='absolute bottom-1/4 right-1/4 w-64 h-64 rounded-full bg-cyan-400/5 blur-3xl'
           animate={{
@@ -213,7 +180,7 @@ export function AboutSection() {
           }}
           transition={{
             duration: 4,
-            repeat: Infinity,
+            repeat: Number.POSITIVE_INFINITY,
             ease: "easeInOut",
             delay: 2,
           }}
@@ -222,14 +189,20 @@ export function AboutSection() {
 
       <div className='container mx-auto px-3 relative max-w-6xl'>
         <motion.div
-          variants={containerVariants}
-          initial='hidden'
-          whileInView='visible'
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
+          transition={{
+            staggerChildren: 0.1,
+            delayChildren: 0.2,
+          }}
           className='text-center mb-8 sm:mb-12'
         >
           <motion.div
-            variants={itemVariants}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
             className='inline-block mb-3'
             whileHover={{ scale: 1.05, rotate: 2 }}
           >
@@ -242,14 +215,14 @@ export function AboutSection() {
                 }}
                 transition={{
                   duration: 2,
-                  repeat: Infinity,
+                  repeat: Number.POSITIVE_INFINITY,
                   ease: "easeInOut",
                 }}
               />
               <motion.div
                 className='absolute -left-1 -top-1 w-2 h-2 bg-blue-500 rounded-full animate-ping'
                 animate={{ scale: [1, 2, 1], opacity: [1, 0, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
+                transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
               />
               <span className='text-xs font-medium text-blue-400'>
                 BSc (Hons) Software Engineering Student
@@ -258,7 +231,10 @@ export function AboutSection() {
           </motion.div>
 
           <motion.h2
-            variants={itemVariants}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
             className='text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3 text-white'
           >
             Transforming Ideas Into{" "}
@@ -273,15 +249,19 @@ export function AboutSection() {
               }}
               transition={{
                 duration: 3,
-                repeat: Infinity,
+                repeat: Number.POSITIVE_INFINITY,
                 ease: "easeInOut",
               }}
             >
               Digital Reality
             </motion.span>
           </motion.h2>
+
           <motion.p
-            variants={itemVariants}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             className='text-xs sm:text-sm text-gray-400 max-w-2xl mx-auto'
           >
             Passionate about creating innovative solutions that address
@@ -290,23 +270,28 @@ export function AboutSection() {
         </motion.div>
 
         <motion.div
-          variants={containerVariants}
-          initial='hidden'
-          whileInView='visible'
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
+          transition={{
+            staggerChildren: 0.1,
+            delayChildren: 0.2,
+          }}
           className='grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 mb-8 sm:mb-12'
         >
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
-              variants={itemVariants}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
               className='relative group'
               whileHover={{
                 scale: 1.05,
                 rotateY: 10,
                 z: 10,
               }}
-              transition={{ duration: 0.3 }}
             >
               <motion.div
                 className='absolute inset-0 bg-gradient-to-r from-blue-500/20 to-cyan-400/10 rounded-lg blur-xl opacity-0 group-hover:opacity-100'
@@ -316,7 +301,7 @@ export function AboutSection() {
                 }}
                 transition={{
                   duration: 4,
-                  repeat: Infinity,
+                  repeat: Number.POSITIVE_INFINITY,
                   delay: index * 0.5,
                 }}
               />
@@ -331,7 +316,7 @@ export function AboutSection() {
                     animate={{ rotate: [0, 360] }}
                     transition={{
                       duration: 8,
-                      repeat: Infinity,
+                      repeat: Number.POSITIVE_INFINITY,
                       ease: "linear",
                       delay: index * 0.5,
                     }}
@@ -340,6 +325,7 @@ export function AboutSection() {
                       {stat.icon}
                     </div>
                   </motion.div>
+
                   <motion.div
                     className='text-lg sm:text-xl md:text-2xl font-bold text-blue-400 mb-0.5'
                     animate={{
@@ -347,12 +333,13 @@ export function AboutSection() {
                     }}
                     transition={{
                       duration: 2,
-                      repeat: Infinity,
+                      repeat: Number.POSITIVE_INFINITY,
                       delay: index * 0.2,
                     }}
                   >
                     {stat.value}
                   </motion.div>
+
                   <div className='text-[10px] xs:text-xs text-gray-400'>
                     {stat.label}
                   </div>
@@ -400,10 +387,11 @@ export function AboutSection() {
                 }}
                 transition={{
                   duration: 5,
-                  repeat: Infinity,
+                  repeat: Number.POSITIVE_INFINITY,
                   ease: "easeInOut",
                 }}
               />
+
               <motion.div
                 className='absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4 backdrop-blur-lg bg-black/80 p-2 sm:p-3 rounded-lg border border-blue-500/30'
                 initial={{ opacity: 0, y: 20 }}
@@ -428,11 +416,12 @@ export function AboutSection() {
               }}
               transition={{
                 duration: 6,
-                repeat: Infinity,
+                repeat: Number.POSITIVE_INFINITY,
                 ease: "easeInOut",
               }}
               className='absolute -top-4 sm:-top-6 -right-4 sm:-right-6 w-8 h-8 sm:w-12 sm:h-12 rounded-full bg-blue-500/20 blur-xl'
             />
+
             <motion.div
               animate={{
                 y: [0, 15, 0],
@@ -440,7 +429,7 @@ export function AboutSection() {
               }}
               transition={{
                 duration: 4,
-                repeat: Infinity,
+                repeat: Number.POSITIVE_INFINITY,
                 ease: "easeInOut",
               }}
               className='absolute -bottom-4 sm:-bottom-6 -left-4 sm:-left-6 w-10 h-10 sm:w-16 sm:h-16 rounded-full bg-cyan-400/20 blur-xl'
@@ -457,13 +446,19 @@ export function AboutSection() {
           >
             <motion.div
               className='prose prose-neutral max-w-none'
-              variants={containerVariants}
-              initial='hidden'
-              whileInView='visible'
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
+              transition={{
+                staggerChildren: 0.1,
+                delayChildren: 0.2,
+              }}
             >
               <motion.p
-                variants={itemVariants}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
                 className='text-xs sm:text-sm text-gray-400'
               >
                 I am a passionate BSc (Hons) Software Engineering student at
@@ -473,7 +468,10 @@ export function AboutSection() {
               </motion.p>
 
               <motion.p
-                variants={itemVariants}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
                 className='text-xs sm:text-sm text-gray-400'
               >
                 With experience in web development, mobile applications, and
@@ -486,15 +484,21 @@ export function AboutSection() {
 
             <motion.div
               className='grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3'
-              variants={containerVariants}
-              initial='hidden'
-              whileInView='visible'
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
+              transition={{
+                staggerChildren: 0.1,
+                delayChildren: 0.2,
+              }}
             >
               {skills.map((skill, index) => (
                 <motion.div
                   key={skill.title}
-                  variants={skillVariants}
+                  initial={{ opacity: 0, scale: 0.8, rotateY: 45 }}
+                  whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
                   className='group p-2 sm:p-2.5 rounded-lg bg-blue-500/10 border border-blue-500/20 hover:border-blue-500/30 transition-all duration-300 relative overflow-hidden'
                   whileHover={{
                     scale: 1.02,
@@ -513,7 +517,7 @@ export function AboutSection() {
                         animate={{ rotate: [0, 360] }}
                         transition={{
                           duration: 8,
-                          repeat: Infinity,
+                          repeat: Number.POSITIVE_INFINITY,
                           ease: "linear",
                           delay: index * 0.3,
                         }}
@@ -524,9 +528,11 @@ export function AboutSection() {
                         {skill.title}
                       </h3>
                     </div>
+
                     <p className='text-[10px] xs:text-xs text-gray-400 mb-1 sm:mb-2'>
                       {skill.description}
                     </p>
+
                     <div className='flex flex-wrap gap-1'>
                       {skill.tools.map((tool, toolIndex) => (
                         <motion.span
@@ -571,7 +577,7 @@ export function AboutSection() {
               <span className='relative z-10'>View My Skills</span>
               <motion.div
                 animate={{ x: [0, 5, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
+                transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}
               >
                 <ArrowRight className='h-3 w-3 group-hover:translate-x-1 transition-transform' />
               </motion.div>

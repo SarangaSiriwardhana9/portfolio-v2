@@ -116,7 +116,6 @@ export function ContactSection() {
 
   const onSubmit = async (data: FormValues) => {
     setFormStatus("submitting");
-
     try {
       const templateParams = {
         from_name: data.name,
@@ -141,28 +140,10 @@ export function ContactSection() {
     } catch (error) {
       console.error("Error sending email:", error);
       setFormStatus("error");
-
       setTimeout(() => {
         setFormStatus("idle");
       }, 5000);
     }
-  };
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1 },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
-    },
   };
 
   const socialLinks = [
@@ -222,7 +203,7 @@ export function ContactSection() {
             }}
             transition={{
               duration: 5,
-              repeat: Infinity,
+              repeat: Number.POSITIVE_INFINITY,
               delay: element.delay,
               ease: "easeInOut",
             }}
@@ -243,10 +224,11 @@ export function ContactSection() {
           }}
           transition={{
             duration: 10,
-            repeat: Infinity,
+            repeat: Number.POSITIVE_INFINITY,
             ease: "easeInOut",
           }}
         />
+
         <motion.div
           className='absolute bottom-1/4 right-1/3 w-96 h-96 rounded-full bg-cyan-400/5 blur-3xl'
           animate={{
@@ -256,7 +238,7 @@ export function ContactSection() {
           }}
           transition={{
             duration: 8,
-            repeat: Infinity,
+            repeat: Number.POSITIVE_INFINITY,
             ease: "easeInOut",
             delay: 3,
           }}
@@ -297,7 +279,7 @@ export function ContactSection() {
               }}
               transition={{
                 duration: 4,
-                repeat: Infinity,
+                repeat: Number.POSITIVE_INFINITY,
                 ease: "easeInOut",
               }}
             >
@@ -318,18 +300,23 @@ export function ContactSection() {
 
         <motion.div
           className='max-w-5xl mx-auto'
-          variants={containerVariants}
-          initial='hidden'
-          animate={isInView ? "visible" : "hidden"}
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ staggerChildren: 0.1 }}
         >
           <div className='grid grid-cols-1 lg:grid-cols-5 gap-4 sm:gap-6'>
             {/* Contact Info */}
-            <motion.div variants={itemVariants} className='lg:col-span-2'>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6 }}
+              className='lg:col-span-2'
+            >
               <div className='bg-blue-500/5 p-3 sm:p-4 md:p-6 rounded-xl border border-blue-500/20 h-full shadow-lg backdrop-blur-sm relative overflow-hidden'>
                 <motion.div
                   className='absolute inset-0 bg-gradient-to-br from-blue-500/10 to-cyan-400/10 opacity-0'
                   animate={{ opacity: [0, 0.3, 0] }}
-                  transition={{ duration: 4, repeat: Infinity }}
+                  transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY }}
                 />
 
                 <div className='space-y-4 sm:space-y-6 relative z-10'>
@@ -360,7 +347,7 @@ export function ContactSection() {
                         animate={{ rotate: [0, 360] }}
                         transition={{
                           duration: 8,
-                          repeat: Infinity,
+                          repeat: Number.POSITIVE_INFINITY,
                           ease: "linear",
                         }}
                       >
@@ -386,7 +373,7 @@ export function ContactSection() {
                         animate={{ rotate: [0, 360] }}
                         transition={{
                           duration: 10,
-                          repeat: Infinity,
+                          repeat: Number.POSITIVE_INFINITY,
                           ease: "linear",
                         }}
                       >
@@ -446,12 +433,17 @@ export function ContactSection() {
             </motion.div>
 
             {/* Contact Form */}
-            <motion.div variants={itemVariants} className='lg:col-span-3'>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className='lg:col-span-3'
+            >
               <div className='bg-black/70 rounded-xl border border-blue-500/20 p-3 sm:p-4 md:p-6 shadow-xl backdrop-blur-sm relative overflow-hidden'>
                 <motion.div
                   className='absolute inset-0 bg-gradient-to-br from-blue-500/5 to-cyan-400/5 opacity-0'
                   animate={{ opacity: [0, 0.5, 0] }}
-                  transition={{ duration: 6, repeat: Infinity }}
+                  transition={{ duration: 6, repeat: Number.POSITIVE_INFINITY }}
                 />
 
                 <div className='relative z-10'>
@@ -486,7 +478,7 @@ export function ContactSection() {
                                     animate={{ rotate: [0, 360] }}
                                     transition={{
                                       duration: 6,
-                                      repeat: Infinity,
+                                      repeat: Number.POSITIVE_INFINITY,
                                       ease: "linear",
                                     }}
                                   >
@@ -524,7 +516,7 @@ export function ContactSection() {
                                     animate={{ rotate: [0, 360] }}
                                     transition={{
                                       duration: 8,
-                                      repeat: Infinity,
+                                      repeat: Number.POSITIVE_INFINITY,
                                       ease: "linear",
                                     }}
                                   >
@@ -562,7 +554,7 @@ export function ContactSection() {
                                   animate={{ rotate: [0, 360] }}
                                   transition={{
                                     duration: 10,
-                                    repeat: Infinity,
+                                    repeat: Number.POSITIVE_INFINITY,
                                     ease: "linear",
                                   }}
                                 >
@@ -624,21 +616,18 @@ export function ContactSection() {
                                   <span className='ml-2'>Send Message</span>
                                 </>
                               )}
-
                               {formStatus === "submitting" && (
                                 <>
                                   <Loader2 className='size-3 sm:size-4 animate-spin' />
                                   <span className='ml-2'>Sending...</span>
                                 </>
                               )}
-
                               {formStatus === "success" && (
                                 <>
                                   <CheckCircle className='size-3 sm:size-4' />
                                   <span className='ml-2'>Message Sent!</span>
                                 </>
                               )}
-
                               {formStatus === "error" && (
                                 <>
                                   <AlertCircle className='size-3 sm:size-4' />
@@ -702,13 +691,17 @@ export function ContactSection() {
             animate={{ y: [0, -10, 0] }}
             transition={{
               duration: 3,
-              repeat: Infinity,
+              repeat: Number.POSITIVE_INFINITY,
               ease: "easeInOut",
             }}
           >
             <motion.div
               animate={{ rotate: [0, 360] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+              transition={{
+                duration: 2,
+                repeat: Number.POSITIVE_INFINITY,
+                ease: "linear",
+              }}
             >
               <Heart className='h-4 w-4 text-red-400/60' />
             </motion.div>
@@ -717,7 +710,7 @@ export function ContactSection() {
               animate={{ rotate: [0, 360] }}
               transition={{
                 duration: 2,
-                repeat: Infinity,
+                repeat: Number.POSITIVE_INFINITY,
                 ease: "linear",
                 delay: 1,
               }}

@@ -82,7 +82,7 @@ const skillCategories = [
       "Firebase",
       "Cloudflare",
     ],
-    gradient: "from-cyan-500/15 via-cyan-400/15 to-blue-500/15",
+    gradient: "from-cyan-500/15 via-cyan-400/15 to-blue-600/15",
     accentColor: "cyan",
     progress: 70,
   },
@@ -154,27 +154,6 @@ export function SkillsSection() {
   // Parallax effects
   const backgroundY = useTransform(scrollYProgress, [0, 1], [0, -100]);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.08 },
-    },
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30, rotateX: 45 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      rotateX: 0,
-      transition: {
-        duration: 0.6,
-        ease: "backOut",
-      },
-    },
-  };
-
   return (
     <motion.section
       ref={containerRef}
@@ -205,7 +184,7 @@ export function SkillsSection() {
             }}
             transition={{
               duration: 5,
-              repeat: Infinity,
+              repeat: Number.POSITIVE_INFINITY,
               delay: element.delay,
               ease: "easeInOut",
             }}
@@ -226,10 +205,11 @@ export function SkillsSection() {
           }}
           transition={{
             duration: 8,
-            repeat: Infinity,
+            repeat: Number.POSITIVE_INFINITY,
             ease: "easeInOut",
           }}
         />
+
         <motion.div
           className='absolute bottom-1/4 right-1/3 w-80 h-80 rounded-full bg-cyan-400/5 blur-3xl'
           animate={{
@@ -239,7 +219,7 @@ export function SkillsSection() {
           }}
           transition={{
             duration: 6,
-            repeat: Infinity,
+            repeat: Number.POSITIVE_INFINITY,
             ease: "easeInOut",
             delay: 3,
           }}
@@ -281,7 +261,7 @@ export function SkillsSection() {
               }}
               transition={{
                 duration: 3,
-                repeat: Infinity,
+                repeat: Number.POSITIVE_INFINITY,
                 ease: "easeInOut",
               }}
             >
@@ -303,26 +283,39 @@ export function SkillsSection() {
         <motion.div
           ref={ref}
           className='grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4'
-          variants={containerVariants}
-          initial='hidden'
-          animate={isInView ? "visible" : "hidden"}
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ staggerChildren: 0.08 }}
         >
           {skillCategories.map((category, index) => (
             <motion.div
               key={category.title}
-              variants={cardVariants}
+              initial={{ opacity: 0, y: 30, rotateX: 45 }}
+              animate={
+                isInView
+                  ? {
+                      opacity: 1,
+                      y: 0,
+                      rotateX: 0,
+                    }
+                  : {}
+              }
+              transition={{
+                duration: 0.6,
+                delay: index * 0.08,
+              }}
               className='group relative'
               whileHover={{
                 scale: 1.05,
                 rotateY: 10,
                 z: 20,
               }}
-              transition={{ duration: 0.3 }}
             >
               <motion.div
                 className='absolute -inset-1 bg-gradient-to-br from-blue-500/20 to-cyan-400/20 rounded-xl blur-lg opacity-0 group-hover:opacity-100'
                 transition={{ duration: 0.3 }}
               />
+
               <div
                 className={`relative h-full p-3 sm:p-4 rounded-xl border border-blue-500/20 bg-gradient-to-br ${category.gradient} backdrop-blur-sm bg-black/40 overflow-hidden`}
               >
@@ -343,7 +336,7 @@ export function SkillsSection() {
                         animate={{ rotate: [0, 360] }}
                         transition={{
                           duration: 10,
-                          repeat: Infinity,
+                          repeat: Number.POSITIVE_INFINITY,
                           ease: "linear",
                           delay: index * 0.5,
                         }}
@@ -354,6 +347,7 @@ export function SkillsSection() {
                         {category.title}
                       </h3>
                     </div>
+
                     <motion.div
                       className={`text-xs font-bold text-${
                         category.accentColor === "blue" ? "blue" : "cyan"
@@ -431,7 +425,7 @@ export function SkillsSection() {
                   }}
                   transition={{
                     duration: 3,
-                    repeat: Infinity,
+                    repeat: Number.POSITIVE_INFINITY,
                     delay: index * 0.2,
                   }}
                 />
@@ -453,7 +447,7 @@ export function SkillsSection() {
             animate={{ y: [0, -5, 0] }}
             transition={{
               duration: 2,
-              repeat: Infinity,
+              repeat: Number.POSITIVE_INFINITY,
               ease: "easeInOut",
             }}
           >
@@ -467,7 +461,7 @@ export function SkillsSection() {
                 }}
                 transition={{
                   duration: 1.5,
-                  repeat: Infinity,
+                  repeat: Number.POSITIVE_INFINITY,
                   delay: i * 0.1,
                   ease: "easeInOut",
                 }}

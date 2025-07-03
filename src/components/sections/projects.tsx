@@ -69,6 +69,7 @@ export function ProjectsSection() {
     new Set(projects.map((project) => project.category))
   );
   const categories = ["All", ...uniqueCategories];
+
   const [activeCategory, setActiveCategory] = useState("All");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [showModal, setShowModal] = useState(false);
@@ -77,39 +78,6 @@ export function ProjectsSection() {
     activeCategory === "All"
       ? projects
       : projects.filter((project) => project.category === activeCategory);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.08 },
-    },
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30, rotateX: 45 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      rotateX: 0,
-      transition: {
-        duration: 0.6,
-        ease: "backOut",
-      },
-    },
-  };
-
-  const filterVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.4,
-        ease: "backOut",
-      },
-    },
-  };
 
   return (
     <motion.section
@@ -166,6 +134,7 @@ export function ProjectsSection() {
             ease: "easeInOut",
           }}
         />
+
         <motion.div
           className='absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-cyan-400/5 blur-3xl'
           animate={{
@@ -198,6 +167,7 @@ export function ProjectsSection() {
               My Work
             </span>
           </motion.div>
+
           <motion.h2
             className='text-2xl sm:text-3xl md:text-4xl font-bold mb-3 text-white'
             initial={{ opacity: 0, y: 20 }}
@@ -223,6 +193,7 @@ export function ProjectsSection() {
               Projects
             </motion.span>
           </motion.h2>
+
           <motion.p
             className='text-xs sm:text-sm text-gray-400 max-w-2xl mx-auto'
             initial={{ opacity: 0, y: 20 }}
@@ -244,10 +215,9 @@ export function ProjectsSection() {
           {categories.map((category, index) => (
             <motion.div
               key={category}
-              variants={filterVariants}
-              initial='hidden'
-              animate={inView ? "visible" : "hidden"}
-              transition={{ delay: index * 0.1 }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={inView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
             >
               <Button
                 variant={activeCategory === category ? "default" : "outline"}
@@ -256,7 +226,7 @@ export function ProjectsSection() {
                 className={`rounded-full px-3 py-1 text-xs relative overflow-hidden ${
                   activeCategory === category
                     ? "bg-blue-600 hover:bg-blue-700 text-white shadow-md shadow-blue-500/20"
-                    : "hover:bg-blue-500/10 border-blue-500/30 text-blue-400 hover:text-blue-300"
+                    : "hover:bg-blue-500/10 border-blue-500/30 text-blue-400 hover:text-blue-300 bg-transparent"
                 }`}
               >
                 <motion.div
@@ -273,21 +243,22 @@ export function ProjectsSection() {
         {/* Projects Grid */}
         <motion.div
           className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4'
-          variants={containerVariants}
-          initial='hidden'
-          animate={inView ? "visible" : "hidden"}
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ staggerChildren: 0.08 }}
         >
           {filteredProjects.map((project, index) => (
             <motion.div
               key={project.title}
-              variants={cardVariants}
+              initial={{ opacity: 0, y: 30, rotateX: 45 }}
+              animate={inView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
+              transition={{ duration: 0.6, delay: index * 0.08 }}
               className='h-full'
               whileHover={{
                 scale: 1.05,
                 rotateY: 5,
                 z: 20,
               }}
-              transition={{ duration: 0.3 }}
             >
               <div className='relative h-full rounded-xl overflow-hidden border border-blue-500/20 bg-gradient-to-br from-blue-500/5 to-blue-500/10 backdrop-blur-sm group'>
                 {/* Glow effect */}
@@ -328,13 +299,17 @@ export function ProjectsSection() {
                       transition={{ duration: 0.4 }}
                     >
                       <Image
-                        src={project.image || "/placeholder.svg"}
+                        src={
+                          project.image ||
+                          "/placeholder.svg?height=150&width=300"
+                        }
                         alt={project.title}
                         fill
                         className='object-cover object-center'
                         style={{ objectPosition: "center" }}
                       />
                     </motion.div>
+
                     <motion.div
                       className='absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-70'
                       animate={{
@@ -350,6 +325,7 @@ export function ProjectsSection() {
                         delay: index * 0.2,
                       }}
                     />
+
                     {/* Category Badge - Fixed Position */}
                     <div className='absolute top-2 sm:top-3 right-2 sm:right-3'>
                       <motion.div
@@ -566,7 +542,7 @@ export function ProjectsSection() {
               initial={{ scale: 0.8, y: 50, opacity: 0 }}
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.8, y: 50, opacity: 0 }}
-              transition={{ duration: 0.3, ease: "backOut" }}
+              transition={{ duration: 0.3 }}
               onClick={(e) => e.stopPropagation()}
             >
               {/* Animated background */}
@@ -600,7 +576,10 @@ export function ProjectsSection() {
                 <div className='absolute inset-0 bg-gradient-to-br from-blue-500/20 to-cyan-400/20'>
                   <div className='absolute inset-0 mix-blend-overlay opacity-40'>
                     <Image
-                      src={selectedProject.image || "/placeholder.svg"}
+                      src={
+                        selectedProject.image ||
+                        "/placeholder.svg?height=300&width=600"
+                      }
                       alt={selectedProject.title}
                       fill
                       className='object-cover'
@@ -608,7 +587,9 @@ export function ProjectsSection() {
                     />
                   </div>
                 </div>
+
                 <div className='absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent' />
+
                 <motion.div
                   className='absolute bottom-0 left-0 right-0 p-3 sm:p-4 md:p-6 text-left'
                   initial={{ opacity: 0, y: 20 }}
@@ -649,7 +630,10 @@ export function ProjectsSection() {
                         transition={{ duration: 0.3 }}
                       >
                         <Image
-                          src={selectedProject.image || "/placeholder.svg"}
+                          src={
+                            selectedProject.image ||
+                            "/placeholder.svg?height=300&width=500"
+                          }
                           alt={selectedProject.title}
                           fill
                           className='object-cover object-center'
