@@ -1,29 +1,35 @@
-import '@/styles/global.css'
-import type { Metadata } from 'next'
-import { Outfit } from 'next/font/google'
+import "@/styles/global.css";
+import type { Metadata } from "next";
+import { Outfit } from "next/font/google";
 
-const outfit = Outfit({ 
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-outfit',
-})
+const outfit = Outfit({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-outfit",
+});
 
 export const metadata: Metadata = {
-  title: 'Saranga Siriwardhana | Full Stack Developer',
-  description: 'BSc (Hons) Software Engineering Student | Full Stack Developer specializing in modern web applications',
-  keywords: 'Full Stack Developer, Software Engineer, React, Next.js, TypeScript, Portfolio',
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
+  title: "Saranga Siriwardhana | Full Stack Developer",
+  description:
+    "BSc (Hons) Software Engineering Student | Full Stack Developer specializing in modern web applications",
+  keywords:
+    "Full Stack Developer, Software Engineer, React, Next.js, TypeScript, Portfolio",
+  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
   icons: {
-    icon: './favicon.png',  
+    icon: "./favicon.png",
   },
-}
+};
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en" suppressHydrationWarning className={outfit.variable}>
-      <body suppressHydrationWarning>
+    <html lang='en' suppressHydrationWarning className={outfit.variable}>
+      <body suppressHydrationWarning className='bg-black'>
         {children}
       </body>
     </html>
-  )
+  );
 }

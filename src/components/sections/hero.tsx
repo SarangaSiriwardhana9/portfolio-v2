@@ -1,223 +1,452 @@
-'use client'
+"use client";
 
-import { Button } from '@/components/ui/button'
-import { motion, useScroll, useSpring, useTransform } from 'framer-motion'
-import { ArrowRight, Code2, Cpu, GitBranch, Sparkles, Server, Database } from 'lucide-react'
-import Image from 'next/image'
-import { useEffect, useRef, useState } from 'react'
+import { Button } from "@/components/ui/button";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import {
+  ArrowRight,
+  Code2,
+  Cpu,
+  GitBranch,
+  Sparkles,
+  Server,
+  Database,
+} from "lucide-react";
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 
 const floatingElements = [
-  { icon: <Code2 className="h-6 w-6" />, delay: 0 },
-  { icon: <Server className="h-6 w-6" />, delay: 0.5 },
-  { icon: <Database className="h-6 w-6" />, delay: 1 }
-]
+  { icon: <Code2 className='h-4 w-4' />, delay: 0 },
+  { icon: <Server className='h-4 w-4' />, delay: 0.5 },
+  { icon: <Database className='h-4 w-4' />, delay: 1 },
+];
 
 export function HeroSection() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const containerRef = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll()
-  const y = useTransform(scrollYProgress, [0, 1], [0, 100])
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
 
-  const springConfig = { damping: 25, stiffness: 700 }
-  const x = useSpring(mousePosition.x, springConfig)
-  const y2 = useSpring(mousePosition.y, springConfig)
+  // Scroll-based transforms for disappearing effect
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8]);
+  const y = useTransform(scrollYProgress, [0, 0.5], [0, -100]);
+
+  const springConfig = { damping: 25, stiffness: 700 };
+  const x = useSpring(mousePosition.x, springConfig);
+  const y2 = useSpring(mousePosition.y, springConfig);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      const rect = containerRef.current?.getBoundingClientRect()
+      const rect = containerRef.current?.getBoundingClientRect();
       if (rect) {
         setMousePosition({
           x: (e.clientX - rect.left - rect.width / 2) / 50,
           y: (e.clientY - rect.top - rect.height / 2) / 50,
-        })
+        });
       }
-    }
+    };
 
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
-  
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id)
+    const element = document.getElementById(id);
     if (element) {
-      const headerOffset = 80
-      const elementPosition = element.getBoundingClientRect().top + window.scrollY
-      const offsetPosition = elementPosition - headerOffset
-      
+      const headerOffset = 60;
+      const elementPosition =
+        element.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - headerOffset;
+
       window.scrollTo({
         top: offsetPosition,
-        behavior: 'smooth'
-      })
+        behavior: "smooth",
+      });
     }
-  }
+  };
+
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+      },
+    },
+  };
+
+  const statsVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const statItemVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        ease: "backOut",
+      },
+    },
+  };
 
   return (
-    <section 
-      ref={containerRef} 
-      className="py-10 pb-20 md:pb-36 relative mt-10 md:mt-24 flex items-center overflow-hidden pt-[5vh]"
-      id="home"
+    <motion.section
+      ref={containerRef}
+      className='py-6 pb-12 md:pb-20 relative mt-8 md:mt-16 flex items-center overflow-hidden pt-[3vh]'
+      id='home'
+      style={{ opacity, scale, y }}
     >
-      <div className="absolute inset-0 overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className='absolute inset-0 overflow-hidden'>
+        {/* Floating Elements */}
+        {floatingElements.map((element, index) => (
+          <motion.div
+            key={index}
+            className='absolute'
+            style={{
+              left: `${20 + index * 30}%`,
+              top: `${30 + index * 20}%`,
+              x,
+              y: y2,
+            }}
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{
+              opacity: [0.3, 0.6, 0.3],
+              scale: [1, 1.2, 1],
+              rotate: [0, 360],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              delay: element.delay,
+              ease: "easeInOut",
+            }}
+          >
+            <div className='p-2 rounded-full bg-blue-500/10 border border-blue-500/20 backdrop-blur-sm'>
+              {element.icon}
+            </div>
+          </motion.div>
+        ))}
+
+        {/* Background Gradients */}
         <motion.div
-          style={{ y }}
-          className="absolute top-20 -left-20 w-64 md:w-96 h-64 md:h-96 rounded-full border border-primary/30 blur-2xl"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+          className='absolute top-10 -left-10 w-40 md:w-64 h-40 md:h-64 rounded-full border border-blue-500/20 blur-2xl'
+          animate={{
+            rotate: 360,
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            rotate: { duration: 50, repeat: Infinity, ease: "linear" },
+            scale: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+          }}
         />
         <motion.div
-          style={{ y: useTransform(scrollYProgress, [0, 1], [0, 150]) }}
-          className="absolute bottom-20 -right-20 w-64 md:w-96 h-64 md:h-96 rounded-full border border-accent/30 blur-2xl"
-          animate={{ rotate: -360 }}
-          transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+          className='absolute bottom-10 -right-10 w-40 md:w-64 h-40 md:h-64 rounded-full border border-cyan-400/20 blur-2xl'
+          animate={{
+            rotate: -360,
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            rotate: { duration: 40, repeat: Infinity, ease: "linear" },
+            scale: { duration: 3, repeat: Infinity, ease: "easeInOut" },
+          }}
         />
       </div>
 
-      <div className="container mx-auto px-4 relative max-w-[2000px]">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+      <div className='container mx-auto px-3 relative max-w-6xl'>
+        <motion.div
+          className='grid lg:grid-cols-2 gap-6 lg:gap-8 items-center'
+          variants={containerVariants}
+          initial='hidden'
+          animate='visible'
+        >
+          {/* Text Content */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="space-y-6 md:space-y-8"
+            className='space-y-4 md:space-y-5'
+            variants={itemVariants}
           >
+            {/* Badge */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.3, duration: 0.5 }}
-              className="inline-block"
+              className='inline-block'
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <div className="relative px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-lg">
-                <div className="absolute -left-1 -top-1 w-3 h-3 bg-primary rounded-full animate-ping" />
-                <div className="absolute -left-1 -top-1 w-3 h-3 bg-primary rounded-full" />
-                <span className="text-sm font-medium">Junior Full Stack Developer</span>
+              <div className='relative px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/30 backdrop-blur-lg'>
+                <motion.div
+                  className='absolute -left-1 -top-1 w-2 h-2 bg-blue-500 rounded-full'
+                  animate={{
+                    scale: [1, 1.5, 1],
+                    opacity: [1, 0.5, 1],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
+                <motion.div
+                  className='absolute -left-1 -top-1 w-2 h-2 bg-blue-500 rounded-full animate-ping'
+                  animate={{ scale: [1, 2, 1], opacity: [1, 0, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
+                <span className='text-xs font-medium text-blue-400'>
+                  Junior Full Stack Developer
+                </span>
               </div>
             </motion.div>
 
-            <div className="space-y-4">
-              <motion.h1 
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-none"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
+            {/* Main Heading */}
+            <motion.div className='space-y-3' variants={itemVariants}>
+              <motion.h1
+                className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight'
+                initial='hidden'
+                animate='visible'
               >
-                <span className="block">Building</span>
-                <span className="block text-primary">Digital Dreams</span>
-                <span className="block">Into Reality</span>
+                <motion.span
+                  className='block text-white'
+                  variants={{
+                    hidden: { opacity: 0, x: -50 },
+                    visible: { opacity: 1, x: 0, transition: { delay: 0.2 } },
+                  }}
+                >
+                  Building
+                </motion.span>
+                <motion.span
+                  className='block text-blue-400'
+                  variants={{
+                    hidden: { opacity: 0, x: 50 },
+                    visible: { opacity: 1, x: 0, transition: { delay: 0.4 } },
+                  }}
+                >
+                  Digital Dreams
+                </motion.span>
+                <motion.span
+                  className='block text-white'
+                  variants={{
+                    hidden: { opacity: 0, x: -50 },
+                    visible: { opacity: 1, x: 0, transition: { delay: 0.6 } },
+                  }}
+                >
+                  Into Reality
+                </motion.span>
               </motion.h1>
-              <motion.p 
-                className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-xl"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.8 }}
-              >
-                Crafting exceptional digital experiences with cutting-edge technologies.
-                Let&apos;s transform your vision into reality.
-              </motion.p>
-            </div>
 
-            <motion.div
-              className="flex flex-wrap gap-3 md:gap-4 pt-2 md:pt-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-            >
-              <Button 
-                size="lg" 
-                className="group"
-                onClick={() => scrollToSection('contact')}
+              <motion.p
+                className='text-sm sm:text-base text-gray-400 max-w-lg'
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0, transition: { delay: 0.8 } },
+                }}
               >
-                Let&apos;s Work Together
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline"
-                className='hover:bg-primary/10'
-                onClick={() => scrollToSection('projects')}
-              >
-                View Portfolio
-              </Button>
+                Crafting exceptional digital experiences with cutting-edge
+                technologies. Let&apos;s transform your vision into reality.
+              </motion.p>
             </motion.div>
 
-            <motion.div 
-              className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-8 pt-4 md:pt-8"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
+            {/* Action Buttons */}
+            <motion.div
+              className='flex flex-wrap gap-2 md:gap-3 pt-2 md:pt-3'
+              variants={itemVariants}
             >
-              <div>
-                <div className="text-xl sm:text-2xl md:text-3xl xl:text-4xl font-bold text-primary">5+</div>
-                <div className="text-xs md:text-sm text-muted-foreground">Years Experience</div>
-              </div>
-              <div>
-                <div className="text-xl sm:text-2xl md:text-3xl xl:text-4xl font-bold text-primary">50+</div>
-                <div className="text-xs md:text-sm text-muted-foreground">Projects Delivered</div>
-              </div>
-              <div>
-                <div className="text-xl sm:text-2xl md:text-3xl xl:text-4xl font-bold text-primary">30+</div>
-                <div className="text-xs md:text-sm text-muted-foreground">Happy Clients</div>
-              </div>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button
+                  size='sm'
+                  className='group bg-blue-600 hover:bg-blue-700 text-white border-0 relative overflow-hidden'
+                  onClick={() => scrollToSection("contact")}
+                >
+                  <motion.div
+                    className='absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700'
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                  <span className='relative z-10 flex items-center'>
+                    Let&apos;s Work Together
+                    <ArrowRight className='ml-1.5 h-3 w-3 group-hover:translate-x-1 transition-transform' />
+                  </span>
+                </Button>
+              </motion.div>
+
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button
+                  size='sm'
+                  variant='outline'
+                  className='hover:bg-blue-500/10 border-blue-500/30 text-blue-400 hover:text-blue-300'
+                  onClick={() => scrollToSection("projects")}
+                >
+                  View Portfolio
+                </Button>
+              </motion.div>
+            </motion.div>
+
+            {/* Stats */}
+            <motion.div
+              className='grid grid-cols-3 gap-2 sm:gap-3 md:gap-4 pt-3 md:pt-4'
+              variants={statsVariants}
+              initial='hidden'
+              animate='visible'
+            >
+              {[
+                { value: "5+", label: "Years Experience" },
+                { value: "50+", label: "Projects Delivered" },
+                { value: "30+", label: "Happy Clients" },
+              ].map((stat, index) => (
+                <motion.div
+                  key={index}
+                  variants={statItemVariants}
+                  whileHover={{
+                    scale: 1.1,
+                    rotateY: 10,
+                    transition: { duration: 0.3 },
+                  }}
+                  className='text-center p-2 rounded-lg bg-blue-500/5 border border-blue-500/20 backdrop-blur-sm'
+                >
+                  <motion.div
+                    className='text-lg sm:text-xl md:text-2xl font-bold text-blue-400'
+                    animate={{
+                      textShadow: [
+                        "0 0 0px #60a5fa",
+                        "0 0 10px #60a5fa",
+                        "0 0 0px #60a5fa",
+                      ],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      delay: index * 0.2,
+                    }}
+                  >
+                    {stat.value}
+                  </motion.div>
+                  <div className='text-xs text-gray-500'>{stat.label}</div>
+                </motion.div>
+              ))}
             </motion.div>
           </motion.div>
 
           {/* Mobile Image Section */}
-          <motion.div 
-            className="block lg:hidden mt-8 mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
+          <motion.div
+            className='block lg:hidden mt-6 mb-3'
+            variants={itemVariants}
           >
-            <div className="relative w-full h-[350px] rounded-2xl overflow-hidden border border-border/50 shadow-lg">
-              <div className="absolute inset-0 bg-background/50 backdrop-blur-sm"></div>
+            <motion.div
+              className='relative w-full h-[250px] rounded-xl overflow-hidden border border-blue-500/20 shadow-lg'
+              whileHover={{ scale: 1.02, rotateY: 5 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className='absolute inset-0 bg-black/30 backdrop-blur-sm'></div>
               <Image
-                src="/banner5.jpg"
-                alt="Saranga Siriwardhana"
+                src='/banner5.jpg'
+                alt='Saranga Siriwardhana'
                 fill
-                className="object-cover opacity-80"
-                sizes="(max-width: 768px) 100vw, 50vw"
+                className='object-cover opacity-70'
+                sizes='(max-width: 768px) 100vw, 50vw'
                 priority
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/30 to-background/70" />
-            </div>
+              <motion.div
+                className='absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/60'
+                animate={{
+                  background: [
+                    "linear-gradient(to bottom, transparent, rgba(0,0,0,0.2), rgba(0,0,0,0.6))",
+                    "linear-gradient(to bottom, transparent, rgba(59,130,246,0.1), rgba(0,0,0,0.6))",
+                    "linear-gradient(to bottom, transparent, rgba(0,0,0,0.2), rgba(0,0,0,0.6))",
+                  ],
+                }}
+                transition={{ duration: 4, repeat: Infinity }}
+              />
+            </motion.div>
           </motion.div>
 
           {/* Desktop Image Section */}
-          <motion.div 
-            className="hidden lg:block relative"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
+          <motion.div
+            className='hidden lg:block relative'
+            variants={itemVariants}
           >
-            <div className="relative w-full h-[600px] bg-background/50 backdrop-blur-xl rounded-3xl border border-border/50 shadow-2xl overflow-hidden">
+            <motion.div
+              className='relative w-full h-[400px] bg-black/50 backdrop-blur-xl rounded-2xl border border-blue-500/20 shadow-2xl overflow-hidden'
+              whileHover={{
+                scale: 1.02,
+                rotateY: 5,
+                transition: { duration: 0.3 },
+              }}
+            >
               <Image
-                src="/banner5.jpg"
-                alt="Saranga Siriwardhana"
+                src='/banner5.jpg'
+                alt='Saranga Siriwardhana'
                 fill
-                className="object-cover opacity-90"
-                sizes="(min-width: 1024px) 50vw, 100vw"
+                className='object-cover opacity-80'
+                sizes='(min-width: 1024px) 50vw, 100vw'
                 priority
                 quality={85}
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/40 to-background/80" />
-            </div>
+              <motion.div
+                className='absolute inset-0 bg-gradient-to-b from-transparent via-black/30 to-black/70'
+                animate={{
+                  background: [
+                    "linear-gradient(to bottom, transparent, rgba(0,0,0,0.3), rgba(0,0,0,0.7))",
+                    "linear-gradient(to bottom, transparent, rgba(59,130,246,0.2), rgba(0,0,0,0.7))",
+                    "linear-gradient(to bottom, transparent, rgba(0,0,0,0.3), rgba(0,0,0,0.7))",
+                  ],
+                }}
+                transition={{ duration: 4, repeat: Infinity }}
+              />
+            </motion.div>
           </motion.div>
-        </div>
+        </motion.div>
       </div>
 
       {/* Scroll Indicator */}
       <motion.div
-        className="absolute bottom-10 md:bottom-22 left-1/2 -translate-x-1/2 z-10"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 1.5, repeat: Infinity }}
+        className='absolute bottom-6 md:bottom-12 left-1/2 -translate-x-1/2 z-10'
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5 }}
       >
-        <div className="w-6 h-10 rounded-full border-2 border-primary flex justify-center">
+        <motion.div
+          className='w-5 h-8 rounded-full border-2 border-blue-500 flex justify-center cursor-pointer'
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+          whileHover={{ scale: 1.1 }}
+          onClick={() => scrollToSection("about")}
+        >
           <motion.div
-            className="w-1 h-2 bg-primary rounded-full mt-2"
-            animate={{ y: [0, 12, 0] }}
+            className='w-1 h-1.5 bg-blue-500 rounded-full mt-1.5'
+            animate={{ y: [0, 8, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}
           />
-        </div>
+        </motion.div>
       </motion.div>
-    </section>
-  )
+    </motion.section>
+  );
 }
