@@ -1,4 +1,4 @@
-@import './tailwind.css';
+@import "./tailwind.css";
 
 @layer base {
   :root {
@@ -23,7 +23,7 @@
     --ring: 224 76% 48%;
     --radius: 0.75rem;
   }
- 
+
   .light {
     --background: 0 0% 100%;
     --foreground: 222 47% 11%;
@@ -84,7 +84,8 @@
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -94,8 +95,11 @@
 
 .grid-pattern {
   background-size: 30px 30px;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+  background-image: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.1) 1px,
+      transparent 1px
+    ),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
 }
 
@@ -116,7 +120,8 @@
 }
 
 @keyframes gradient-movement {
-  0%, 100% {
+  0%,
+  100% {
     background-position: 0% 50%;
   }
   50% {
@@ -126,7 +131,11 @@
 
 /* Optimized starry background */
 .starry-bg {
-  background-image: radial-gradient(circle at center, rgba(37, 99, 235, 0.1) 1px, transparent 1px);
+  background-image: radial-gradient(
+    circle at center,
+    rgba(37, 99, 235, 0.1) 1px,
+    transparent 1px
+  );
   background-size: 30px 30px;
 }
 
@@ -150,7 +159,8 @@
 
 /* Simplified cursor effect */
 @keyframes blink {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
@@ -164,7 +174,8 @@
 
 /* Optimized animations */
 @keyframes float-slow {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(0, 0) rotate(0deg);
   }
   25% {
@@ -179,7 +190,8 @@
 }
 
 @keyframes float-slow-delayed {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(0, 0) rotate(0deg);
   }
   25% {
@@ -194,7 +206,8 @@
 }
 
 @keyframes pulse-slow {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.4;
     transform: scale(1);
   }
@@ -221,7 +234,8 @@
 
 /* Fast floating animations */
 @keyframes float-fast {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(0, 0) rotate(0deg);
   }
   25% {
@@ -236,7 +250,8 @@
 }
 
 @keyframes float-fast-delayed {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(0, 0) rotate(0deg);
   }
   25% {
@@ -316,4 +331,3 @@
   animation: slide-up 8s linear infinite;
   will-change: transform;
 }
-

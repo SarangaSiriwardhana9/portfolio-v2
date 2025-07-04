@@ -4,12 +4,13 @@ import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
+  SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Download, Menu, X } from "lucide-react";
+import { Download, Menu } from "lucide-react";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -80,7 +81,6 @@ export function Navbar() {
             >
               <div className='relative w-7 h-7 sm:w-8 sm:h-8 rounded-lg overflow-hidden bg-gradient-to-br from-cyan-400 to-blue-600 p-0.5'>
                 <div className='w-full h-full rounded-lg overflow-hidden bg-black'>
-                   
                   <Image
                     src='/favicon.png'
                     alt='SS'
@@ -155,22 +155,23 @@ export function Navbar() {
                 </SheetTrigger>
                 <SheetContent
                   side='right'
-                  className='bg-black/95 backdrop-blur-2xl border-l border-white/10 w-72'
+                  className='bg-black/95 backdrop-blur-2xl border-l border-white/10 w-72 p-6'
                 >
                   <VisuallyHidden>
                     <SheetTitle>Navigation Menu</SheetTitle>
                   </VisuallyHidden>
 
                   <div className='flex flex-col h-full'>
-                    <div className='flex items-center justify-between mb-6'>
+                    <SheetHeader className='mb-6 pb-0'>
                       <div className='flex items-center gap-2'>
                         <div className='w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-400 to-blue-600 p-0.5'>
-                          <div className='w-full h-full rounded-lg bg-black flex items-center justify-center'>
+                          <div className='w-full h-full rounded-lg bg-black flex items-center justify-center overflow-hidden'>
                             <Image
-                              src='/placeholder.svg?height=24&width=24'
+                              src='/favicon.png'
                               alt='SS'
                               width={24}
                               height={24}
+                              className='object-cover'
                             />
                           </div>
                         </div>
@@ -178,16 +179,7 @@ export function Navbar() {
                           Saranga
                         </span>
                       </div>
-                      <Button
-                        variant='ghost'
-                        size='icon'
-                        onClick={() => setIsOpen(false)}
-                        className='h-8 w-8'
-                      >
-                        <X className='h-4 w-4 text-white' />
-                        <span className='sr-only'>Close navigation menu</span>
-                      </Button>
-                    </div>
+                    </SheetHeader>
 
                     <nav
                       className='flex flex-col gap-1 flex-1'
@@ -214,16 +206,18 @@ export function Navbar() {
                       ))}
                     </nav>
 
-                    <Link
-                      href='/Saranga Siriwardhana_CV.pdf'
-                      target='_blank'
-                      className='mt-auto'
-                    >
-                      <Button className='w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 py-2.5 text-sm'>
-                        <Download className='w-4 h-4 mr-2' />
-                        Download Resume
-                      </Button>
-                    </Link>
+                    <div className='mt-auto pt-4'>
+                      <Link
+                        href='/Saranga Siriwardhana_CV.pdf'
+                        target='_blank'
+                        className='block'
+                      >
+                        <Button className='w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 py-2.5 text-sm'>
+                          <Download className='w-4 h-4 mr-2' />
+                          Download Resume
+                        </Button>
+                      </Link>
+                    </div>
                   </div>
                 </SheetContent>
               </Sheet>

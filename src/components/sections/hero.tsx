@@ -62,7 +62,7 @@ export function HeroSection() {
   return (
     <motion.section
       ref={containerRef}
-      className='py-6 pb-12 md:pb-20 relative mt-8 md:mt-16 flex items-center overflow-hidden pt-[3vh]'
+      className='py-6 pb-12 md:pb-20 relative mt-8 md:mt-16 flex items-center overflow-hidden pt-[3vh] min-h-screen'
       id='home'
       style={{ opacity, scale, y }}
     >
@@ -140,16 +140,16 @@ export function HeroSection() {
         />
       </div>
 
-      <div className='container mx-auto px-3 relative max-w-7xl'>
+      <div className='container mx-auto px-4 sm:px-6 relative max-w-7xl'>
         <motion.div
-          className='grid lg:grid-cols-2 gap-6 lg:gap-8 items-center'
+          className='flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[calc(100vh-200px)]'
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ staggerChildren: 0.2, delayChildren: 0.1 }}
         >
-          {/* Text Content */}
+          {/* Text Content - Always first on mobile */}
           <motion.div
-            className='space-y-4 md:space-y-5'
+            className='space-y-6 md:space-y-8 text-center lg:text-left order-1 lg:order-1'
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -160,7 +160,7 @@ export function HeroSection() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <div className='relative px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/30 backdrop-blur-lg'>
+              <div className='relative px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/30 backdrop-blur-lg'>
                 <motion.div
                   className='absolute -left-1 -top-1 w-2 h-2 bg-blue-500 rounded-full'
                   animate={{
@@ -178,7 +178,7 @@ export function HeroSection() {
                   animate={{ scale: [1, 2, 1], opacity: [1, 0, 1] }}
                   transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
                 />
-                <span className='text-xs font-medium text-blue-400'>
+                <span className='text-sm font-medium text-blue-400'>
                   Junior Full Stack Developer
                 </span>
               </div>
@@ -186,12 +186,12 @@ export function HeroSection() {
 
             {/* Main Heading */}
             <motion.div
-              className='space-y-3'
+              className='space-y-4'
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
             >
-              <motion.h1 className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight'>
+              <motion.h1 className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight'>
                 <motion.span
                   className='block text-white'
                   initial={{ opacity: 0, x: -50 }}
@@ -219,7 +219,7 @@ export function HeroSection() {
               </motion.h1>
 
               <motion.p
-                className='text-sm sm:text-base text-gray-400 max-w-lg'
+                className='text-base sm:text-lg text-gray-400 max-w-2xl mx-auto lg:mx-0'
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8 }}
@@ -231,7 +231,7 @@ export function HeroSection() {
 
             {/* Action Buttons */}
             <motion.div
-              className='flex flex-wrap gap-2 md:gap-3 pt-2 md:pt-3'
+              className='flex flex-col sm:flex-row justify-center lg:justify-start gap-4 pt-4'
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
@@ -241,8 +241,8 @@ export function HeroSection() {
                 whileTap={{ scale: 0.95 }}
               >
                 <Button
-                  size='sm'
-                  className='group bg-blue-600 hover:bg-blue-700 text-white border-0 relative overflow-hidden'
+                  size='lg'
+                  className='group bg-blue-600 hover:bg-blue-700 text-white border-0 relative overflow-hidden w-full sm:w-auto'
                   onClick={() => scrollToSection("contact")}
                 >
                   <motion.div
@@ -252,7 +252,7 @@ export function HeroSection() {
                   />
                   <span className='relative z-10 flex items-center'>
                     Let&apos;s Work Together
-                    <ArrowRight className='ml-1.5 h-3 w-3 group-hover:translate-x-1 transition-transform' />
+                    <ArrowRight className='ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform' />
                   </span>
                 </Button>
               </motion.div>
@@ -262,9 +262,9 @@ export function HeroSection() {
                 whileTap={{ scale: 0.95 }}
               >
                 <Button
-                  size='sm'
+                  size='lg'
                   variant='outline'
-                  className='hover:bg-blue-500/10 border-blue-500/30 text-blue-400 hover:text-blue-300 bg-transparent'
+                  className='hover:bg-blue-500/10 border-blue-500/30 text-blue-400 hover:text-blue-300 bg-transparent w-full sm:w-auto'
                   onClick={() => scrollToSection("projects")}
                 >
                   View Portfolio
@@ -274,7 +274,7 @@ export function HeroSection() {
 
             {/* Stats */}
             <motion.div
-              className='grid grid-cols-3 gap-2 sm:gap-3 md:gap-4 pt-3 md:pt-4'
+              className='grid grid-cols-3 gap-4 pt-6 max-w-md mx-auto lg:mx-0'
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, staggerChildren: 0.1, delay: 0.3 }}
@@ -294,10 +294,10 @@ export function HeroSection() {
                     rotateY: 10,
                     transition: { duration: 0.3 },
                   }}
-                  className='text-center p-2 rounded-lg bg-blue-500/5 border border-blue-500/20 backdrop-blur-sm'
+                  className='text-center p-3 rounded-lg bg-blue-500/5 border border-blue-500/20 backdrop-blur-sm'
                 >
                   <motion.div
-                    className='text-lg sm:text-xl md:text-2xl font-bold text-blue-400'
+                    className='text-xl sm:text-2xl md:text-3xl font-bold text-blue-400'
                     animate={{
                       textShadow: [
                         "0 0 0px #60a5fa",
@@ -313,56 +313,23 @@ export function HeroSection() {
                   >
                     {stat.value}
                   </motion.div>
-                  <div className='text-xs text-gray-500'>{stat.label}</div>
+                  <div className='text-xs sm:text-sm text-gray-500'>
+                    {stat.label}
+                  </div>
                 </motion.div>
               ))}
             </motion.div>
           </motion.div>
 
-          {/* Mobile Image Section */}
+          {/* Image Section - Always second on mobile */}
           <motion.div
-            className='block lg:hidden mt-6 mb-3'
+            className='relative w-full order-2 lg:order-2'
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
           >
             <motion.div
-              className='relative w-full h-[250px] rounded-xl overflow-hidden border border-blue-500/20 shadow-lg'
-              whileHover={{ scale: 1.02, rotateY: 5 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className='absolute inset-0 bg-black/30 backdrop-blur-sm'></div>
-              <Image
-                src='/banner5.jpg'
-                alt='Saranga Siriwardhana'
-                fill
-                className='object-cover opacity-70'
-                sizes='(max-width: 768px) 100vw, 50vw'
-                priority
-              />
-              <motion.div
-                className='absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/60'
-                animate={{
-                  background: [
-                    "linear-gradient(to bottom, transparent, rgba(0,0,0,0.2), rgba(0,0,0,0.6))",
-                    "linear-gradient(to bottom, transparent, rgba(59,130,246,0.1), rgba(0,0,0,0.6))",
-                    "linear-gradient(to bottom, transparent, rgba(0,0,0,0.2), rgba(0,0,0,0.6))",
-                  ],
-                }}
-                transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY }}
-              />
-            </motion.div>
-          </motion.div>
-
-          {/* Desktop Image Section */}
-          <motion.div
-            className='hidden lg:block relative'
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-          >
-            <motion.div
-              className='relative w-full h-[400px] bg-black/50 backdrop-blur-xl rounded-2xl border border-blue-500/20 shadow-2xl overflow-hidden'
+              className='relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] bg-black/50 backdrop-blur-xl rounded-2xl border border-blue-500/20 shadow-2xl overflow-hidden'
               whileHover={{
                 scale: 1.02,
                 rotateY: 5,
@@ -373,8 +340,8 @@ export function HeroSection() {
                 src='/banner5.jpg'
                 alt='Saranga Siriwardhana'
                 fill
-                className='object-cover opacity-80'
-                sizes='(min-width: 1024px) 50vw, 100vw'
+                className='object-cover object-center'
+                sizes='(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 50vw'
                 priority
                 quality={85}
               />

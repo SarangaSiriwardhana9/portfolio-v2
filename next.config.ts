@@ -4,13 +4,13 @@ const nextConfig: NextConfig = {
   output: "export",
   images: {
     unoptimized: true,
+    formats: ["image/webp", "image/avif"],
   },
   experimental: {
     optimizePackageImports: ["framer-motion"],
   },
   transpilePackages: ["framer-motion"],
   webpack: (config, { isServer }) => {
-    // Fix for framer-motion in static export
     if (!isServer) {
       config.resolve.fallback = {
         ...config.resolve.fallback,
@@ -21,9 +21,31 @@ const nextConfig: NextConfig = {
     }
     return config;
   },
-  // Additional configuration for static export compatibility
   trailingSlash: true,
   skipTrailingSlashRedirect: true,
+
+  // Performance optimizations
+  compress: true,
+  poweredByHeader: false,
+
+  // Additional headers for SEO
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          {
+            key: "X-DNS-Prefetch-Control",
+            value: "on",
+          },
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=63072000; includeSubDomains; preload",
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;
