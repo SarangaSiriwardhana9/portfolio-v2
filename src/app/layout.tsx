@@ -32,6 +32,13 @@ export const metadata: Metadata = {
   authors: [{ name: "Saranga Siriwardhana" }],
   creator: "Saranga Siriwardhana",
   publisher: "Saranga Siriwardhana",
+
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
+
   robots: {
     index: true,
     follow: true,
@@ -66,14 +73,14 @@ export const metadata: Metadata = {
     description:
       "BSc Software Engineering Student & Junior Full Stack Developer specializing in modern web applications",
     images: ["https://sarangasiriwardhana.netlify.app/og-image.jpg"],
-    creator: "@saranga_dev", // Replace with your Twitter handle
+    creator: "@saranga_dev",
   },
   alternates: {
     canonical: "https://sarangasiriwardhana.netlify.app",
   },
   category: "Technology",
   verification: {
-    google: "your-google-verification-code", // Add after setting up Google Search Console
+    google: "your-google-verification-code",
   },
   other: {
     "application-name": "Saranga Siriwardhana Portfolio",
@@ -102,9 +109,9 @@ export default function RootLayout({
               jobTitle: "Full Stack Developer",
               url: "https://sarangasiriwardhana.netlify.app",
               sameAs: [
-                "https://linkedin.com/in/saranga-siriwardhana", // Replace with your LinkedIn
-                "https://github.com/saranga-dev", // Replace with your GitHub
-                "https://twitter.com/saranga_dev", // Replace with your Twitter
+                "https://www.linkedin.com/in/saranga-siriwardhana-409494218/", // Replace with your LinkedIn
+                "https://github.com/SarangaSiriwardhana9", // Replace with your GitHub
+                "https://instagram.com/_.l_sara_?igshid=NTc4MTIwNjQ2YQ==", // Replace with your Twitter
               ],
               worksFor: {
                 "@type": "Organization",
@@ -112,7 +119,7 @@ export default function RootLayout({
               },
               alumniOf: {
                 "@type": "Organization",
-                name: "University Name", // Replace with your university
+                name: "SLIIT", // Replace with your university
               },
               knowsAbout: [
                 "React",
